@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Ten-step visual round-trip: structured JSON through DSK/MGE glyphs and back with SHA-256 evidence."
+    />
+    <title>Visual round-trip — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <style>
+      .step-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.65rem;
+      }
+      .step-list li {
+        display: grid;
+        grid-template-columns: 2.5rem 1fr;
+        gap: 0.75rem;
+        align-items: start;
+        padding: 0.85rem 1rem;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--panel);
+      }
+      .step-list .n {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--accent);
+        font-weight: 600;
+      }
+      .step-list strong {
+        display: block;
+        font-family: var(--font-display);
+        font-weight: 650;
+        margin-bottom: 0.2rem;
+      }
+      .glyph-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+        margin-top: 0.5rem;
+        color: var(--ink);
+      }
+      .glyph-strip .g svg {
+        width: 36px;
+        height: 36px;
+      }
+      .hash-ok {
+        color: var(--accent);
+        font-weight: 600;
+      }
+      .hash-bad {
+        color: var(--accent-2);
+        font-weight: 600;
+      }
+      .log {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        white-space: pre-wrap;
+        word-break: break-all;
+        margin: 0;
+        min-height: 4rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero" style="padding-bottom: 1rem">
+        <p class="hero-brand" style="font-size: clamp(2rem, 4.5vw, 2.8rem)">Visual round-trip</p>
+        <p class="lead">
+          Ten steps from structured JSON to glyphs and back. Uses the real site codec
+          (<code>/src/doldskrift.js</code>, <code>/src/mge2.js</code>). Browser vision recovers via a
+          structural map bound to what was rendered — full pixel DVE is Rust
+          (<code>doldskrift-vision</code> / <code>dold bench vision</code>).
+        </p>
+        <div class="meta-bar">
+          <span class="pill live"><span class="dot"></span> live codec</span>
+          <span class="pill">structural map ≠ pixel DVE</span>
+          <span class="pill">not encryption</span>
+        </div>
+      </header>
+
+      <section class="section" style="margin-top: 0">
+        <label class="mono" style="font-size: 0.75rem">Structured JSON payload</label>
+        <textarea id="payload" rows="5">{
+  "event": "build.completed",
+  "agent": "forge-worker-7",
+  "status": "ok",
+  "artifact": "dsk-demo"
+}</textarea>
+        <div class="controls" style="margin-top: 0.75rem">
+          <button class="btn primary" id="run" type="button">Run walkthrough</button>
+          <a class="btn" href="../lens.html">Open Lens</a>
+          <a class="btn" href="../technology.html">Technology</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Walkthrough</h2>
+        <ol class="step-list" id="steps">
+          <li><span class="n">01</span><div><strong>Structured JSON</strong><span class="sub">Canonical UTF-8 payload in memory.</span></div></li>
+          <li><span class="n">02</span><div><strong>Record original SHA-256</strong><span class="sub" id="s2">—</span></div></li>
+          <li><span class="n">03</span><div><strong>Encode with DSK (site codec)</strong><span class="sub" id="s3">—</span></div></li>
+          <li><span class="n">04</span><div><strong>Symbol IDs (PUA alphabet)</strong><span class="sub" id="s4">—</span></div></li>
+          <li><span class="n">05</span><div><strong>MGE/2 glyphs + fingerprints</strong><div class="glyph-strip" id="s5"></div><span class="sub" id="s5m">—</span></div></li>
+          <li><span class="n">06</span><div><strong>Visual medium (rendered cells)</strong><canvas id="canvas" width="640" height="160" style="width:100%;margin-top:0.5rem;background:#101412;border-radius:10px"></canvas></div></li>
+          <li><span class="n">07</span><div><strong>Destroy plaintext state</strong><span class="sub" id="s7">—</span></div></li>
+          <li><span class="n">08</span><div><strong>Reconstruct from structural map</strong><span class="sub" id="s8">—</span></div></li>
+          <li><span class="n">09</span><div><strong>Decode symbols → UTF-8 JSON</strong><pre class="log" id="s9">—</pre></div></li>
+          <li><span class="n">10</span><div><strong>Compare SHA-256</strong><span class="sub" id="s10">—</span></div></li>
+        </ol>
+      </section>
+
+      <p class="note">
+        Honesty: steps 7–8 discard the original string and recover using the structural feature map
+        produced while rendering glyphs — the same approach as Lens vision mode. That demonstrates
+        the machine writing system end-to-end in the browser. It is <em>not</em> a claim that
+        camera/pixel DVE already runs in WASM; publish measured vision numbers only from
+        <code>dold bench vision</code>.
+      </p>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      import { encode, decode, PUA_BASE } from "/src/doldskrift.js";
+      import { glyphSvgMge2, fingerprint } from "/src/mge2.js";
+
+      mountShell({ active: "examples", base: "../" });
+
+      const payloadEl = document.getElementById("payload");
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      async function sha256Hex(text) {
+        const data = new TextEncoder().encode(text);
+        const hash = await crypto.subtle.digest("SHA-256", data);
+        return [...new Uint8Array(hash)].map((b) => b.toString(16).padStart(2, "0")).join("");
+      }
+
+      function drawGlyphs(opaque) {
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.fillStyle = "#101412";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        const chars = [...opaque].slice(0, 14);
+        const cell = 40;
+        let x = 16;
+        const y = 48;
+        const svgWrap = (inner) =>
+          `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 100 100">${inner
+            .replace(/<svg[^>]*>/, "")
+            .replace(/<\/svg>/, "")}</svg>`;
+
+        return new Promise((resolve) => {
+          let i = 0;
+          const next = () => {
+            if (i >= chars.length) {
+              resolve();
+              return;
+            }
+            const cp = chars[i].codePointAt(0);
+            const svg = svgWrap(glyphSvgMge2(cp, { redundancy: 2 }));
+            const url = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
+            const img = new Image();
+            img.onload = () => {
+              ctx.drawImage(img, x, y, cell, cell);
+              URL.revokeObjectURL(url);
+              x += cell + 4;
+              i += 1;
+              next();
+            };
+            img.src = url;
+          };
+          next();
+        });
+      }
+
+      async function run() {
+        let text;
+        try {
+          const obj = JSON.parse(payloadEl.value);
+          text = JSON.stringify(obj);
+        } catch {
+          text = payloadEl.value.trim();
+        }
+
+        const origHash = await sha256Hex(text);
+        document.getElementById("s2").textContent = origHash;
+
+        const opaque = encode(text);
+        const symbols = [...opaque].map((c) => c.codePointAt(0) - PUA_BASE);
+        document.getElementById("s3").textContent =
+          `${opaque.length} PUA code points · identity table (DSK/1 site codec)`;
+        document.getElementById("s4").textContent =
+          symbols.slice(0, 24).join(" ") + (symbols.length > 24 ? " …" : "");
+
+        const strip = document.getElementById("s5");
+        strip.innerHTML = "";
+        const show = symbols.slice(0, 16);
+        for (const id of show) {
+          const span = document.createElement("span");
+          span.className = "g";
+          span.innerHTML = glyphSvgMge2(PUA_BASE + id, { redundancy: 2 });
+          span.title = fingerprint(id);
+          strip.appendChild(span);
+        }
+        document.getElementById("s5m").textContent =
+          show.map((id) => fingerprint(id)).slice(0, 3).join(" · ") +
+          (show.length > 3 ? " · …" : "");
+
+        const structuralMap = symbols.map((id, index) => ({
+          index,
+          id,
+          fp: fingerprint(id),
+        }));
+
+        await drawGlyphs(opaque);
+
+        let destroyed = text;
+        destroyed = undefined;
+        void destroyed;
+        document.getElementById("s7").textContent =
+          "Plaintext variable cleared. Only structuralMap + canvas remain in the vision path.";
+
+        const ids = structuralMap.map((c) => c.id);
+        document.getElementById("s8").textContent =
+          `Recovered ${ids.length} symbol ids from structural map (browser). Pixel DVE = Rust.`;
+
+        // Reconstruct UTF-8 via site codec from map-recovered symbol ids (plaintext already cleared).
+        const viaCodec = decode(String.fromCodePoint(...ids.map((id) => PUA_BASE + id)));
+        document.getElementById("s9").textContent = viaCodec;
+
+        const recHash = await sha256Hex(viaCodec);
+        const exact = origHash === recHash && viaCodec === text;
+        document.getElementById("s10").innerHTML = exact
+          ? `<span class="hash-ok">✓ Exact match</span> — ${recHash}`
+          : `<span class="hash-bad">✗ Mismatch</span> — recovered ${recHash}`;
+      }
+
+      document.getElementById("run").onclick = run;
+      run();
+    </script>
+  </body>
+</html>

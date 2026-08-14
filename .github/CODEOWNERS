@@ -1,0 +1,7 @@
+# Default — adjust when the project has named maintainers.
+* @doldskrift/maintainers
+
+/spec/ @doldskrift/maintainers
+/deps/ @doldskrift/maintainers
+/crates/doldskrift-core/ @doldskrift/maintainers
+/crates/doldskrift-font/ @doldskrift/maintainers

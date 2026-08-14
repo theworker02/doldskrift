@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Support Doldskrift — open-source sustainability via thanks.dev. Not a crypto product."
+    />
+    <meta property="og:title" content="Support Doldskrift" />
+    <meta
+      property="og:description"
+      content="Fund the open core via thanks.dev. Open / Neural are not encryption."
+    />
+    <meta property="og:image" content="./social-card.svg" />
+    <title>Support — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero" style="padding-bottom: 1rem">
+        <p class="hero-brand" style="font-size: clamp(2.2rem, 5vw, 3.2rem)">
+          Support <span aria-label="Sweden">🇸🇪</span>
+        </p>
+        <p class="lead">
+          Sustain the open core — codec, glyphs, demos, and honest research. This is not a
+          fundraising pitch for encryption or a token.
+        </p>
+        <p class="cta-row" style="margin-top: 1.25rem">
+          <a class="btn primary" href="https://thanks.dev/u/gh/theworker02">thanks.dev</a>
+          <a class="btn" href="https://github.com/doldskrift/doldskrift">GitHub</a>
+          <a class="btn" href="./partners.html">Partners</a>
+        </p>
+      </header>
+
+      <section class="section" style="margin-top: 0">
+        <h2>Where support goes</h2>
+        <p class="sub">Optional sponsorship helps keep protocol work, docs, and demos moving.</p>
+        <div class="grid-2">
+          <article class="panel">
+            <h3>thanks.dev</h3>
+            <p>
+              Primary funding link for this maintainer:
+              <a href="https://thanks.dev/u/gh/theworker02">thanks.dev/u/gh/theworker02</a>
+            </p>
+            <p class="sub">Also listed in <code>.github/FUNDING.yml</code> for the GitHub Sponsor button.</p>
+          </article>
+          <article class="panel">
+            <h3>Local CLI</h3>
+            <p>From a checkout: <code>dold funding</code> prints the same URLs (<code>--json</code> for agents).</p>
+            <p class="sub">Brand kit export: <code>dold brand</code> · identity: <code>dold about</code>.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Honesty</h2>
+        <div class="feature-strip">
+          <article>
+            <h3>Open</h3>
+            <p>Visual concealment ≠ encryption.</p>
+          </article>
+          <article>
+            <h3>Neural</h3>
+            <p>Learned grammar ≠ encryption.</p>
+          </article>
+          <article>
+            <h3>Protected</h3>
+            <p>AEAD + Gate not shipping — refuse stubs only.</p>
+          </article>
+        </div>
+        <p class="sub" style="margin-top: 1.5rem">
+          Commercial collaboration is separate — see <a href="./partners.html">Partners</a> and
+          <a href="https://github.com/doldskrift/doldskrift/blob/main/SUPPORT.md">SUPPORT.md</a>.
+        </p>
+      </section>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      mountShell({ active: "funding" });
+    </script>
+  </body>
+</html>

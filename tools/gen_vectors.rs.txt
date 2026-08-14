@@ -1,0 +1,38 @@
+﻿fn main() {
+  let cases = [
+    (\"hello-world\", \"Hello world\"),
+    (\"hello-doldskrift\", \"Hello from Doldskrift\"),
+    (\"unicode\", \"café 日本語 🎉\"),
+    (\"empty\", \"\"),
+  ];
+  for (name, input) in cases {
+    let encoded = doldskrift::encode(input).unwrap();
+    let checksum = format!(\"{:08x}\", doldskrift::checksum_bytes(input.as_bytes()));
+    let session = doldskrift::Session::from_seed(b\"vector-seed\", \"v1\").unwrap();
+    let sess_enc = session.encode(input).unwrap();
+    println!(\"=== {name} ===\");
+    println!(\"checksum={checksum}\");
+    println!(\"encoded_chars={}\", encoded.chars().count());
+    // write files
+    let enc_json = serde_json::json!({
+      \"version\": 1,
+      \"mode\": \"encoded\",
+      \"input\": input,
+      \"encoded\": encoded,
+      \"checksum\": checksum,
+    });
+    std::fs::write(format!(\"spec/vectors/{name}.json\"), serde_json::to_string_pretty(&enc_json).unwrap()).unwrap();
+    let sess_json = serde_json::json!({
+      \"version\": 1,
+      \"mode\": \"session\",
+      \"seed\": \"vector-seed\",
+      \"input\": input,
+      \"encoded\": sess_enc,
+      \"mapping_id\": session.mapping_id().to_string(),
+    });
+    std::fs::write(format!(\"spec/vectors/{name}-session.json\"), serde_json::to_string_pretty(&sess_json).unwrap()).unwrap();
+  }
+  let visual = serde_json::json!({\"version\":1,\"mode\":\"visual\",\"input\":\"DEPLOY READY\",\"encoded\":\"DEPLOY READY\"});
+  std::fs::write(\"spec/vectors/visual-identity.json\", serde_json::to_string_pretty(&visual).unwrap()).unwrap();
+  println!(\"wrote vectors\");
+}

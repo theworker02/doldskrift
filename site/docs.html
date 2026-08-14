@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Doldskrift documentation — CLI, Rust, JS, security, Neural." />
+    <title>Docs — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="page-title">
+        <p class="hero-brand" style="font-size: clamp(2.2rem, 5vw, 3.2rem)">
+          Docs <span aria-label="Sweden">🇸🇪</span>
+        </p>
+        <p class="lead">
+          Quick paths into the markdown docs and CLI. Normative wire rules live in
+          <code>spec/</code>.
+        </p>
+      </header>
+
+      <section class="section">
+        <div class="grid-2">
+          <div>
+            <h2>CLI</h2>
+            <pre>cargo install --path crates/doldskrift-cli
+dold doctor
+echo "hello" | dold encode > m.dsk
+dold validate m.dsk
+dold inspect --json m.dsk
+dold decode m.dsk</pre>
+            <p class="sub">Full surface: <code>docs/reference/cli.md</code> in the repo.</p>
+          </div>
+          <div>
+            <h2>Rust</h2>
+            <pre>use doldskrift::{encode, decode};
+let p = encode("hi")?;
+assert_eq!(decode(&amp;p)?, "hi");</pre>
+            <p class="sub">Library docs: <code>cargo doc -p doldskrift --no-deps</code>.</p>
+          </div>
+        </div>
+        <h2 style="margin-top: 2rem">JavaScript</h2>
+        <pre>import { encode, decode } from "@doldskrift/core";
+decode(encode("hello agent"));</pre>
+        <h2 style="margin-top: 2rem">Further reading</h2>
+        <ul>
+          <li><a href="./install.html">Install components</a></li>
+          <li><a href="./product.html">Product / profiles</a></li>
+          <li><a href="./neural.html">Neural overview</a></li>
+          <li><a href="./security.html">Security model</a></li>
+          <li><a href="./spec.html">Spec pointers</a></li>
+          <li>
+            <a href="https://github.com/doldskrift/doldskrift/blob/main/docs/reference/cli.md"
+              >CLI reference (GitHub)</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/doldskrift/doldskrift/blob/main/CONTRIBUTING.md"
+              >Contributing</a
+            >
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      mountShell({ active: "docs" });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" role="img" aria-label="Doldskrift wax seal">
+  <desc id="dsk-carrier">{&quot;kind&quot;:&quot;wax-seal&quot;,&quot;encoded&quot;:&quot;&quot;,&quot;sha256&quot;:&quot;f0f668bf610e5cf9f11d2aa50f924ada10797100e8f05de085842ddb6370a867&quot;,&quot;epoch&quot;:1,&quot;note&quot;:&quot;Wax seal — SHA-256 bound into seal geometry. Verify with dold seal --verify. Integrity ≠ cryptographic signature.&quot;}</desc>
+  <defs>
+    <radialGradient id="wax" cx="45%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#c45c4a"/>
+      <stop offset="55%" stop-color="#8b3a3a"/>
+      <stop offset="100%" stop-color="#5a2424"/>
+    </radialGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#121614"/>
+  <circle cx="200" cy="200" r="120" fill="url(#wax)" stroke="#6b2e2e" stroke-width="3"/>
+  <circle cx="200" cy="200" r="108" fill="none" stroke="#f0e6d8" stroke-opacity="0.25" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <circle cx="321.0" cy="200.0" r="7.8" fill="#8b3a3a" opacity="0.85" data-nibble="f"/><circle cx="286.3" cy="217.2" r="2.5" fill="#8b3a3a" opacity="0.85" data-nibble="0"/><circle cx="311.8" cy="246.3" r="7.8" fill="#8b3a3a" opacity="0.85" data-nibble="f"/><circle cx="284.1" cy="256.2" r="4.6" fill="#8b3a3a" opacity="0.85" data-nibble="6"/><circle cx="271.6" cy="271.6" r="4.6" fill="#8b3a3a" opacity="0.85" data-nibble="6"/><circle cx="258.7" cy="287.8" r="5.3" fill="#8b3a3a" opacity="0.85" data-nibble="8"/><circle cx="242.9" cy="303.7" r="6.3" fill="#8b3a3a" opacity="0.85" data-nibble="b"/><circle cx="223.6" cy="318.7" r="7.8" fill="#8b3a3a" opacity="0.85" data-nibble="f"/><circle cx="200.0" cy="301.2" r="4.6" fill="#8b3a3a" opacity="0.85" data-nibble="6"/><circle cx="182.4" cy="288.5" r="2.9" fill="#8b3a3a" opacity="0.85" data-nibble="1"/><circle cx="166.3" cy="281.3" r="2.5" fill="#8b3a3a" opacity="0.85" data-nibble="0"/><circle cx="134.0" cy="298.8" r="7.4" fill="#8b3a3a" opacity="0.85" data-nibble="e"/><circle cx="130.0" cy="270.0" r="4.2" fill="#8b3a3a" opacity="0.85" data-nibble="5"/><circle cx="104.9" cy="263.6" r="6.7" fill="#8b3a3a" opacity="0.85" data-nibble="c"/><circle cx="88.2" cy="246.3" r="7.8" fill="#8b3a3a" opacity="0.85" data-nibble="f"/><circle cx="94.3" cy="221.0" r="5.7" fill="#8b3a3a" opacity="0.85" data-nibble="9"/><circle cx="79.0" cy="200.0" r="7.8" fill="#8b3a3a" opacity="0.85" data-nibble="f"/><circle cx="111.5" cy="182.4" r="2.9" fill="#8b3a3a" opacity="0.85" data-nibble="1"/><circle cx="116.7" cy="165.5" r="2.9" fill="#8b3a3a" opacity="0.85" data-nibble="1"/><circle cx="103.1" cy="135.2" r="7.0" fill="#8b3a3a" opacity="0.85" data-nibble="d"/><circle cx="134.7" cy="134.7" r="3.2" fill="#8b3a3a" opacity="0.85" data-nibble="2"/><circle cx="138.9" cy="108.5" r="6.0" fill="#8b3a3a" opacity="0.85" data-nibble="a"/><circle cx="157.9" cy="98.4" r="6.0" fill="#8b3a3a" opacity="0.85" data-nibble="a"/><circle cx="180.7" cy="102.9" r="4.2" fill="#8b3a3a" opacity="0.85" data-nibble="5"/><circle cx="200.0" cy="112.0" r="2.5" fill="#8b3a3a" opacity="0.85" data-nibble="0"/><circle cx="223.6" cy="81.3" r="7.8" fill="#8b3a3a" opacity="0.85" data-nibble="f"/><circle cx="241.3" cy="100.4" r="5.7" fill="#8b3a3a" opacity="0.85" data-nibble="9"/><circle cx="251.3" cy="123.2" r="3.2" fill="#8b3a3a" opacity="0.85" data-nibble="2"/><circle cx="268.4" cy="131.6" r="3.9" fill="#8b3a3a" opacity="0.85" data-nibble="4"/><circle cx="291.5" cy="138.9" r="6.0" fill="#8b3a3a" opacity="0.85" data-nibble="a"/><circle cx="307.7" cy="155.4" r="7.0" fill="#8b3a3a" opacity="0.85" data-nibble="d"/><circle cx="307.9" cy="178.5" r="6.0" fill="#8b3a3a" opacity="0.85" data-nibble="a"/>
+  <g transform="translate(200.0,152.0) scale(0.028)" stroke="#f0e6d8" fill="none" stroke-width="36"><line x1="500" y1="350" x2="500" y2="650"/>
+<path d="M 500 240 L 590 240 M 500 240 L 410 240"/>
+<circle cx="760" cy="500" r="55"/>
+<path d="M 500 760 L 590 760 M 500 760 L 410 760"/>
+<path d="M 240 430 L 240 570 M 170 500 L 310 500"/>
+<path d="M 500 430 L 500 570 M 430 500 L 570 500"/>
+<circle cx="720" cy="780" r="14" fill="#1a1a1a" stroke="none"/></g><g transform="translate(233.9,166.1) scale(0.028)" stroke="#f0e6d8" fill="none" stroke-width="36"><line x1="350" y1="500" x2="650" y2="500"/>
+<circle cx="500" cy="240" r="20" fill="#1a1a1a" stroke="none"/>
+<circle cx="760" cy="500" r="20" fill="#1a1a1a" stroke="none"/>
+<path d="M 500 760 L 500 670 M 500 760 L 500 850"/>
+<path d="M 170 500 L 310 500 M 240 570 L 240 430"/>
+<path d="M 500 500 L 500 410 M 500 500 L 500 590"/>
+<circle cx="720" cy="780" r="14" fill="#1a1a1a" stroke="none"/></g><g transform="translate(248.0,200.0) scale(0.028)" stroke="#f0e6d8" fill="none" stroke-width="36"><line x1="650" y1="500" x2="350" y2="500"/>
+<circle cx="500" cy="240" r="20" fill="#1a1a1a" stroke="none"/>
+<line x1="780" y1="500" x2="740" y2="500" stroke-width="48"/>
+<path d="M 500 760 L 500 850 M 500 760 L 500 670"/>
+<path d="M 310 500 L 170 500 M 240 430 L 240 570"/>
+<line x1="514" y1="486" x2="486" y2="514" stroke-width="48"/>
+<circle cx="720" cy="780" r="14" fill="#1a1a1a" stroke="none"/>
+<circle cx="760" cy="780" r="14" fill="#1a1a1a" stroke="none"/>
+<circle cx="800" cy="780" r="14" fill="#1a1a1a" stroke="none"/></g><g transform="translate(233.9,233.9) scale(0.028)" stroke="#f0e6d8" fill="none" stroke-width="36"><line x1="605" y1="395" x2="395" y2="605"/>
+<line x1="486" y1="226" x2="514" y2="254" stroke-width="48"/>
+<path d="M 760 500 L 823 563 M 760 500 L 697 437"/>
+<path d="M 500 760 L 563 823 M 500 760 L 437 697"/>
+<path d="M 289 451 L 191 549 M 191 451 L 289 549"/>
+<circle cx="500" cy="500" r="20" fill="#1a1a1a" stroke="none"/>
+<circle cx="720" cy="780" r="14" fill="#1a1a1a" stroke="none"/>
+<circle cx="760" cy="780" r="14" fill="#1a1a1a" stroke="none"/></g>
+  <g transform="translate(172,172) scale(0.055)" stroke="#f0e6d8" fill="none" stroke-width="36"><line x1="280" y1="780" x2="280" y2="220"/>
+<path d="M 419.99999999999994 760 A 260 260 0 0 1 420.00000000000006 240"/>
+<path d="M 420 500 L 560 620 M 420 500 L 560 380"/>
+<circle cx="280" cy="780" r="12" fill="#1a1a1a" stroke="none"/>
+<circle cx="280" cy="220" r="12" fill="#1a1a1a" stroke="none"/>
+<line x1="660" y1="500" x2="700" y2="500" stroke-width="48"/>
+<circle cx="520" cy="500" r="18" fill="#1a1a1a" stroke="none"/>
+<circle cx="760" cy="760" r="12" fill="#1a1a1a" stroke="none"/>
+<circle cx="800" cy="760" r="12" fill="#1a1a1a" stroke="none"/></g>
+  <text x="24" y="28" fill="#c9a87c" font-family="IBM Plex Mono, monospace" font-size="11">wax seal · sha256:f0f668bf610e… · integrity ≠ signature</text>
+  <text x="24" y="384" fill="#5a7a6e" font-family="IBM Plex Mono, monospace" font-size="9">verify: dold seal --verify · Open payload bound to digest</text>
+</svg>

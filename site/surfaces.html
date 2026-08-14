@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Doldskrift unexpected surfaces — ambient, mesh, echo, flicker. Open visual channels, not encryption."
+    />
+    <title>Surfaces — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <style>
+      .surface-stage {
+        position: relative;
+        min-height: 280px;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: #0b0e0d;
+      }
+      .surface-stage svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        min-height: 280px;
+      }
+      .surface-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+        align-items: center;
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.25rem;
+        margin-top: 1.5rem;
+      }
+      .gallery-card h3 {
+        margin: 0 0 0.35rem;
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+      }
+      .gallery-card p {
+        margin: 0 0 0.75rem;
+        color: var(--ink-soft);
+        font-size: 0.95rem;
+      }
+      .gallery-preview {
+        aspect-ratio: 16 / 9;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        background: #0b0e0d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .gallery-preview img,
+      .gallery-preview object {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .cli-hint {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        color: var(--accent);
+        margin-top: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero" style="padding-bottom: 1rem">
+        <p class="hero-brand">Surfaces <span aria-label="Sweden">🇸🇪</span></p>
+        <h1 class="hero-line">Unexpected Open channels.</h1>
+        <p class="lead">
+          Ambient constellations, mesh maps, echo digests, flicker frames — still
+          machine-recoverable Open Doldskrift. Beautiful ≠ encrypted.
+          <em>Maskinskriven betydelse — inte hemlighet.</em>
+        </p>
+        <div class="cta">
+          <button class="btn primary" id="btn-ambient" type="button">Paint ambient</button>
+          <button class="btn" id="btn-mesh" type="button">Paint mesh-ish</button>
+          <a class="btn warm" href="./radio.html">Agent Radio</a>
+        </div>
+        <div class="meta-bar">
+          <span class="pill live"><span class="dot"></span> Open mode</span>
+          <span class="pill">not steganography</span>
+          <span class="pill">hashes ≠ signatures</span>
+        </div>
+      </header>
+
+      <section class="section" style="margin-top: 0">
+        <h2>Live ambient constellation</h2>
+        <p class="sub">
+          Stars are placed from Open PUA symbol ids + a seed. Decode still uses the
+          embedded carrier (CLI: <code>dold ambient --decode</code>) — this page is a visual sketch.
+        </p>
+        <label style="display: block; margin: 0.75rem 0">
+          Payload
+          <input id="surface-input" type="text" value="Deploy worker seven." style="width: min(100%, 28rem); margin-left: 0.5rem" />
+        </label>
+        <div class="surface-stage" id="stage" aria-live="polite"></div>
+        <div class="surface-meta">
+          <span class="pill" id="stage-kind">ambient</span>
+          <span class="pill" id="stage-info">—</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Gallery</h2>
+        <p class="sub">
+          Static fixtures under <code>public/surfaces/</code>
+          (<code>npm run surfaces:fixtures</code>). Each sample is an honest Open demo —
+          download and decode locally.
+        </p>
+        <div class="gallery-grid">
+          <article class="gallery-card">
+            <h3>Ambient</h3>
+            <p>Constellation field with aurora gradient. Not steganography.</p>
+            <div class="gallery-preview">
+              <object data="/surfaces/ambient-sample.svg" type="image/svg+xml" aria-label="Ambient sample">ambient</object>
+            </div>
+            <p class="cli-hint">dold ambient -o ambient.svg && dold ambient --decode ambient.svg</p>
+            <a class="btn" href="/surfaces/ambient-sample.svg" download>Download SVG</a>
+          </article>
+          <article class="gallery-card">
+            <h3>Mesh</h3>
+            <p>Neural constellation map from an LSG plan (DeterministicBaseline path).</p>
+            <div class="gallery-preview">
+              <object data="/surfaces/mesh-sample.svg" type="image/svg+xml" aria-label="Mesh sample">mesh</object>
+            </div>
+            <p class="cli-hint">echo graph | dold mesh -o mesh.svg · dold mesh --html -o mesh.html</p>
+            <a class="btn" href="/surfaces/mesh-sample.svg" download>Download SVG</a>
+          </article>
+          <article class="gallery-card">
+            <h3>Echo</h3>
+            <p>Self-describing document + SHA-256 glyph strip (integrity, not a signature).</p>
+            <div class="gallery-preview">
+              <object data="/surfaces/echo-sample.svg" type="image/svg+xml" aria-label="Echo sample">echo</object>
+            </div>
+            <p class="cli-hint">dold echo -o echo.svg && dold echo --verify echo.svg</p>
+            <a class="btn" href="/surfaces/echo-sample.svg" download>Download SVG</a>
+          </article>
+          <article class="gallery-card">
+            <h3>Flicker</h3>
+            <p>Temporal animated SVG; machines read the embedded frame carrier.</p>
+            <div class="gallery-preview">
+              <object data="/surfaces/flicker-sample.svg" type="image/svg+xml" aria-label="Flicker sample">flicker</object>
+            </div>
+            <p class="cli-hint">dold flicker -o flicker.svg · decode via dold ambient --decode</p>
+            <a class="btn" href="/surfaces/flicker-sample.svg" download>Download SVG</a>
+          </article>
+          <article class="gallery-card">
+            <h3>Postcard</h3>
+            <p>Single-file machine postcard: constellation + digest + glyph strip.</p>
+            <div class="gallery-preview">
+              <object data="/surfaces/postcard-sample.svg" type="image/svg+xml" aria-label="Postcard sample">postcard</object>
+            </div>
+            <p class="cli-hint">dold postcard -o postcard.svg && dold postcard --read postcard.svg</p>
+            <a class="btn" href="/surfaces/postcard-sample.svg" download>Download SVG</a>
+          </article>
+          <article class="gallery-card">
+            <h3>Spectrogram</h3>
+            <p>Symbol-id → bar height strip that still round-trips via carrier.</p>
+            <div class="gallery-preview">
+              <object data="/surfaces/spectrogram-sample.svg" type="image/svg+xml" aria-label="Spectrogram sample">spec</object>
+            </div>
+            <p class="cli-hint">dold spectrogram -o spectrogram.svg && dold spectrogram --decode spectrogram.svg</p>
+            <a class="btn" href="/surfaces/spectrogram-sample.svg" download>Download SVG</a>
+          </article>
+          <article class="gallery-card">
+            <h3>Kaleidoscope</h3>
+            <p>Six-fold machine-glyph mandala that still Open-decodes.</p>
+            <div class="gallery-preview">
+              <object data="/surfaces/kaleidoscope-sample.svg" type="image/svg+xml" aria-label="Kaleidoscope sample">kal</object>
+            </div>
+            <p class="cli-hint">dold kaleidoscope -o kal.svg && dold kaleidoscope --decode kal.svg</p>
+            <a class="btn" href="/surfaces/kaleidoscope-sample.svg" download>Download SVG</a>
+          </article>
+          <article class="gallery-card">
+            <h3>Timeline</h3>
+            <p>Multi-epoch living strip; scrub with <code>--epoch</code> on decode.</p>
+            <div class="gallery-preview">
+              <object data="/surfaces/timeline-sample.svg" type="image/svg+xml" aria-label="Timeline sample">time</object>
+            </div>
+            <p class="cli-hint">dold timeline --epochs 1,2,3 -o t.svg && dold timeline --decode t.svg --epoch 2</p>
+            <a class="btn" href="/surfaces/timeline-sample.svg" download>Download SVG</a>
+          </article>
+          <article class="gallery-card">
+            <h3>Seal</h3>
+            <p>Wax-seal compound mark binding SHA-256 (integrity ≠ signature).</p>
+            <div class="gallery-preview">
+              <object data="/surfaces/seal-sample.svg" type="image/svg+xml" aria-label="Seal sample">seal</object>
+            </div>
+            <p class="cli-hint">dold seal -o seal.svg && dold seal --verify seal.svg</p>
+            <a class="btn" href="/surfaces/seal-sample.svg" download>Download SVG</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Honesty</h2>
+        <pre>Open / Neural  ≠  encryption
+SHA-256 digests  ≠  signatures
+ambient / flicker / postcard  ≠  steganography
+Protected AEAD + Gate  —  not shipping (refuse stubs only)</pre>
+      </section>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      import { encode } from "/src/doldskrift.js";
+
+      mountShell({ active: "surfaces" });
+
+      const stage = document.getElementById("stage");
+      const input = document.getElementById("surface-input");
+      const kind = document.getElementById("stage-kind");
+      const info = document.getElementById("stage-info");
+
+      function mix64(seed, x) {
+        let h = BigInt(seed) ^ (BigInt(x) * 0x9e3779b97f4a7c15n);
+        h ^= h >> 33n;
+        h = (h * 0xff51afd7ed558ccdn) & 0xffffffffffffffffn;
+        h ^= h >> 33n;
+        return h;
+      }
+
+      function paintAmbient() {
+        const text = input.value || " ";
+        const opaque = encode(text);
+        const seed = 7n;
+        let stars = "";
+        let i = 0;
+        for (const ch of opaque) {
+          const cp = ch.codePointAt(0);
+          const sid = cp >= 0xe000 && cp < 0xe100 ? cp - 0xe000 : (cp & 0xff);
+          const h = mix64(seed, BigInt(sid) ^ (BigInt(i) << 8n));
+          const x = 24 + Number(h % 920n);
+          const y = 40 + Number((h >> 10n) % 220n);
+          const r = 1.5 + Number((h >> 20n) % 5n) * 0.55;
+          const hue = 160 + Number(h % 40n);
+          stars += `<circle cx="${x}" cy="${y}" r="${r}" fill="hsl(${hue},42%,62%)" opacity="0.9"/>`;
+          i += 1;
+          if (i > 64) break;
+        }
+        stage.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" role="img" aria-label="Ambient sketch">
+          <defs>
+            <radialGradient id="a" cx="40%" cy="30%" r="75%">
+              <stop offset="0%" stop-color="#1f3d36"/>
+              <stop offset="100%" stop-color="#0b0e0d"/>
+            </radialGradient>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#a)"/>
+          ${stars}
+          <text x="20" y="24" fill="#7aa897" font-family="IBM Plex Mono, monospace" font-size="12">ambient sketch · Open PUA stars · site demo (CLI carrier is authoritative)</text>
+        </svg>`;
+        kind.textContent = "ambient";
+        info.textContent = `${opaque.length} glyphs · seed 7 · not encryption`;
+      }
+
+      function paintMesh() {
+        const text = input.value || "graph";
+        const opaque = encode(text);
+        const nodes = [];
+        let i = 0;
+        for (const ch of opaque) {
+          const cp = ch.codePointAt(0);
+          const sid = cp >= 0xe000 && cp < 0xe100 ? cp - 0xe000 : (cp & 0xff);
+          const angle = (i / Math.max(opaque.length, 1)) * Math.PI * 2;
+          const r = 70 + (sid % 5) * 14;
+          nodes.push({ x: 320 + Math.cos(angle) * r, y: 150 + Math.sin(angle) * r, id: `n${i}` });
+          i += 1;
+          if (i > 18) break;
+        }
+        let marks = "";
+        for (let j = 0; j < nodes.length - 1; j++) {
+          const a = nodes[j], b = nodes[j + 1];
+          marks += `<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="#0F6B5C" stroke-opacity="0.4"/>`;
+        }
+        for (const n of nodes) {
+          marks += `<g transform="translate(${n.x},${n.y})"><circle r="6" fill="#0F6B5C"/><circle r="2.5" fill="#E8EFE9"/><title>${n.id}</title></g>`;
+        }
+        stage.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" role="img" aria-label="Mesh sketch">
+          <rect width="100%" height="100%" fill="#0b0e0d"/>
+          ${marks}
+          <text x="16" y="22" fill="#7aa897" font-family="IBM Plex Mono, monospace" font-size="12">mesh-ish sketch · CLI: dold mesh --html for real LSG nodes</text>
+        </svg>`;
+        kind.textContent = "mesh";
+        info.textContent = `${nodes.length} nodes · sketch only · use CLI for LSG plan`;
+      }
+
+      document.getElementById("btn-ambient").addEventListener("click", paintAmbient);
+      document.getElementById("btn-mesh").addEventListener("click", paintMesh);
+      input.addEventListener("input", () => {
+        if (kind.textContent === "mesh") paintMesh();
+        else paintAmbient();
+      });
+      paintAmbient();
+    </script>
+  </body>
+</html>

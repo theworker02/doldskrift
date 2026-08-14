@@ -1,0 +1,15 @@
+# Sample agent handshake transcript
+
+Agent Alpha:
+DSK?
+versions=1
+modes=visual,encoded,session
+capabilities=DSK_VISUAL,DSK_ENCODED,DSK_SESSION,DSK_STREAM,DSK_CONTAINER
+
+Agent Beta:
+DSK!
+version=1
+mode=session
+
+# Then exchange a .dsk session document or raw session-encoded text.
+# This is representation negotiation only — not transport security.

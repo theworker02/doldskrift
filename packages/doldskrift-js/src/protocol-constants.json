@@ -1,0 +1,24 @@
+{
+  "$comment": "Synced from spec/protocol-constants.json — edit the spec copy, then refresh this file / types.ts.",
+  "protocolName": "doldskrift",
+  "protocolVersion": 1,
+  "protocolVersionProtected": 3,
+  "fontVersion": 2,
+  "glyphEngineVersion": 2,
+  "puaBase": 57344,
+  "puaBaseHex": "0xE000",
+  "alphabetSize": 256,
+  "projectMark": 57840,
+  "projectMarkHex": "0xE1F0",
+  "projectMarkName": "DSK_PROJECT_MARK",
+  "handshakeQuery": "DSK?",
+  "handshakeReply": "DSK!",
+  "magic": "DSK1",
+  "profiles": ["open", "neural", "protected"],
+  "honesty": {
+    "openIsNotEncryption": true,
+    "neuralIsNotEncryption": true,
+    "hashesAreNotSignatures": true,
+    "protectedAeadShipping": false
+  }
+}

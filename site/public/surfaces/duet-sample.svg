@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="104" height="200" viewBox="0 0 104 200" role="img" aria-label="Doldskrift duet channels">
+  <desc id="dsk-carrier">{&quot;kind&quot;:&quot;duet-channels&quot;,&quot;encoded&quot;:&quot;&quot;,&quot;sha256&quot;:null,&quot;epoch&quot;:1,&quot;note&quot;:&quot;Duet A/B — two Open channels interleaved visually; decode independently. Not encryption.&quot;,&quot;channel_b&quot;:&quot;&quot;}</desc>
+  <defs><radialGradient id="duet-aurora" cx="63%" cy="46%" r="78%">
+      <stop offset="0%" stop-color="hsl(191,48%,22%)"/>
+      <stop offset="55%" stop-color="hsl(168,28%,14%)"/>
+      <stop offset="100%" stop-color="hsl(172,36%,10%)"/>
+    </radialGradient>
+    <linearGradient id="duet-aurora-band" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="hsl(191,48%,22%)" stop-opacity="0.35"/>
+      <stop offset="50%" stop-color="hsl(168,28%,14%)" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="hsl(172,36%,10%)" stop-opacity="0.4"/>
+    </linearGradient></defs>
+  <rect width="100%" height="100%" fill="url(#duet-aurora)"/>
+  <text x="16" y="22" fill="#7aa897" font-family="IBM Plex Mono, monospace" font-size="11">duet · channel A (teal) · channel B (warm) · independent Open decode</text>
+  <g transform="translate(24,36) scale(0.045)" stroke="#7ec8b3" fill="none" stroke-width="36" data-channel="A" data-dsk-cp="U+E061"><title>A</title><line x1="650" y1="500" x2="350" y2="500"/>
+<circle cx="500" cy="240" r="20" fill="#1a1a1a" stroke="none"/>
+<line x1="780" y1="500" x2="740" y2="500" stroke-width="48"/>
+<path d="M 500 760 L 500 850 M 500 760 L 500 670"/>
+<path d="M 310 500 L 170 500 M 240 430 L 240 570"/>
+<line x1="514" y1="486" x2="486" y2="514" stroke-width="48"/>
+<circle cx="720" cy="780" r="14" fill="#1a1a1a" stroke="none"/>
+<circle cx="760" cy="780" r="14" fill="#1a1a1a" stroke="none"/>
+<circle cx="800" cy="780" r="14" fill="#1a1a1a" stroke="none"/></g><g transform="translate(24,110) scale(0.045)" stroke="#c9a87c" fill="none" stroke-width="36" data-channel="B" data-dsk-cp="U+E062"><title>B</title><line x1="350" y1="500" x2="650" y2="500"/>
+<path d="M 570 240 A 70 70 0 0 1 446.3768889816715 195.00486732194224"/>
+<line x1="740" y1="500" x2="780" y2="500" stroke-width="48"/>
+<path d="M 500 760 L 500 670 M 500 760 L 500 850"/>
+<path d="M 170 500 L 310 500 M 240 570 L 240 430"/>
+<circle cx="500" cy="500" r="20" fill="#1a1a1a" stroke="none"/>
+<circle cx="720" cy="780" r="14" fill="#1a1a1a" stroke="none"/>
+<circle cx="760" cy="780" r="14" fill="#1a1a1a" stroke="none"/>
+<circle cx="800" cy="780" r="14" fill="#1a1a1a" stroke="none"/></g><line x1="42" y1="88" x2="42" y2="108" stroke="#0F6B5C" stroke-opacity="0.25" stroke-width="1"/>
+</svg>

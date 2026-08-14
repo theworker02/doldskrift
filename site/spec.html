@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Specification — Doldskrift</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <nav class="nav">
+        <a class="brand" href="./index.html"><img src="/logo-mark.svg" alt="" />Doldskrift</a>
+        <div class="nav-links">
+          <a href="./docs.html">docs</a>
+          <a class="active" href="./spec.html">spec</a>
+          <a href="./protocol.html">protocol</a>
+        </div>
+      </nav>
+      <header class="page-title">
+        <h1>DOLDSKRIFT/1</h1>
+        <p>Normative protocol requirements. Experimental extensions are explicitly marked in the spec text.</p>
+      </header>
+      <section class="section" style="border-top:none;padding-top:0">
+        <div class="panel">
+          <h3>Documents</h3>
+          <ul>
+            <li><a href="../spec/DOLDSKRIFT-1.md">DOLDSKRIFT-1.md</a></li>
+            <li><a href="../spec/encoding.md">encoding.md</a></li>
+            <li><a href="../spec/glyphs.md">glyphs.md</a></li>
+            <li><a href="../spec/containers.md">containers.md</a></li>
+            <li><a href="../spec/discovery.md">discovery.md</a></li>
+            <li><a href="../spec/vectors/">golden vectors/</a></li>
+          </ul>
+        </div>
+        <pre style="margin-top:1rem">MAGIC "DSK1"
+VERSION 1
+MODE visual|encoded|session
+CRC32C over header || payload
+Alphabet: U+E000..U+E0FF (UTF-8 bytes)</pre>
+      </section>
+      <footer>Forward-compatible · reject unknown versions</footer>
+    </div>
+      <script type="module">
+      import { mountShell } from "/src/shell.js";
+      mountShell({ active: "spec" });
+    </script>
+  </body>
+</html>

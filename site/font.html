@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Font specimen — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <nav class="nav">
+        <a class="brand" href="./index.html">
+          <img src="/logo-mark.svg" alt="" />
+          Doldskrift
+        </a>
+        <div class="nav-links">
+          <a href="./index.html">home</a>
+          <a href="./docs.html">docs</a>
+          <a class="active" href="./font.html">font</a>
+          <a href="./protocol.html">protocol</a>
+          <a href="./playground.html">playground</a>
+        </div>
+      </nav>
+
+      <header class="page-title">
+        <h1>Font specimen</h1>
+        <p>Watch one sentence move between normal, visual, encoded, and session.</p>
+      </header>
+
+      <section class="section" style="border-top: none; padding-top: 0">
+        <div class="controls">
+          <label>Mode
+            <select id="mode">
+              <option value="normal">normal</option>
+              <option value="visual">visual</option>
+              <option value="encoded" selected>encoded</option>
+              <option value="session">session</option>
+            </select>
+          </label>
+          <label>Size
+            <input id="size" type="range" min="18" max="72" value="36" />
+          </label>
+          <label>Spacing
+            <input id="spacing" type="range" min="0" max="30" value="8" />
+          </label>
+          <label>Seed
+            <input id="seed" type="number" value="1" />
+          </label>
+        </div>
+        <label style="margin-bottom: 0.75rem">Input text
+          <textarea id="input">Hello from Doldskrift</textarea>
+        </label>
+        <div class="panel" style="margin-bottom: 0.75rem">
+          <h3>Normal</h3>
+          <div id="normal" class="mono"></div>
+        </div>
+        <div class="panel">
+          <h3>Doldskrift</h3>
+          <div id="stage" class="glyph-stage" aria-live="polite"></div>
+        </div>
+        <p class="note" style="margin-top: 1rem">
+          Visual mode keeps semantic text underneath. Encoded/session change the characters;
+          this specimen renders procedural glyph previews for education.
+        </p>
+      </section>
+
+      <footer>Procedural glyphs · font version 1 · not encryption</footer>
+    </div>
+    <script type="module">
+      import { renderGlyphRun } from "./src/doldskrift.js";
+
+      const input = document.getElementById("input");
+      const mode = document.getElementById("mode");
+      const size = document.getElementById("size");
+      const spacing = document.getElementById("spacing");
+      const seed = document.getElementById("seed");
+      const stage = document.getElementById("stage");
+      const normal = document.getElementById("normal");
+
+      function paint() {
+        const text = input.value;
+        const m = mode.value;
+        const s = Number(seed.value) || 1;
+        normal.textContent = text;
+        stage.style.setProperty("--glyph-size", `${size.value}px`);
+        stage.style.setProperty("--glyph-tracking", `${Number(spacing.value) / 100}em`);
+        if (m === "normal") {
+          stage.textContent = text;
+          stage.style.fontFamily = "var(--mono)";
+          stage.style.fontSize = `${size.value}px`;
+        } else {
+          stage.style.fontFamily = "";
+          stage.innerHTML = renderGlyphRun(text, m, s);
+        }
+      }
+
+      [input, mode, size, spacing, seed].forEach((el) =>
+        el.addEventListener("input", paint)
+      );
+      paint();
+    </script>
+      <script type="module">
+      import { mountShell } from "/src/shell.js";
+      mountShell({ active: "font" });
+    </script>
+  </body>
+</html>

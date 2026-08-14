@@ -1,0 +1,19 @@
+{
+  "name": "doldskrift-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "site"
+  ],
+  "scripts": {
+    "build": "npm run build -w @doldskrift/core && npm run build -w @doldskrift/web && npm run build -w @doldskrift/react && npm run build -w doldskrift-site",
+    "test": "npm run test -w @doldskrift/core",
+    "check": "cargo fmt --all -- --check && cargo clippy --workspace --all-targets -- -D warnings && cargo test --workspace && npm test",
+    "fixtures": "npm run surfaces:fixtures",
+    "site": "npm run dev -w doldskrift-site",
+    "site:build": "npm run build -w doldskrift-site",
+    "site:preview": "npm run build -w doldskrift-site && npm run preview -w doldskrift-site",
+    "surfaces:fixtures": "cargo run -p doldskrift-font --example gen_surfaces_fixtures",
+    "links": "node tools/check-links.mjs"
+  }
+}

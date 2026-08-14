@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Doldskrift Lens — human view vs machine reconstruction with evidence." />
+    <title>Doldskrift Lens</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <style>
+      .lens-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        min-height: 320px;
+      }
+      .lens-pane h3 {
+        margin: 0 0 0.75rem;
+        font-family: var(--font-display);
+      }
+      .evidence {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.35rem 1rem;
+        margin-top: 1rem;
+      }
+      .evidence dt {
+        color: var(--ink-soft);
+      }
+      .evidence dd {
+        margin: 0;
+        word-break: break-all;
+      }
+      .hash-ok {
+        color: var(--accent);
+        font-weight: 600;
+      }
+      .hash-bad {
+        color: var(--accent-2);
+        font-weight: 600;
+      }
+      .deg-controls label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--ink-soft);
+      }
+      @media (max-width: 900px) {
+        .lens-grid,
+        .evidence {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero" style="padding-bottom: 1rem">
+        <p class="hero-brand" style="font-size: clamp(2.2rem, 5vw, 3.2rem)">Lens</p>
+        <p class="lead">
+          Flagship demonstration. Human side sees only glyphs. Machine side runs the real decoder.
+          Vision mode discards the text and reconstructs from a rendered image bitmap.
+        </p>
+        <div class="meta-bar">
+          <span class="pill live"><span class="dot"></span> local-first</span>
+          <span class="pill">not encryption</span>
+          <span class="pill">DSK · MGE · DVE</span>
+        </div>
+      </header>
+
+      <section class="section" style="margin-top: 0">
+        <label class="mono" style="font-size: 0.75rem">Input</label>
+        <textarea id="input" rows="3">Build completed successfully.</textarea>
+        <div class="controls deg-controls" style="margin-top: 0.75rem">
+          <div class="mode-tabs" id="modes">
+            <button type="button" data-mode="direct" class="active">Direct</button>
+            <button type="button" data-mode="vision">Vision</button>
+          </div>
+          <label>Blur <input id="blur" type="range" min="0" max="8" value="0" /></label>
+          <label>Noise <input id="noise" type="range" min="0" max="40" value="0" /></label>
+          <label>Rotate ° <input id="rot" type="range" min="0" max="25" value="0" /></label>
+          <button class="btn primary" id="run" type="button">Run Lens</button>
+          <button class="btn" id="export" type="button">Export PNG</button>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="lens-grid">
+          <div class="panel lens-pane">
+            <h3>Human view</h3>
+            <canvas id="canvas" width="640" height="220" style="width: 100%; background: #101412; border-radius: 10px"></canvas>
+            <p class="sub" id="human-note">Glyph stream only — no Latin letters in the bitmap.</p>
+          </div>
+          <div class="panel lens-pane">
+            <h3>Machine view</h3>
+            <pre id="machine" style="margin: 0; min-height: 180px; white-space: pre-wrap">Waiting…</pre>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top: 1rem">
+          <h3>Evidence</h3>
+          <dl class="evidence" id="evidence"></dl>
+        </div>
+      </section>
+
+        <p class="note">
+          Direct mode uses the WASM codec when available (JS fallback otherwise). Vision mode
+          rasterizes glyphs with rotate-within-cell, applies blur/noise, then matches cells
+          with multi-angle deskew against a pixel template catalog — plaintext is discarded.
+          Modest rotation often round-trips; large degradation may fail honestly.
+        </p>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      import { initWasmCodec } from "/src/wasm-codec.js";
+      import { scanCanvasCells, bytesFromSymbolIds } from "/src/pixel-vision.js";
+      import { glyphSvgMge2, projectMarkSvg } from "/src/mge2.js";
+
+      mountShell({ active: "lens" });
+
+      const input = document.getElementById("input");
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
+      const machine = document.getElementById("machine");
+      const evidence = document.getElementById("evidence");
+      const humanNote = document.getElementById("human-note");
+      let mode = "direct";
+      let codec = null;
+      let lastCells = [];
+
+      document.getElementById("modes").addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-mode]");
+        if (!btn) return;
+        mode = btn.dataset.mode;
+        for (const b of e.currentTarget.querySelectorAll("button")) {
+          b.classList.toggle("active", b === btn);
+        }
+      });
+
+      async function sha256Hex(text) {
+        const data = new TextEncoder().encode(text);
+        const hash = await crypto.subtle.digest("SHA-256", data);
+        return [...new Uint8Array(hash)].map((b) => b.toString(16).padStart(2, "0")).join("");
+      }
+
+      function wrapSvg(inner) {
+        return `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 100 100">${inner
+          .replace(/<svg[^>]*>/, "")
+          .replace(/<\/svg>/, "")}</svg>`;
+      }
+
+      /**
+       * Draw glyphs with rotate-within-cell (not whole-canvas rotate) so cell
+       * bounds stay valid for pixel sampling. Modest rot can still round-trip;
+       * large rot may fail honestly after deskew.
+       */
+      async function drawGlyphs(opaque, { blur, noise, rot }) {
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.fillStyle = "#101412";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        if (blur > 0) ctx.filter = `blur(${blur}px)`;
+
+        const chars = [...opaque];
+        const cell = 48;
+        let x = 24;
+        let y = 40;
+        const cells = [];
+        const jobs = [{ kind: "mark", svg: await projectMarkSvg("64") }];
+        for (const ch of chars.slice(0, 22)) {
+          jobs.push({
+            kind: "glyph",
+            svg: glyphSvgMge2(ch.codePointAt(0), { redundancy: 2 }),
+          });
+        }
+
+        for (const job of jobs) {
+          const svg = wrapSvg(job.svg);
+          const url = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
+          await new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => {
+              ctx.save();
+              const cx = x + cell / 2;
+              const cy = y + cell / 2;
+              // Rotate within cell — layout AABB stays (x,y,cell,cell)
+              if (rot !== 0) {
+                ctx.translate(cx, cy);
+                ctx.rotate((rot * Math.PI) / 180);
+                ctx.translate(-cx, -cy);
+              }
+              ctx.drawImage(img, x, y, cell, cell);
+              ctx.restore();
+              URL.revokeObjectURL(url);
+              cells.push({ x, y, w: cell, h: cell, kind: job.kind, rotation: rot });
+              x += cell + 4;
+              if (x > canvas.width - cell - 16) {
+                x = 24;
+                y += cell + 8;
+              }
+              resolve();
+            };
+            img.onerror = reject;
+            img.src = url;
+          });
+        }
+
+        if (noise > 0) {
+          const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const d = img.data;
+          for (let p = 0; p < d.length; p += 4) {
+            if (Math.random() < noise / 200) {
+              const v = (Math.random() * 80) | 0;
+              d[p] = d[p + 1] = d[p + 2] = v;
+            }
+          }
+          ctx.putImageData(img, 0, 0);
+        }
+        ctx.filter = "none";
+        ctx.restore();
+        return cells;
+      }
+
+      async function run() {
+        if (!codec) codec = await initWasmCodec();
+        const text = input.value;
+        const t0 = performance.now();
+        const opaque = codec.encode(text);
+        const puaBase = codec.puaBase;
+        const symbols = [...opaque].map((c) => c.codePointAt(0) - puaBase);
+
+        const blur = Number(document.getElementById("blur").value);
+        const noise = Number(document.getElementById("noise").value);
+        const rot = Number(document.getElementById("rot").value);
+
+        lastCells = await drawGlyphs(opaque, { blur, noise, rot });
+
+        let recovered;
+        let path;
+        let visionMeta = { meanConfidence: "n/a", matched: "n/a" };
+        if (mode === "direct") {
+          recovered = codec.decode(opaque);
+          path = `direct symbol stream (${codec.backend} codec)`;
+          humanNote.textContent =
+            codec.backend === "wasm"
+              ? "Direct: WASM DSK codec decode of PUA symbols."
+              : "Direct: JS codec fallback (WASM unavailable).";
+        } else {
+          // Discard plaintext — recover only from pixel templates on the canvas.
+          const scan = await scanCanvasCells(ctx, lastCells);
+          recovered = bytesFromSymbolIds(scan.ids);
+          path = "vision pixel-template + rotate-within-cell deskew; full DVE = Rust/CLI";
+          visionMeta = {
+            meanConfidence: scan.meanConfidence.toFixed(3),
+            matched: `${scan.ids.length} cells`,
+            strategy: scan.strategy,
+            meanDeskew: scan.meanDeskew.toFixed(1),
+          };
+          const degraded = blur > 0 || noise > 0 || rot > 0;
+          humanNote.textContent = degraded
+            ? "Vision: plaintext discarded. Modest rotate uses deskew; large blur/noise/rotate may fail honestly."
+            : "Vision: plaintext discarded. Recovery via pixel signatures vs MGE/2 catalog.";
+        }
+
+        const origHash = await sha256Hex(text);
+        const recHash = await sha256Hex(recovered);
+        const exact = origHash === recHash;
+        const ms = (performance.now() - t0).toFixed(1);
+
+        machine.textContent = recovered;
+
+        evidence.innerHTML = `
+          <dt>Codec backend</dt><dd>${codec.backend}${codec.crateVersion ? ` · ${codec.crateVersion}` : ""}</dd>
+          <dt>Input bytes</dt><dd>${new TextEncoder().encode(text).length}</dd>
+          <dt>Symbols</dt><dd>${symbols.length}</dd>
+          <dt>Glyph profile</dt><dd>MGE/2 · GRE/1 R2</dd>
+          <dt>Path</dt><dd>${path}</dd>
+          <dt>Pixel template</dt><dd>${mode === "vision" ? `mean conf ${visionMeta.meanConfidence} · ${visionMeta.matched}` : "n/a (direct)"}</dd>
+          <dt>Rotation strategy</dt><dd>${mode === "vision" ? `${visionMeta.strategy || "n/a"} · mean deskew ${visionMeta.meanDeskew ?? "0"}°` : "n/a (direct)"}</dd>
+          <dt>Image</dt><dd>${canvas.width}×${canvas.height}</dd>
+          <dt>Drawn cells</dt><dd>${lastCells.length} (mark + glyphs)</dd>
+          <dt>Degradation</dt><dd>blur=${blur} noise=${noise} rot=${rot}° ${mode === "vision" ? "(within-cell; deskew ±15°)" : "(preview)"}</dd>
+          <dt>ECC corrections</dt><dd>0 (ECC experimental — not applied here)</dd>
+          <dt>Decode duration</dt><dd>${ms} ms</dd>
+          <dt>Original SHA-256</dt><dd>${origHash}</dd>
+          <dt>Recovered SHA-256</dt><dd>${recHash}</dd>
+          <dt>Round-trip</dt><dd class="${exact ? "hash-ok" : "hash-bad"}">${exact ? "✓ Exact round trip" : "✗ Mismatch (expected under heavy degradation)"}</dd>
+        `;
+      }
+
+      document.getElementById("run").onclick = run;
+      document.getElementById("export").onclick = () => {
+        const a = document.createElement("a");
+        a.href = canvas.toDataURL("image/png");
+        a.download = "doldskrift-lens.png";
+        a.click();
+      };
+      run().catch((err) => {
+        machine.textContent = String(err);
+        console.error(err);
+      });
+    </script>
+  </body>
+</html>

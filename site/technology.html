@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Doldskrift technology — DSK, MGE, DVE, Forge, Lens, and Lab along the DATA→VISUAL→DATA path."
+    />
+    <title>Technology — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero" style="padding-bottom: 1rem">
+        <p class="hero-brand" style="font-size: clamp(2.2rem, 5vw, 3.2rem)">Technology</p>
+        <p class="lead">
+          Six named surfaces of one platform: protocol, glyphs, vision, optimization, demonstration,
+          and tooling — connected by a single round-trip story.
+        </p>
+        <div class="meta-bar">
+          <span class="pill">DSK · MGE · DVE</span>
+          <span class="pill">Forge · Lens · Lab</span>
+          <span class="pill">not encryption</span>
+        </div>
+      </header>
+
+      <section class="section" style="margin-top: 0">
+        <h2>The story</h2>
+        <p class="sub">
+          Structured data leaves the machine as Doldskrift, becomes visual, survives a medium, and
+          returns as the same structured data.
+        </p>
+        <pre style="margin: 0.75rem 0 0">DATA → DSK → MGE → VISUAL → DVE → DSK → DATA</pre>
+        <div class="pipeline" style="margin-top: 1.25rem">
+          <div class="pipe-step">
+            <strong>DATA</strong>
+            Structured JSON, agent messages, telemetry, or any byte-addressable payload.
+          </div>
+          <div class="pipe-arrow">↓</div>
+          <div class="pipe-step">
+            <strong>DSK</strong>
+            Protocol framing — containers, sessions, checksums; DSK/1 for the codec path, DSK/2
+            modules for experimental semantics.
+          </div>
+          <div class="pipe-arrow">↓</div>
+          <div class="pipe-step">
+            <strong>MGE</strong>
+            Machine Glyph Engine — zone-structured glyphs (MGE/2), fingerprints (DSKG-1), GRE
+            redundancy. Not dingbats.
+          </div>
+          <div class="pipe-arrow">↓</div>
+          <div class="pipe-step">
+            <strong>VISUAL</strong>
+            Screen, print, screenshot, or camera frame — the lossy physical channel.
+          </div>
+          <div class="pipe-arrow">↓</div>
+          <div class="pipe-step">
+            <strong>DVE</strong>
+            Vision Engine — detect glyphs, recognize structure, reconstruct symbols. Full pixel
+            pipeline lives in Rust (<code>doldskrift-vision</code> / <code>dold</code> CLI).
+          </div>
+          <div class="pipe-arrow">↓</div>
+          <div class="pipe-step">
+            <strong>DSK → DATA</strong>
+            Decode protocol frames back to the original structured payload (hash-verifiable when the
+            channel succeeds).
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Platform names</h2>
+        <div class="feature-strip">
+          <article>
+            <h3>DSK</h3>
+            <p>
+              Protocol. DSK/1 codec and <code>.dsk</code> containers are the most mature surface.
+              DSK/2 semantics remain experimental.
+            </p>
+          </article>
+          <article>
+            <h3>MGE</h3>
+            <p>
+              Machine Glyph Engine. Candidate maturity — zone anatomy, fingerprints, and font
+              generation continue to evolve.
+            </p>
+          </article>
+          <article>
+            <h3>DVE</h3>
+            <p>
+              Vision Engine. Experimental structural recognition in Rust; browser demos use a
+              structural map, not full pixel DVE.
+            </p>
+          </article>
+          <article>
+            <h3>Forge</h3>
+            <p>
+              Alphabet and glyph optimization research — multi-objective search for separability.
+              Experimental; not a shipped product UI.
+            </p>
+          </article>
+          <article>
+            <h3>Lens</h3>
+            <p>
+              Flagship demonstration: human glyphs vs machine reconstruction with evidence and
+              SHA-256 round-trip checks.
+            </p>
+          </article>
+          <article>
+            <h3>Lab</h3>
+            <p>
+              Developer tooling environment — CLI (<code>dold</code>), Studio, specimens, and local
+              experimentation surfaces.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Honest boundaries</h2>
+        <div class="note">
+          Visual illegibility is not secrecy. Browser Lens/example paths prove the codec and glyph
+          story; measured pixel recognition belongs to <code>dold bench vision</code> and the Rust
+          vision crate. See <a href="./security.html">Security</a> and
+          <a href="./benchmarks.html">Research / status</a>.
+        </div>
+      </section>
+
+      <div class="cta">
+        <a class="btn primary" href="./lens.html">Open Lens</a>
+        <a class="btn" href="./examples/visual-roundtrip.html">Visual round-trip</a>
+        <a class="btn warm" href="./product.html">Product</a>
+      </div>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      mountShell({ active: "tech" });
+    </script>
+  </body>
+</html>

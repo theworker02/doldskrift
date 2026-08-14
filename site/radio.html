@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent Radio — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero" style="padding-bottom: 1rem">
+        <p class="hero-brand" style="font-size: clamp(2.2rem, 5vw, 3.2rem)">Agent Radio</p>
+        <p class="lead">
+          Two agents negotiate DSK capabilities, then trade session-encoded packets.
+          Watch glyphs stream while the wire log shows handshake + payload bytes.
+        </p>
+        <div class="cta">
+          <button class="btn primary" id="btn-start" type="button">Start transmission</button>
+          <button class="btn" id="btn-stop" type="button">Stop</button>
+          <button class="btn warm" id="btn-burst" type="button">Burst packet</button>
+        </div>
+        <div class="meta-bar">
+          <span class="pill live" id="link-state"><span class="dot"></span> idle</span>
+          <span class="pill" id="pkt-count">0 packets</span>
+        </div>
+      </header>
+
+      <section class="section" style="margin-top: 0">
+        <div class="radio-stage">
+          <article class="agent-card">
+            <header>
+              <span>α · agent-alpha</span>
+              <span>session seed shared</span>
+            </header>
+            <div class="stream" id="stream-a"></div>
+            <div class="wire" id="wire-a">waiting…</div>
+          </article>
+          <article class="agent-card">
+            <header>
+              <span>β · agent-beta</span>
+              <span>GRE/1 R2</span>
+            </header>
+            <div class="stream" id="stream-b"></div>
+            <div class="wire" id="wire-b">waiting…</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Protocol sketch</h2>
+        <pre>α → β  DSK? caps=encode,session,mge2
+β → α  DSK! ok session_id=radio-42
+α → β  .dsk packet (mode=session, CRC32C)
+β → α  ACK + mirrored decode confirmation</pre>
+        <p class="note" style="margin-top: 1rem">
+          This page simulates the wire for demonstration. Production agents use the
+          Rust/JS SDKs and real `.dsk` containers — still not encryption.
+        </p>
+      </section>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      import { encodeSession, renderGlyphRun } from "/src/doldskrift.js";
+      import { projectMarkSvg } from "/src/mge2.js";
+
+      mountShell({ active: "radio" });
+
+      const phrases = [
+        "Deploy worker seven.",
+        "Token boundary intact.",
+        "Capability mge2 confirmed.",
+        "Checksum matches header.",
+        "Escalate density high.",
+        "Handshake complete.",
+        "Route packet northbound.",
+        "Integrity marker stable.",
+      ];
+
+      const seed = "radio-shared-seed";
+      let timer = null;
+      let packets = 0;
+      let turn = 0;
+
+      const streamA = document.getElementById("stream-a");
+      const streamB = document.getElementById("stream-b");
+      const wireA = document.getElementById("wire-a");
+      const wireB = document.getElementById("wire-b");
+      const link = document.getElementById("link-state");
+      const pkt = document.getElementById("pkt-count");
+
+      function setLive(on) {
+        link.innerHTML = on
+          ? `<span class="dot"></span> live link`
+          : `<span class="dot"></span> idle`;
+        link.classList.toggle("live", on);
+      }
+
+      function appendStream(el, text) {
+        const html =
+          `<span class="g" title="mark">${projectMarkSvg("1.6rem")}</span>` +
+          renderGlyphRun(text, "session", seed, { redundancy: 2, animate: true });
+        const wrap = document.createElement("div");
+        wrap.style.cssText = "display:flex;flex-wrap:wrap;gap:0.25rem;width:100%;margin-bottom:0.5rem";
+        wrap.innerHTML = html;
+        el.prepend(wrap);
+        while (el.children.length > 6) el.lastChild.remove();
+      }
+
+      function hexPreview(text) {
+        const enc = encodeSession(text, seed);
+        const bytes = [...enc].map((c) => c.codePointAt(0).toString(16).padStart(4, "0"));
+        return bytes.slice(0, 12).join(" ") + (bytes.length > 12 ? " …" : "");
+      }
+
+      function transmit() {
+        const text = phrases[turn % phrases.length];
+        const fromA = turn % 2 === 0;
+        packets += 1;
+        pkt.textContent = `${packets} packets`;
+        if (fromA) {
+          appendStream(streamA, text);
+          wireA.textContent = `TX session · "${text}"\nPUA ${hexPreview(text)}\nDSK! ack pending`;
+          wireB.textContent = `RX ok · decoded\nCAPS mge2,session\nCRC32C verified (sim)`;
+          appendStream(streamB, text);
+        } else {
+          appendStream(streamB, text);
+          wireB.textContent = `TX session · "${text}"\nPUA ${hexPreview(text)}\nDSK! ack pending`;
+          wireA.textContent = `RX ok · decoded\nCAPS mge2,session\nCRC32C verified (sim)`;
+          appendStream(streamA, text);
+        }
+        turn += 1;
+      }
+
+      document.getElementById("btn-start").onclick = () => {
+        if (timer) return;
+        setLive(true);
+        wireA.textContent = "DSK? encode,session,mge2";
+        wireB.textContent = "DSK! ok session_id=radio-42";
+        transmit();
+        timer = setInterval(transmit, 1600);
+      };
+      document.getElementById("btn-stop").onclick = () => {
+        clearInterval(timer);
+        timer = null;
+        setLive(false);
+      };
+      document.getElementById("btn-burst").onclick = () => {
+        setLive(true);
+        for (let i = 0; i < 3; i++) setTimeout(transmit, i * 180);
+      };
+
+      streamA.innerHTML = `<span style="opacity:.5;font-family:var(--font-mono);font-size:.75rem">α channel quiet</span>`;
+      streamB.innerHTML = `<span style="opacity:.5;font-family:var(--font-mono);font-size:.75rem">β channel quiet</span>`;
+    </script>
+  </body>
+</html>

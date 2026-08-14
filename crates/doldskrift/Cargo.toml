@@ -1,0 +1,38 @@
+[package]
+name = "doldskrift"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+rust-version.workspace = true
+description = "Machine-native typography, encoding, and agent communication (DOLDSKRIFT/1)"
+keywords.workspace = true
+categories.workspace = true
+readme = "../../README.md"
+
+[dependencies]
+thiserror = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+crc32c = { workspace = true }
+hex = { workspace = true }
+sha2 = { workspace = true }
+base64 = { workspace = true }
+
+[features]
+default = []
+# C ABI bindings. Enables `unsafe` in `ffi` only.
+ffi = []
+# Stub Gemma reader API — does NOT download or link model weights.
+gemma-reader = []
+
+[dev-dependencies]
+proptest = { workspace = true }
+serde_json = { workspace = true }
+criterion = { workspace = true }
+
+[[bench]]
+name = "codec"
+harness = false

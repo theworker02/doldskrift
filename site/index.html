@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="doldskrift" content="version=1;mode=visual" />
+    <meta
+      name="description"
+      content="Doldskrift — machine-native visual information. Protocol, glyphs, and recognition for structured data that survives pixels."
+    />
+    <title>Doldskrift — Machine-native visual information</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero">
+        <div class="logo-lockup">
+          <img src="/logo-horizontal.svg" alt="Doldskrift" width="420" height="96" />
+        </div>
+        <p class="hero-brand">Doldskrift <span aria-label="Sweden">🇸🇪</span></p>
+        <h1 class="hero-line">Machine-native visual information.</h1>
+        <p class="lead">
+          Swedish <em>dold</em> (hidden) + <em>skrift</em> (writing) — a visual language designed
+          for software to recognize before humans. Concealed script, not cryptography.
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="./lens.html">Try the Demo</a>
+          <a class="btn" href="./docs.html">Read the Documentation</a>
+          <a class="btn warm" href="./black-page.html">Black Page</a>
+        </div>
+        <div class="meta-bar">
+          <span class="pill live"><span class="dot"></span> platform</span>
+          <span class="pill">Open · Neural · Protected</span>
+          <span class="pill">DSK · MGE · DVE · LSG · Gate</span>
+          <span class="pill">Apache-2.0 OR MIT</span>
+          <span class="pill">not encryption</span>
+        </div>
+      </header>
+
+      <section class="section">
+        <h2>Watch a real round trip</h2>
+        <p class="sub">Live encode with the site codec — glyphs are MGE/2 structures, not decoration.</p>
+        <div class="live-demo">
+          <div>
+            <textarea id="home-input">Build completed successfully.</textarea>
+            <div class="controls">
+              <div class="mode-tabs" id="home-modes">
+                <button type="button" data-mode="visual">Visual</button>
+                <button type="button" data-mode="encoded" class="active">Encoded</button>
+                <button type="button" data-mode="session">Session</button>
+              </div>
+              <label>
+                Seed
+                <input id="home-seed" type="text" value="agent-alpha" />
+              </label>
+            </div>
+          </div>
+          <div>
+            <div class="glyph-runway" id="home-runway" aria-live="polite"></div>
+            <div class="meta-bar" id="home-meta"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Open · Neural · Protected</h2>
+        <p class="sub">One mental model — Swedish concealed script, not a crypto product.</p>
+        <div class="feature-strip">
+          <article>
+            <h3>Open</h3>
+            <p>DSK/1–2 codec and demos. Visual opacity for humans; exact decode for agents.</p>
+          </article>
+          <article>
+            <h3>Neural</h3>
+            <p>LSG + compatible reader. Foundation stubs today. Still not encryption.</p>
+          </article>
+          <article>
+            <h3>Protected</h3>
+            <p>AEAD + Gate when it ships. Today: refuse stubs only — Readable: No.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>The platform</h2>
+        <pre>DATA → DSK → MGE → VISUAL MEDIUM → DVE → DSK → DATA</pre>
+        <div class="feature-strip" style="margin-top: 1rem">
+          <article><h3>Semantic</h3><p>Structured machine information (DSK/2 experimental).</p></article>
+          <article><h3>Protocol</h3><p>Frames, streams, schemas, sessions, containers.</p></article>
+          <article><h3>Visual</h3><p>Machine glyphs and alphabets (MGE).</p></article>
+          <article><h3>Recognition</h3><p>Detection and reconstruction (DVE).</p></article>
+        </div>
+        <div class="cta" style="margin-top: 1.25rem">
+          <a class="btn primary" href="./install.html">Install &amp; doctor</a>
+          <a class="btn" href="./demo.html">All demos</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Flagship demos</h2>
+        <div class="grid-3">
+          <a class="panel" href="./lens.html" style="text-decoration: none; color: inherit">
+            <h3>Lens</h3>
+            <p>Human view vs machine evidence, hashes, degradation controls.</p>
+          </a>
+          <a class="panel" href="./surfaces.html" style="text-decoration: none; color: inherit">
+            <h3>Surfaces</h3>
+            <p>Ambient constellations, mesh maps, echo &amp; flicker — Open demos that still decode.</p>
+          </a>
+          <a class="panel" href="./black-page.html" style="text-decoration: none; color: inherit">
+            <h3>Black Page</h3>
+            <p>Dense illegible page carrying a structured JSON payload.</p>
+          </a>
+        </div>
+      </section>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      import { encode, encodeSession, renderGlyphRun } from "/src/doldskrift.js";
+      mountShell({ active: "home" });
+
+      const input = document.getElementById("home-input");
+      const seed = document.getElementById("home-seed");
+      const runway = document.getElementById("home-runway");
+      const meta = document.getElementById("home-meta");
+      let mode = "encoded";
+
+      document.getElementById("home-modes").addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-mode]");
+        if (!btn) return;
+        mode = btn.dataset.mode;
+        for (const b of e.currentTarget.querySelectorAll("button")) {
+          b.classList.toggle("active", b === btn);
+        }
+        paint();
+      });
+
+      function paint() {
+        const text = input.value || " ";
+        runway.innerHTML = renderGlyphRun(text, mode, seed.value || "1", {
+          animate: true,
+          redundancy: 2,
+        });
+        const sample =
+          mode === "session"
+            ? encodeSession(text, seed.value || "1")
+            : mode === "encoded"
+              ? encode(text)
+              : text;
+        const cps = [...sample].map((c) => "U+" + c.codePointAt(0).toString(16).toUpperCase());
+        meta.innerHTML = `
+          <span class="pill">${mode}</span>
+          <span class="pill">${[...text].length} chars → ${cps.length} symbols</span>
+          <span class="pill">${cps.slice(0, 6).join(" · ")}${cps.length > 6 ? "…" : ""}</span>
+        `;
+      }
+
+      input.addEventListener("input", paint);
+      seed.addEventListener("input", paint);
+      paint();
+    </script>
+  </body>
+</html>

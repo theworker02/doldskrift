@@ -1,0 +1,55 @@
+name: Vision failure
+description: Report a DVE recognition miss, false positive, or scan regression
+labels: ["vision", "bug"]
+body:
+  - type: dropdown
+    id: path
+    attributes:
+      label: Path
+      options:
+        - dold vision / dold scan (CLI)
+        - dold bench vision
+        - Library (doldskrift-vision)
+        - Browser structural demo (Lens / examples)
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Version / commit
+      placeholder: "v0.4.0 or git SHA"
+  - type: textarea
+    id: input
+    attributes:
+      label: Input
+      description: Image path, specimen command, or steps to regenerate the visual medium.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected reconstruction
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+      description: Include confidence, fingerprints, or CLI stderr if available.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: "OS, CPU, samples flag, degradation (blur/noise/print)"
+  - type: checkboxes
+    id: honesty
+    attributes:
+      label: Checks
+      options:
+        - label: I understand browser structural-map demos are not full pixel DVE
+          required: false
+        - label: I can share a sample image or reproducible command (or explain why not)
+          required: false

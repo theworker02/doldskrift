@@ -1,0 +1,27 @@
+name: Feature request
+description: Propose a capability that fits Doldskrift's scope
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options: [codec, font, glyph-engine, protocol, CLI, web, vision, documentation, agents]
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / motivation
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed approach
+  - type: checkboxes
+    id: dep
+    attributes:
+      label: Protocol impact
+      options:
+        - label: This may require a DEP (Doldskrift Enhancement Proposal)

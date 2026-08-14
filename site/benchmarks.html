@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Doldskrift research status — component maturity and how to run measured benches."
+    />
+    <title>Research &amp; status — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <style>
+      .maturity-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+      }
+      .maturity-table th,
+      .maturity-table td {
+        text-align: left;
+        padding: 0.65rem 0.75rem;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      .maturity-table th {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        font-weight: 600;
+      }
+      .tag {
+        display: inline-block;
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        padding: 0.15rem 0.45rem;
+        border-radius: 6px;
+        border: 1px solid var(--line);
+        background: var(--paper-2);
+      }
+      .tag.stable {
+        border-color: rgba(15, 107, 92, 0.35);
+        color: var(--accent);
+      }
+      .tag.exp {
+        border-color: rgba(196, 92, 38, 0.4);
+        color: var(--accent-2);
+      }
+      .tag.cand {
+        border-color: rgba(20, 24, 22, 0.25);
+        color: var(--ink-soft);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero" style="padding-bottom: 1rem">
+        <p class="hero-brand" style="font-size: clamp(2.2rem, 5vw, 3.2rem)">Research</p>
+        <p class="lead">
+          Status dashboard for the platform. This page does not invent throughput, accuracy, or
+          latency numbers. Published numeric benches must come from measured
+          <code>dold bench</code> / Criterion runs on a named host.
+        </p>
+        <div class="meta-bar">
+          <span class="pill">no fake metrics</span>
+          <span class="pill">CLI-measured only</span>
+        </div>
+      </header>
+
+      <section class="section" style="margin-top: 0">
+        <h2>Component maturity</h2>
+        <p class="sub">Aligned with the repository README status table — qualitative, not scored.</p>
+        <table class="maturity-table">
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Maturity</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>DSK/1 codec + <code>.dsk</code></td>
+              <td><span class="tag stable">Stable prototype</span></td>
+              <td>Primary encode/decode path; golden vectors in CI.</td>
+            </tr>
+            <tr>
+              <td>DSK/2 semantics</td>
+              <td><span class="tag exp">Experimental</span></td>
+              <td>Typed modules in progress; not a frozen wire format.</td>
+            </tr>
+            <tr>
+              <td>MGE glyph engine</td>
+              <td><span class="tag cand">Candidate</span></td>
+              <td>MGE/2 zones, fingerprints, GRE — still evolving.</td>
+            </tr>
+            <tr>
+              <td>DVE vision</td>
+              <td><span class="tag exp">Experimental</span></td>
+              <td>Structural pipeline in Rust; browser demos use structural maps.</td>
+            </tr>
+            <tr>
+              <td>Forge</td>
+              <td><span class="tag exp">Experimental</span></td>
+              <td>Alphabet / optimization research — not a product UI.</td>
+            </tr>
+            <tr>
+              <td>WASM bindings</td>
+              <td><span class="tag cand">Beta / in progress</span></td>
+              <td>Preferred foreign bridge; site JS codec is demo-aligned.</td>
+            </tr>
+            <tr>
+              <td>CLI (<code>dold</code>)</td>
+              <td><span class="tag cand">Beta</span></td>
+              <td>Lab entrypoint: encode, inspect, vision, bench, font.</td>
+            </tr>
+            <tr>
+              <td>Lens / Black Page</td>
+              <td><span class="tag stable">Shipping in site/</span></td>
+              <td>Local-first demos with evidence panels.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section">
+        <h2>How to measure</h2>
+        <p class="sub">
+          Run benches locally or in CI, then paste Criterion / CLI output into release notes. Do not
+          copy invented figures onto this page.
+        </p>
+        <pre>cargo install --path crates/doldskrift-cli
+
+# Vision structural benches (measured on your machine)
+dold bench vision --samples 32
+
+# Host microbenches (Criterion), when configured for the workspace
+cargo bench -p doldskrift
+
+# Suggested Criterion targets (fill from real runs only)
+# - encode / decode: 1KB, 100KB, 1MB, 100MB
+# - stream throughput
+# - container parse
+# - mapping generation
+# - glyph generation</pre>
+        <div class="note" style="margin-top: 1rem">
+          CLI guide: <a href="../docs/guides/cli.md">docs/guides/cli.md</a> · Reference:
+          <a href="../docs/reference/cli.md">docs/reference/cli.md</a> · Whitepaper evaluation
+          section: <a href="../research/doldskrift-whitepaper.md">research/doldskrift-whitepaper.md</a>
+          (marked “to be filled from reproducible runs”).
+        </div>
+      </section>
+
+      <div class="cta">
+        <a class="btn primary" href="./lens.html">Try Lens</a>
+        <a class="btn" href="./technology.html">Technology</a>
+        <a class="btn" href="./docs.html">Docs</a>
+      </div>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      mountShell({ active: "bench" });
+    </script>
+  </body>
+</html>

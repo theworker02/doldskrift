@@ -1,0 +1,17 @@
+/* Mirror of @doldskrift/core/doldskrift.css — keep in sync when editing fonts. */
+@font-face {
+  font-family: "Doldskrift";
+  src: url("/Doldskrift-Regular.woff2") format("woff2"),
+       url("/Doldskrift-Regular.ttf") format("truetype"),
+       url("/Doldskrift-Regular.svg#Doldskrift") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.doldskrift,
+.agent-text {
+  font-family: "Doldskrift", monospace;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}

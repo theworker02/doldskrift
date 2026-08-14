@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Glyph Explorer — Doldskrift</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <nav class="nav">
+        <a class="brand" href="./index.html">Doldskrift</a>
+        <div class="nav-links">
+          <a class="active" href="./glyphs.html">glyphs</a>
+          <a href="./machine-reader.html">machine reader</a>
+          <a href="./protocol.html">protocol</a>
+          <a href="./docs.html">docs</a>
+        </div>
+      </nav>
+      <header class="page-title">
+        <h1>Glyph Explorer</h1>
+        <p>256-symbol alphabet + project mark. Select a cell for MGE/2 metadata.</p>
+      </header>
+      <section class="section" style="border-top:none;padding-top:0">
+        <div id="grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(48px,1fr));gap:4px"></div>
+        <div class="panel" style="margin-top:1rem">
+          <h3>Selection</h3>
+          <pre id="detail" class="mono" style="margin:0">Click a glyph.</pre>
+        </div>
+      </section>
+    </div>
+    <script type="module">
+      import { glyphSvg, PUA_BASE, mappingFromSeed } from "./src/doldskrift.js";
+      const grid = document.getElementById("grid");
+      const detail = document.getElementById("detail");
+      function fp(b) {
+        return `DSKG-1:N${1+(b&7)}-E${1+((b>>2)&7)}-S${1+((b>>5)&7)}-W${1+((b*3)&7)}-C${1+((b^0x5a)&7)}-R2-I${(b&15).toString(16)}-O${b&7}`;
+      }
+      for (let b = 0; b < 256; b++) {
+        const cp = PUA_BASE + b;
+        const el = document.createElement("button");
+        el.className = "btn";
+        el.style.padding = "4px";
+        el.style.fontSize = "28px";
+        el.innerHTML = glyphSvg(cp, 1);
+        el.title = `U+${cp.toString(16).toUpperCase()}`;
+        el.onclick = () => {
+          detail.textContent = [
+            `Symbol ID:     ${b} (0x${b.toString(16)})`,
+            `Unicode:       U+${cp.toString(16).toUpperCase()}`,
+            `Fingerprint:   ${fp(b)}`,
+            `Density:       normal`,
+            `Redundancy:    2 (GRE/1)`,
+            `Font version:  2 (MGE/2)`,
+            `Family:        DoldskriftText`,
+          ].join("\n");
+        };
+        grid.appendChild(el);
+      }
+      // Project mark
+      const mark = document.createElement("button");
+      mark.className = "btn primary";
+      mark.style.padding = "4px";
+      mark.style.fontSize = "28px";
+      mark.innerHTML = glyphSvg(0xe1f0, 1);
+      mark.onclick = () => {
+        detail.textContent = [
+          "Symbol ID:     DSK_PROJECT_MARK",
+          "Unicode:       U+E1F0",
+          "Role:          Official logo — valid writing-system glyph",
+          "Glyph engine:  MGE/2",
+          "Redundancy:    3",
+        ].join("\n");
+      };
+      grid.appendChild(mark);
+    </script>
+      <script type="module">
+      import { mountShell } from "/src/shell.js";
+      mountShell({ active: "glyphs" });
+    </script>
+  </body>
+</html>

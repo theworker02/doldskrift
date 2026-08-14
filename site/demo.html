@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Doldskrift demos — Lens, Surfaces, Neural Lens. Open visual channel, not encryption."
+    />
+    <title>Demo — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="page-title">
+        <p class="hero-brand" style="font-size: clamp(2.2rem, 5vw, 3.2rem)">
+          Demo <span aria-label="Sweden">🇸🇪</span>
+        </p>
+        <p class="lead">
+          Flagship surfaces for humans and agents. Same honesty model everywhere: Open / Neural are
+          representation; digests are integrity, not signatures.
+        </p>
+      </header>
+
+      <section class="section">
+        <div class="grid-3">
+          <a class="panel" href="./lens.html" style="text-decoration: none; color: inherit">
+            <h3>Lens</h3>
+            <p>Human view vs machine evidence — WASM codec + pixel-template vision when available.</p>
+          </a>
+          <a class="panel" href="./surfaces.html" style="text-decoration: none; color: inherit">
+            <h3>Surfaces</h3>
+            <p>Ambient, mesh, echo, flicker, kaleidoscope — Open demos that still decode.</p>
+          </a>
+          <a class="panel" href="./neural-lens.html" style="text-decoration: none; color: inherit">
+            <h3>Neural Lens</h3>
+            <p>Experimental Mock/Deterministic framing. No Gemma in the browser.</p>
+          </a>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Also on Pages</h2>
+        <div class="cta">
+          <a class="btn" href="./black-page.html">Black Page</a>
+          <a class="btn" href="./radio.html">Agent Radio</a>
+          <a class="btn" href="./examples/visual-roundtrip.html">Visual round-trip</a>
+          <a class="btn" href="./unknown-page.html">Unknown Page</a>
+          <a class="btn primary" href="./install.html">Install</a>
+        </div>
+      </section>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      mountShell({ active: "demo" });
+    </script>
+  </body>
+</html>

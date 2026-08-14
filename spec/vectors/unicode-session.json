@@ -1,0 +1,9 @@
+{
+  "checksum": "6c0b2e2f",
+  "encoded": "",
+  "input": "café 日本語 🎉",
+  "mapping_id": "session-v1-0a2092df",
+  "mode": "session",
+  "seed": "vector-seed",
+  "version": 1
+}

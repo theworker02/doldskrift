@@ -1,0 +1,9 @@
+{
+  "checksum": "602b225f",
+  "encoded": "",
+  "input": "line1\nline2\ttab",
+  "mapping_id": "session-v1-0a2092df",
+  "mode": "session",
+  "seed": "vector-seed",
+  "version": 1
+}

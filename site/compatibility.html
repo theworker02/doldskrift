@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Reader × grammar epoch compatibility matrix (stub)." />
+    <title>Compatibility — Doldskrift Neural</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero" style="padding-bottom: 1rem">
+        <p class="hero-brand" style="font-size: clamp(2rem, 4vw, 2.8rem)">Compatibility</p>
+        <p class="lead">
+          Reader × epoch support. Foundation table is hand-maintained; generate from manifests when
+          packaging exists.
+        </p>
+      </header>
+
+      <section class="section" style="margin-top: 0">
+        <table class="doc-table" style="width: 100%; border-collapse: collapse">
+          <thead>
+            <tr>
+              <th align="left">Reader</th>
+              <th align="left">LSG/1-E0001</th>
+              <th align="left">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>deterministic-baseline/1</td>
+              <td>yes</td>
+              <td>CI exact match</td>
+            </tr>
+            <tr>
+              <td>mock-reader/1</td>
+              <td>yes</td>
+              <td>Demo alias</td>
+            </tr>
+            <tr>
+              <td>gemma-reader (future)</td>
+              <td>TBD</td>
+              <td>Not shipping</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="sub" style="margin-top: 1rem">Neural ≠ encryption.</p>
+      </section>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      mountShell({ active: "neural" });
+    </script>
+  </body>
+</html>

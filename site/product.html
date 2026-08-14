@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Product — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero" style="padding-bottom: 1rem">
+        <p class="hero-brand" style="font-size: clamp(2.2rem, 5vw, 3.2rem)">Product</p>
+        <p class="lead">
+          A machine-native visual information system — protocol, writing system, renderer, and
+          recognition engine for information that survives the journey from structured data to
+          pixels and back again.
+        </p>
+      </header>
+
+      <section class="section" style="margin-top: 0">
+        <h2>Four layers</h2>
+        <pre style="margin: 0">Structured Data
+      ↓
+Doldskrift Protocol (DSK)
+      ↓
+Machine Glyph Engine (MGE)
+      ↓
+Visual Frame / Medium
+      ↓
+Camera / Image / Screenshot / Print
+      ↓
+Doldskrift Vision Engine (DVE)
+      ↓
+Structured Data</pre>
+      </section>
+
+      <section class="section">
+        <h2>Platform</h2>
+        <div class="feature-strip">
+          <article><h3>DSK</h3><p>Protocol — containers, sessions, experimental semantics.</p></article>
+          <article><h3>MGE</h3><p>Machine Glyph Engine — structured glyphs, not dingbats.</p></article>
+          <article><h3>DVE</h3><p>Vision Engine — detect, recognize, reconstruct.</p></article>
+          <article><h3>Lens</h3><p>Flagship demo — human view vs machine evidence.</p></article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Where it helps</h2>
+        <p class="sub">Grounded use cases — not invented customers.</p>
+        <ul>
+          <li>Machine-readable displays and agent debugging surfaces</li>
+          <li>Camera-readable device coordination experiments</li>
+          <li>Visual telemetry and HCI research</li>
+          <li>Air-gap <em>demonstrations</em> of optical machine channels</li>
+          <li>Printed machine-oriented media</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Where it is not</h2>
+        <div class="note">
+          Not encryption. Not a substitute for QR when you need a ubiquitous scanner ecosystem.
+          Not an accessible human UI — provide a semantic channel whenever people must understand
+          the content (safety, legal, medical, consent).
+        </div>
+      </section>
+
+      <div class="cta">
+        <a class="btn primary" href="./lens.html">Try Lens</a>
+        <a class="btn warm" href="./black-page.html">Black Page</a>
+        <a class="btn" href="./docs.html">Documentation</a>
+      </div>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      mountShell({ active: "product" });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+{
+  "name": "@doldskrift/core",
+  "version": "0.2.0",
+  "description": "Doldskrift Open codec for JavaScript/TypeScript — encode/decode, sessions, .dsk, browser helpers",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./doldskrift.css": "./doldskrift.css"
+  },
+  "files": [
+    "dist",
+    "doldskrift.css",
+    "logo.svg",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc && tsc -p tsconfig.test.json && node --test dist-test/vectors.test.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "typescript": "^5.8.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "funding": {
+    "type": "thanks.dev",
+    "url": "https://thanks.dev/u/gh/theworker02"
+  },
+  "homepage": "https://doldskrift.github.io/doldskrift/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/doldskrift/doldskrift",
+    "directory": "packages/doldskrift-js"
+  },
+  "license": "MIT"
+}

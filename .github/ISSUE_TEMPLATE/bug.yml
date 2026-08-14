@@ -1,0 +1,25 @@
+name: Bug report
+description: Report a defect in codec, font, CLI, or docs
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options: [codec, font, glyph-engine, protocol, CLI, web, vision, documentation, other]
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: expect
+    attributes:
+      label: Expected behavior
+  - type: input
+    id: version
+    attributes:
+      label: Version / commit

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Protocol explorer — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <nav class="nav">
+        <a class="brand" href="./index.html">
+          <img src="/logo-mark.svg" alt="" />
+          Doldskrift
+        </a>
+        <div class="nav-links">
+          <a href="./index.html">home</a>
+          <a href="./font.html">font</a>
+          <a class="active" href="./protocol.html">protocol</a>
+          <a href="./playground.html">playground</a>
+          <a href="./spec.html">spec</a>
+        </div>
+      </nav>
+
+      <header class="page-title">
+        <h1>Protocol explorer</h1>
+        <p>Educational walkthrough of the encode path. Not a security bypass interface.</p>
+      </header>
+
+      <section class="section" style="border-top: none; padding-top: 0">
+        <label>Input
+          <input id="input" value="Hello agent" />
+        </label>
+        <div class="pipeline" id="pipeline" style="margin-top: 1rem"></div>
+        <div class="panel" style="margin-top: 1rem">
+          <h3>Selected symbol</h3>
+          <div id="detail" class="mono">Click a symbol ID below.</div>
+        </div>
+        <div id="symbols" class="glyph-stage" style="margin-top: 1rem; font-size: 42px"></div>
+      </section>
+      <footer>DSK/1 · UTF-8 bytes → PUA symbols → glyphs</footer>
+    </div>
+    <script type="module">
+      import { encode, glyphSvg, PUA_BASE } from "./src/doldskrift.js";
+
+      const input = document.getElementById("input");
+      const pipeline = document.getElementById("pipeline");
+      const symbols = document.getElementById("symbols");
+      const detail = document.getElementById("detail");
+
+      function paint() {
+        const text = input.value;
+        const bytes = [...new TextEncoder().encode(text)];
+        const encoded = encode(text);
+        const ids = [...encoded].map((ch) => ch.codePointAt(0));
+
+        pipeline.innerHTML = [
+          ["INPUT", JSON.stringify(text)],
+          ["UTF-8", bytes.map((b) => b.toString(16).padStart(2, "0")).join(" ")],
+          ["ENCODER", "static-v1 identity mapping"],
+          ["SYMBOL IDS", ids.map((id) => "U+" + id.toString(16).toUpperCase()).join(" ")],
+          ["DOLDSKRIFT", encoded],
+        ]
+          .map(
+            ([k, v], i) =>
+              `<div class="pipe-step" style="animation-delay:${i * 40}ms"><strong>${k}</strong><div>${v}</div></div>` +
+              (i < 4 ? `<div class="pipe-arrow">↓</div>` : "")
+          )
+          .join("");
+
+        symbols.innerHTML = ids
+          .map(
+            (id, i) =>
+              `<span class="g" data-i="${i}" data-id="${id}" title="U+${id
+                .toString(16)
+                .toUpperCase()}">${glyphSvg(id, 1)}</span>`
+          )
+          .join("");
+
+        symbols.querySelectorAll(".g").forEach((el) => {
+          el.addEventListener("click", () => {
+            const id = Number(el.dataset.id);
+            const i = Number(el.dataset.i);
+            detail.textContent = [
+              `index: ${i}`,
+              `codepoint: U+${id.toString(16).toUpperCase()}`,
+              `byte: 0x${(id - PUA_BASE).toString(16).padStart(2, "0")} (${id - PUA_BASE})`,
+              `mapping: static-v1`,
+            ].join("\n");
+          });
+        });
+      }
+
+      input.addEventListener("input", paint);
+      paint();
+    </script>
+      <script type="module">
+      import { mountShell } from "/src/shell.js";
+      mountShell({ active: "protocol" });
+    </script>
+  </body>
+</html>
