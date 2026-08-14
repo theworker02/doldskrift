@@ -29,6 +29,10 @@ Thanks for helping build a machine-native visual information system.
 
 ## Development
 
+### Commit author
+
+Release and project commits in this repository use the local git identity **theworker02** / `theworker02@users.noreply.github.com` (never CursorAgent). Agents should rely on repo-local `git config` or pass matching `-c user.name` / `-c user.email` overrides.
+
 One-liners (also see root `Makefile` / npm scripts):
 
 ```bash

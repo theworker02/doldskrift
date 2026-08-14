@@ -1,0 +1,20 @@
+---
+description: Commit author must be theworker02, never CursorAgent
+alwaysApply: true
+---
+
+# Git commit author
+
+When creating commits in this repo:
+
+- Author name: `theworker02`
+- Author email: `theworker02@users.noreply.github.com`
+- Prefer the repo-local git config (`user.name` / `user.email`). Do not change `--global`.
+- If you must override identity on the CLI:
+
+```bash
+git -c user.name="theworker02" -c user.email="theworker02@users.noreply.github.com" commit ...
+```
+
+- Never use `CursorAgent`, `Cursor`, or any other Cursor-default identity as commit author.
+- Do not rewrite existing commit history to change authors unless the user explicitly asks.
