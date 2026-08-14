@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://github.com/theworker02/doldskrift/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/theworker02/doldskrift/ci.yml?branch=main&label=CI" alt="CI" /></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0%20%7C%20MIT-blue" alt="License" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT%20%7C%20Apache--2.0-blue" alt="License" /></a>
   <img src="https://img.shields.io/badge/MSRV-1.75-orange" alt="MSRV" />
   <a href="https://crates.io/crates/doldskrift"><img src="https://img.shields.io/crates/v/doldskrift?label=crates.io" alt="crates.io" /></a>
   <a href="https://docs.rs/doldskrift"><img src="https://img.shields.io/docsrs/doldskrift?label=docs.rs" alt="docs.rs" /></a>
@@ -309,6 +309,19 @@ Bugs and documentation issues: [`SUPPORT.md`](SUPPORT.md). Commercial collaborat
 
 ---
 
+
+## Contributors
+
+Curated project contributors (not GitHub's automatic commit graph):
+
+| Name | Role |
+|------|------|
+| [**theworker02**](https://github.com/theworker02) | Creator and maintainer |
+
+Bots such as Dependabot are not listed as project contributors. Full note: [CONTRIBUTORS.md](CONTRIBUTORS.md).
+
+---
+
 ## Contributing
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md).
@@ -321,7 +334,7 @@ Issues and pull requests are welcome for protocol clarity, Lab DX, documentation
 
 Licensed under either of:
 
-- Apache License, Version 2.0 ([`LICENSE-APACHE`](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
 - MIT license ([`LICENSE-MIT`](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+- Apache License, Version 2.0 ([`LICENSE-APACHE`](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
 
 at your option. See [`LICENSE`](LICENSE).
