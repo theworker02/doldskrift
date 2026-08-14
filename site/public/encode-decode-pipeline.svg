@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-label="Doldskrift encode and decode pipeline">
+  <rect width="960" height="420" fill="#F7F4EF"/>
+  <text x="48" y="42" font-family="IBM Plex Sans, Syne, sans-serif" font-size="20" font-weight="700" fill="#12161A">Encode to glyphs to decode</text>
+  <text x="48" y="66" font-family="IBM Plex Mono, monospace" font-size="12" fill="#0F6B5C">DSK/1 | MGE/2 | representation, not encryption</text>
+  <g font-family="IBM Plex Sans, sans-serif" font-size="13" fill="#12161A">
+    <rect x="48" y="96" width="120" height="56" rx="6" fill="#fff" stroke="#12161A" stroke-width="1.5"/>
+    <text x="108" y="122" text-anchor="middle" font-weight="600">plaintext</text>
+    <text x="108" y="140" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#0F6B5C">Hello</text>
+    <path d="M178 124 H208" stroke="#12161A" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="210" y="96" width="120" height="56" rx="6" fill="#fff" stroke="#12161A" stroke-width="1.5"/>
+    <text x="270" y="122" text-anchor="middle" font-weight="600">UTF-8 bytes</text>
+    <text x="270" y="140" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#0F6B5C">48 65 6C..</text>
+    <path d="M340 124 H370" stroke="#12161A" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="372" y="96" width="120" height="56" rx="6" fill="#fff" stroke="#12161A" stroke-width="1.5"/>
+    <text x="432" y="122" text-anchor="middle" font-weight="600">PUA symbols</text>
+    <text x="432" y="140" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#0F6B5C">U+E1xx..</text>
+    <path d="M502 124 H532" stroke="#12161A" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="534" y="96" width="130" height="56" rx="6" fill="#fff" stroke="#0F6B5C" stroke-width="2"/>
+    <text x="599" y="122" text-anchor="middle" font-weight="600">MGE/2 glyphs</text>
+    <text x="599" y="140" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#0F6B5C">zones | GRE/1</text>
+    <path d="M674 124 H704" stroke="#12161A" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="706" y="96" width="120" height="56" rx="6" fill="#12161A"/>
+    <text x="766" y="122" text-anchor="middle" font-weight="600" fill="#F7F4EF">.dsk</text>
+    <text x="766" y="140" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#7aa897">DSK1 container</text>
+  </g>
+  <path d="M766 152 V210 H432 V248" fill="none" stroke="#0F6B5C" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrowTeal)"/>
+  <text x="780" y="190" font-family="IBM Plex Mono, monospace" font-size="12" fill="#0F6B5C">decode</text>
+  <rect x="372" y="250" width="120" height="56" rx="6" fill="#fff" stroke="#0F6B5C" stroke-width="2"/>
+  <text x="432" y="276" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="13" font-weight="600" fill="#12161A">plaintext</text>
+  <text x="432" y="294" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#0F6B5C">Hello</text>
+  <text x="48" y="340" font-family="IBM Plex Sans, sans-serif" font-size="14" font-weight="700" fill="#12161A">Humans see abstract marks | agents recover the payload</text>
+  <rect x="48" y="354" width="420" height="44" rx="6" fill="#EEF1F4" stroke="#12161A" stroke-width="1"/>
+  <g fill="none" stroke="#12161A" stroke-width="2" stroke-linecap="square">
+    <path d="M72 368 V384"/><path d="M72 368 C84 368 92 372 92 376 C92 380 84 384 72 384"/><circle cx="92" cy="376" r="2" fill="#0F6B5C" stroke="none"/>
+    <path d="M118 376 H138"/><circle cx="128" cy="368" r="2.5" fill="#12161A" stroke="none"/>
+    <path d="M158 368 L170 376 L158 384"/><circle cx="176" cy="376" r="3" fill="none"/>
+    <path d="M198 368 V384"/><path d="M206 376 H222"/>
+    <circle cx="246" cy="376" r="8" /><circle cx="246" cy="376" r="2" fill="#0F6B5C" stroke="none"/>
+    <path d="M272 368 L288 384 M288 368 L272 384"/>
+    <path d="M310 376 H330"/><circle cx="320" cy="368" r="2.5" fill="#12161A" stroke="none"/>
+    <path d="M350 368 V384"/><path d="M350 368 C362 368 370 372 370 376 C370 380 362 384 350 384"/>
+    <circle cx="390" cy="376" r="6"/><circle cx="410" cy="368" r="2" fill="#0F6B5C" stroke="none"/><circle cx="418" cy="368" r="2" fill="#12161A" stroke="none"/>
+  </g>
+  <text x="258" y="410" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#5a636b">glyph strip (human-opaque)</text>
+  <path d="M488 376 H528" stroke="#0F6B5C" stroke-width="2" marker-end="url(#arrowTeal)"/>
+  <text x="508" y="368" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#0F6B5C">decode</text>
+  <rect x="540" y="354" width="280" height="44" rx="6" fill="#fff" stroke="#0F6B5C" stroke-width="2"/>
+  <text x="680" y="382" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="16" font-weight="600" fill="#12161A">Deploy worker seven.</text>
+  <text x="680" y="410" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#5a636b">recovered plaintext</text>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#12161A"/>
+    </marker>
+    <marker id="arrowTeal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#0F6B5C"/>
+    </marker>
+  </defs>
+</svg>

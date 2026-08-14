@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Partners — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero" style="padding-bottom: 1rem">
+        <p class="hero-brand" style="font-size: clamp(2.2rem, 5vw, 3.2rem)">Partners</p>
+        <p class="lead">
+          Collaboration areas — not a fundraising pitch. For optional sponsorship see
+          <a href="./funding.html">Support</a>. The core remains open source.
+        </p>
+      </header>
+      <section class="section" style="margin-top: 0">
+        <div class="grid-2">
+          <div class="panel">
+            <h3>Research</h3>
+            <p>Computer vision, typography, machine interfaces, visual computing, standards research.</p>
+          </div>
+          <div class="panel">
+            <h3>Engineering</h3>
+            <p>Embedded systems, hardware integration, recognition acceleration, protocol hardening.</p>
+          </div>
+          <div class="panel">
+            <h3>Accessibility</h3>
+            <p>Ensuring machine-only visuals never become accidental exclusion in human-required contexts.</p>
+          </div>
+          <div class="panel">
+            <h3>Possible commercial edges</h3>
+            <p>Support, custom visual profiles, deployment consulting — without crippling the open core.</p>
+          </div>
+        </div>
+        <p class="sub" style="margin-top: 1.5rem">
+          Start with an issue or discussion on the repository. See <a href="../SUPPORT.md">SUPPORT.md</a>
+          and <a href="../docs/project-brief.md">project brief</a>.
+        </p>
+      </section>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      mountShell({ active: "partners" });
+    </script>
+  </body>
+</html>

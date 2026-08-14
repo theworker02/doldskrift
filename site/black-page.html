@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Black Page — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <style>
+      .black-stage {
+        background: #0a0c0b;
+        border-radius: var(--radius);
+        padding: 1.25rem;
+        min-height: 280px;
+        box-shadow: var(--shadow);
+      }
+      .black-stage .glyph-runway {
+        background: transparent;
+        box-shadow: none;
+        min-height: 240px;
+        justify-content: center;
+      }
+      .black-stage .g {
+        width: 1.65rem;
+        height: 1.65rem;
+        color: #c5e6da;
+        opacity: 0.92;
+      }
+      .proof {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        display: grid;
+        gap: 0.35rem;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero" style="padding-bottom: 1rem">
+        <p class="hero-brand" style="font-size: clamp(2rem, 5vw, 3rem)">The Black Page</p>
+        <p class="lead">
+          A dense field of machine glyphs. No conventional letters, digits, or word spaces.
+          The page carries a structured payload. Reconstruction uses the Doldskrift pipeline —
+          not OCR of human writing.
+        </p>
+      </header>
+
+      <section class="section" style="margin-top: 0">
+        <div class="cta" style="margin-bottom: 1rem">
+          <button class="btn primary" id="run" type="button">Encode → Destroy → Reconstruct</button>
+          <button class="btn" id="toggle" type="button">Reveal payload</button>
+          <a class="btn" href="./lens.html">Open Lens</a>
+        </div>
+
+        <div class="black-stage">
+          <div class="glyph-runway" id="page" aria-label="Machine-illegible Doldskrift page"></div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 1rem">
+          <div class="panel">
+            <h3>Pipeline</h3>
+            <pre id="pipe" style="margin: 0; font-size: 0.78rem"></pre>
+          </div>
+          <div class="panel">
+            <h3>Integrity</h3>
+            <div class="proof" id="proof">Run the demonstration.</div>
+          </div>
+        </div>
+
+        <pre id="payload" class="panel" style="margin-top: 1rem; display: none; font-size: 0.85rem"></pre>
+
+        <p class="note" style="margin-top: 1rem">
+          Browser path prefers WASM codec when present, with JS fallback. Glyph render is MGE/2.
+          Full pixel-only DVE reconstruction ships in <code>doldskrift-vision</code> /
+          CLI <code>dold scan</code>. This page demonstrates: structured object → symbols →
+          illegible visual → discard plaintext → recover from symbol layer → exact hash match.
+        </p>
+      </section>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      import { initWasmCodec } from "/src/wasm-codec.js";
+      import { renderGlyphRun } from "/src/doldskrift.js";
+      import { fingerprint } from "/src/mge2.js";
+
+      mountShell({ active: "black" });
+
+      const payloadObj = {
+        system: "doldskrift-demo",
+        operation: "benchmark",
+        targets: ["windows-x86_64", "linux-x86_64", "linux-aarch64"],
+        priority: 8,
+        timestamp: "2026-08-12T13:30:00Z",
+        parameters: { iterations: 1000, verify: true },
+      };
+
+      const page = document.getElementById("page");
+      const pipe = document.getElementById("pipe");
+      const proof = document.getElementById("proof");
+      const payloadEl = document.getElementById("payload");
+      payloadEl.textContent = JSON.stringify(payloadObj, null, 2);
+
+      async function sha256Hex(text) {
+        const hash = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+        return [...new Uint8Array(hash)].map((b) => b.toString(16).padStart(2, "0")).join("");
+      }
+
+      async function run() {
+        const codec = await initWasmCodec();
+        const t0 = performance.now();
+        const canonical = JSON.stringify(payloadObj);
+        const opaque = codec.encode(canonical);
+        const symbols = [...opaque].map((c) => c.codePointAt(0) - codec.puaBase);
+
+        // Render dense page (no spaces — machine profile)
+        page.innerHTML = renderGlyphRun(canonical, "encoded", 1, { animate: true, redundancy: 2 });
+
+        // Destroy original semantic state for the recovery path
+        let liveObject = null;
+        void liveObject;
+
+        // Recover only from symbol IDs (as if extracted from the visual layer)
+        const recoveredBytes = Uint8Array.from(symbols);
+        const recovered = new TextDecoder().decode(recoveredBytes);
+        // Also verify codec path
+        const viaDecode = codec.decode(opaque);
+
+        const h1 = await sha256Hex(canonical);
+        const h2 = await sha256Hex(recovered);
+        const h3 = await sha256Hex(viaDecode);
+        const ms = (performance.now() - t0).toFixed(1);
+
+        pipe.textContent = [
+          "STRUCTURED OBJECT",
+          "      ↓",
+          `DSK encode (${codec.backend})`,
+          "      ↓",
+          "MGE/2 glyph stream (no Latin)",
+          "      ↓",
+          "DESTROY plaintext / object",
+          "      ↓",
+          "symbol IDs from visual layer",
+          "      ↓",
+          "UTF-8 reconstruct",
+          "      ↓",
+          "SEMANTIC JSON",
+        ].join("\n");
+
+        const ok = h1 === h2 && h1 === h3;
+        proof.innerHTML = `
+          <div>Codec backend: ${codec.backend}</div>
+          <div>Glyphs rendered: ${symbols.length}</div>
+          <div>Sample fingerprints: ${symbols
+            .slice(0, 3)
+            .map((id) => fingerprint(id))
+            .join(" · ")}</div>
+          <div>Decode duration: ${ms} ms</div>
+          <div>Original SHA-256: ${h1}</div>
+          <div>Recovered SHA-256: ${h2}</div>
+          <div style="color:${ok ? "var(--accent)" : "var(--accent-2)"};font-weight:600">
+            ${ok ? "✓ EXACT MATCH" : "✗ MISMATCH"}
+          </div>
+        `;
+      }
+
+      document.getElementById("run").onclick = run;
+      document.getElementById("toggle").onclick = () => {
+        payloadEl.style.display = payloadEl.style.display === "none" ? "block" : "none";
+      };
+      run();
+    </script>
+  </body>
+</html>

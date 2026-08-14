@@ -1,0 +1,92 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  rust:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - name: Format
+        run: cargo fmt --all -- --check
+      - name: Clippy
+        run: cargo clippy --workspace --all-targets -- -D warnings
+      - name: Test
+        run: cargo test --workspace
+      - name: Conformance
+        run: cargo run -p doldskrift-cli -- conformance
+      - name: Font build
+        run: cargo run -p doldskrift-cli -- font build --out fonts/generated
+      - name: Surfaces fixtures
+        run: cargo run -p doldskrift-font --example gen_surfaces_fixtures
+
+  js:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install
+        run: npm install
+      - name: Test
+        run: npm test
+      - name: Static site build
+        run: npm run build -w doldskrift-site --if-present || (cd site && npm install && npm run build)
+      - name: Link check
+        run: node tools/check-links.mjs
+      - name: cargo-deny
+        uses: EmbarkStudios/cargo-deny-action@v2
+        with:
+          command: check
+        continue-on-error: true
+
+  fuzz-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@nightly
+      - name: Install cargo-fuzz
+        run: cargo install cargo-fuzz --locked || cargo install cargo-fuzz
+      - name: Smoke fuzz decoder
+        working-directory: fuzz
+        run: cargo fuzz run decoder -- -max_total_time=30
+        continue-on-error: true
+
+  release-artifacts:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [rust, js]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Build release CLI
+        run: cargo build -p doldskrift-cli --release
+      - name: Build font
+        run: cargo run -p doldskrift-cli --release -- font build --out fonts/generated
+      - name: Package
+        run: |
+          mkdir -p dist
+          cp target/release/dold dist/ || cp target/release/dold.exe dist/
+          cp -r fonts/generated dist/fonts
+          cp -r spec dist/spec
+          (cd dist && find . -type f -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/**
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

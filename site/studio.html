@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Studio — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero" style="padding-bottom: 1rem">
+        <p class="hero-brand" style="font-size: clamp(2.2rem, 5vw, 3.2rem)">Studio</p>
+        <p class="lead">
+          Morph modes, inspect MGE/2 fingerprints, and export a glyph strip as SVG —
+          the same visual language as the CLI renderer.
+        </p>
+      </header>
+
+      <section class="section" style="margin-top: 0">
+        <div class="studio-grid">
+          <aside class="panel">
+            <h3>Source</h3>
+            <textarea id="src" rows="6">Handshake ready. Token boundary intact.</textarea>
+            <div class="controls" style="flex-direction: column; align-items: stretch">
+              <label>
+                Mode
+                <select id="mode">
+                  <option value="visual">visual</option>
+                  <option value="encoded" selected>encoded</option>
+                  <option value="session">session</option>
+                </select>
+              </label>
+              <label>
+                Session seed
+                <input id="seed" type="text" value="studio-seed" />
+              </label>
+              <label>
+                Redundancy
+                <input id="red" type="range" min="1" max="3" value="2" />
+              </label>
+            </div>
+            <div class="export-bar">
+              <button class="btn primary" id="btn-export" type="button">Export SVG</button>
+              <button class="btn" id="btn-copy" type="button">Copy PUA text</button>
+              <button class="btn" id="btn-morph" type="button">Morph modes</button>
+            </div>
+            <p class="sub" style="margin-top: 1rem; margin-bottom: 0" id="status"></p>
+          </aside>
+          <div>
+            <div class="glyph-runway morph-stage" id="runway"></div>
+            <div class="meta-bar" id="meta"></div>
+            <h3 style="margin: 1.5rem 0 0.5rem; font-family: var(--font-display)">Fingerprints</h3>
+            <div class="fp-panel" id="fps"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      import {
+        encode,
+        encodeSession,
+        renderGlyphRun,
+        projectMarkSvg,
+      } from "/src/doldskrift.js";
+      import { fingerprint, fingerprintLegend, glyphSvgMge2, PUA_BASE } from "/src/mge2.js";
+
+      mountShell({ active: "studio" });
+
+      const src = document.getElementById("src");
+      const modeEl = document.getElementById("mode");
+      const seed = document.getElementById("seed");
+      const red = document.getElementById("red");
+      const runway = document.getElementById("runway");
+      const fps = document.getElementById("fps");
+      const meta = document.getElementById("meta");
+      const status = document.getElementById("status");
+
+      function encodedText() {
+        const t = src.value;
+        const m = modeEl.value;
+        if (m === "visual") return t;
+        if (m === "session") return encodeSession(t, seed.value || "1");
+        return encode(t);
+      }
+
+      function paint() {
+        const m = modeEl.value;
+        const r = Number(red.value);
+        runway.innerHTML =
+          projectMarkSvg("2.2rem") +
+          `<span class="sp"></span>` +
+          renderGlyphRun(src.value, m, seed.value || "1", { redundancy: r, animate: true });
+
+        const enc = encodedText();
+        const rows = [];
+        let i = 0;
+        for (const ch of enc) {
+          if (m === "visual" && (ch === " " || ch === "\n")) continue;
+          const cp = ch.codePointAt(0);
+          const sid = cp >= PUA_BASE && cp < PUA_BASE + 256 ? cp - PUA_BASE : cp & 0xff;
+          const fp = fingerprint(sid, r);
+          const legend = fingerprintLegend(fp);
+          rows.push(`<div class="fp-row">
+            <span class="g">${glyphSvgMge2(cp, { redundancy: r })}</span>
+            <code>${fp}<br/>zones ${Object.entries(legend.zones)
+              .map(([k, v]) => k + "=" + v)
+              .join(" ")}</code>
+          </div>`);
+          if (++i >= 24) break;
+        }
+        fps.innerHTML = rows.join("") || "<em>empty</em>";
+        meta.innerHTML = `
+          <span class="pill">${m}</span>
+          <span class="pill">R${r}</span>
+          <span class="pill">${[...enc].length} symbols</span>
+          <span class="pill">project mark prepended</span>
+        `;
+      }
+
+      function downloadSvg() {
+        const r = Number(red.value);
+        const enc = encodedText();
+        const cells = [];
+        let x = 12;
+        cells.push(`<g transform="translate(${x},12) scale(0.72)">${glyphSvgMge2(0xe1f0).replace(/width="[^"]*"|height="[^"]*"/g, "")}</g>`);
+        x += 80;
+        for (const ch of enc) {
+          if (modeEl.value === "visual" && (ch === " " || ch === "\n")) {
+            x += 24;
+            continue;
+          }
+          const cp = ch.codePointAt(0);
+          const inner = glyphSvgMge2(cp, { redundancy: r })
+            .replace(/<svg[^>]*>/, "")
+            .replace(/<\/svg>/, "");
+          cells.push(`<g transform="translate(${x},12)" stroke="#E8EFE9" fill="none" stroke-width="5.5">${inner}</g>`);
+          x += 72;
+          if (x > 2400) break;
+        }
+        const svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="${x + 20}" height="120" viewBox="0 0 ${x + 20} 120">
+  <rect width="100%" height="100%" fill="#121614"/>
+  <text x="12" y="110" fill="#7aa897" font-family="monospace" font-size="10">Doldskrift Studio · MGE/2 · ${modeEl.value}</text>
+  ${cells.join("\n")}
+</svg>`;
+        const blob = new Blob([svg], { type: "image/svg+xml" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "doldskrift-strip.svg";
+        a.click();
+        URL.revokeObjectURL(a.href);
+        status.textContent = "Exported doldskrift-strip.svg";
+      }
+
+      document.getElementById("btn-export").onclick = downloadSvg;
+      document.getElementById("btn-copy").onclick = async () => {
+        await navigator.clipboard.writeText(encodedText());
+        status.textContent = "Copied encoded / source text to clipboard.";
+      };
+
+      let morphing = false;
+      document.getElementById("btn-morph").onclick = async () => {
+        if (morphing) return;
+        morphing = true;
+        const cycle = ["visual", "encoded", "session"];
+        for (const m of cycle) {
+          modeEl.value = m;
+          paint();
+          await new Promise((r) => setTimeout(r, 700));
+        }
+        morphing = false;
+        status.textContent = "Morph complete.";
+      };
+
+      for (const el of [src, modeEl, seed, red]) el.addEventListener("input", paint);
+      paint();
+    </script>
+  </body>
+</html>

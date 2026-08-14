@@ -1,0 +1,44 @@
+{
+  "name": "@doldskrift/react",
+  "version": "0.2.0",
+  "description": "React bindings for DOLDSKRIFT/1",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "logo.svg",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "dependencies": {
+    "@doldskrift/core": "*"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.18",
+    "react": "^18.3.1",
+    "typescript": "^5.8.2"
+  },
+  "funding": {
+    "type": "thanks.dev",
+    "url": "https://thanks.dev/u/gh/theworker02"
+  },
+  "homepage": "https://doldskrift.github.io/doldskrift/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/doldskrift/doldskrift",
+    "directory": "packages/doldskrift-react"
+  },
+  "license": "MIT"
+}

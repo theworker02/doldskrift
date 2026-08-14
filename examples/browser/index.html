@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="doldskrift" content="version=1;mode=encoded" />
+    <title>Doldskrift browser example</title>
+    <style>
+      body { font-family: Georgia, serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+      .agent-text { letter-spacing: 0.05em; }
+    </style>
+  </head>
+  <body>
+    <h1>Browser discovery example</h1>
+    <div data-doldskrift="1" data-doldskrift-mode="encoded" class="agent-text" id="out"></div>
+    <script type="module">
+      // Prefer @doldskrift/core when installed; inline fallback for the example:
+      const PUA = 0xe000;
+      const encode = (t) =>
+        [...new TextEncoder().encode(t)]
+          .map((b) => String.fromCodePoint(PUA + b))
+          .join("");
+      const el = document.getElementById("out");
+      const semantic = "hello agent";
+      el.textContent = encode(semantic);
+      el.setAttribute("aria-label", semantic);
+    </script>
+  </body>
+</html>

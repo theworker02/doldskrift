@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Machine Reader — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero" style="padding-bottom: 1rem">
+        <p class="hero-brand" style="font-size: clamp(2.2rem, 5vw, 3.2rem)">Machine Reader</p>
+        <p class="lead">
+          Visual writing that carries machine-decodable structure. Encode a sentence, then
+          switch to vision-only reconstruction via MGE/2 fingerprints.
+        </p>
+      </header>
+
+      <section class="section" style="margin-top: 0">
+        <label class="mono" style="font-size: 0.75rem; display: block; margin-bottom: 0.35rem">Sentence</label>
+        <input id="msg" class="field" value="Meet me at the build server at 14:30." />
+        <div class="cta" style="margin: 1rem 0">
+          <button class="btn primary" id="encode" type="button">Encode</button>
+          <button class="btn warm" id="vision" type="button">Vision only</button>
+          <button class="btn" id="reset" type="button">Reset</button>
+        </div>
+
+        <div class="grid-2">
+          <div class="panel">
+            <h3>Human view</h3>
+            <div id="human" class="glyph-runway" style="min-height: 120px"></div>
+            <p class="mono" id="human-note" style="font-size: 0.75rem; opacity: 0.7; margin-top: 0.5rem">
+              Underlying text still available until Vision Only.
+            </p>
+          </div>
+          <div class="panel">
+            <h3>Agent reader</h3>
+            <pre id="agent" style="margin: 0; min-height: 120px">Waiting…</pre>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top: 1rem">
+          <h3>Vision reconstruction path</h3>
+          <div class="pipeline" id="path"></div>
+        </div>
+      </section>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      import { encode, decode, renderGlyphRun, PUA_BASE } from "/src/doldskrift.js";
+      import { fingerprint } from "/src/mge2.js";
+
+      mountShell({ active: "reader" });
+
+      const msg = document.getElementById("msg");
+      const human = document.getElementById("human");
+      const agent = document.getElementById("agent");
+      const path = document.getElementById("path");
+      const note = document.getElementById("human-note");
+      let opaque = "";
+
+      function showEncoded() {
+        opaque = encode(msg.value);
+        human.innerHTML = renderGlyphRun(msg.value, "encoded", 1, { animate: true });
+        note.textContent = "Encoded mode: characters are PUA symbols. Agent still decodes exactly.";
+        agent.textContent = decode(opaque);
+        path.innerHTML = [
+          ["glyphs", `${[...opaque].length} codepoints`],
+          [
+            "fingerprints",
+            [...opaque]
+              .slice(0, 4)
+              .map((ch) => fingerprint(ch.codePointAt(0) - PUA_BASE))
+              .join(" · ") + " …",
+          ],
+          [
+            "symbols",
+            [...opaque]
+              .slice(0, 8)
+              .map((ch) => "U+" + ch.codePointAt(0).toString(16).toUpperCase())
+              .join(" "),
+          ],
+          ["payload", "UTF-8 via identity mapping"],
+          ["sentence", msg.value],
+        ]
+          .map(([k, v]) => `<div class="pipe-step"><strong>${k}</strong><div>${v}</div></div>`)
+          .join('<div class="pipe-arrow">↓</div>');
+      }
+
+      function showVision() {
+        if (!opaque) showEncoded();
+        human.innerHTML = renderGlyphRun(msg.value, "encoded", 1, { animate: true });
+        note.textContent =
+          "VISION ONLY — no semantic textContent; reconstruction uses structural fingerprints.";
+        const bytes = [...opaque].map((ch) => ch.codePointAt(0) - PUA_BASE);
+        const fps = bytes.map((b) => fingerprint(b));
+        const reconstructed = new TextDecoder().decode(Uint8Array.from(bytes));
+        agent.textContent = reconstructed;
+        path.innerHTML = [
+          ["image / display", "glyph raster (simulated)"],
+          ["segmenter", `${bytes.length} cells`],
+          ["structure extractor", fps.slice(0, 3).join(" · ") + " …"],
+          ["classifier", "fingerprint → symbol id"],
+          ["decoder", reconstructed],
+        ]
+          .map(([k, v]) => `<div class="pipe-step"><strong>${k}</strong><div>${v}</div></div>`)
+          .join('<div class="pipe-arrow">↓</div>');
+      }
+
+      document.getElementById("encode").onclick = showEncoded;
+      document.getElementById("vision").onclick = showVision;
+      document.getElementById("reset").onclick = () => {
+        human.textContent = msg.value;
+        agent.textContent = "Waiting…";
+        path.innerHTML = "";
+        note.textContent = "Plaintext. Press Encode.";
+        opaque = "";
+      };
+      document.getElementById("reset").click();
+    </script>
+  </body>
+</html>

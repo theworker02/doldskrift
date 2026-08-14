@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Security — Doldskrift</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <nav class="nav">
+        <a class="brand" href="./index.html"><img src="/logo-mark.svg" alt="" />Doldskrift</a>
+        <div class="nav-links">
+          <a href="./docs.html">docs</a>
+          <a class="active" href="./security.html">security</a>
+        </div>
+      </nav>
+      <header class="page-title">
+        <h1>Security model</h1>
+        <p><strong>Open</strong> mode (shipping demos) is not encryption, authentication, DRM, or a TLS replacement.</p>
+      </header>
+      <section class="section" style="border-top:none;padding-top:0">
+        <div class="note">Need confidentiality today? Use real authenticated encryption first, then optionally represent ciphertext with Open-mode Doldskrift. <strong>Protected</strong> mode (DSK/3 / Gate) is the named encrypted product surface — refuse stubs today, AEAD not shipping; see ADR-0006.</div>
+        <div class="grid-2" style="margin-top:1rem">
+          <div class="panel">
+            <h3>Open — can frustrate</h3>
+            <ul>
+              <li>Casual visual inspection</li>
+              <li>Shoulder surfing</li>
+              <li>Immediate human comprehension</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Open — cannot defeat</h3>
+            <ul>
+              <li>DOM / source inspection</li>
+              <li>Copy/paste</li>
+              <li>Reverse engineering</li>
+              <li>Determined analysts</li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin-top:1rem"><a href="../SECURITY.md">Full SECURITY.md</a> · <a href="../docs/product/protected-mode.md">Protected mode</a></p>
+      </section>
+      <footer>Open: CRC32C ≠ authenticity · Protected (target): AEAD + Gate</footer>
+    </div>
+      <script type="module">
+      import { mountShell } from "/src/shell.js";
+      mountShell({ active: "security" });
+    </script>
+  </body>
+</html>

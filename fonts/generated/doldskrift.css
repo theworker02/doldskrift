@@ -1,0 +1,29 @@
+/* Doldskrift MGE/2 — generated stylesheet */
+@font-face {
+    font-family: "DoldskriftText";
+    src: url("./DoldskriftText-Regular.svg#DoldskriftText") format("svg");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+@font-face {
+    font-family: "DoldskriftMono";
+    src: url("./DoldskriftMono-Regular.svg#DoldskriftMono") format("svg");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+@font-face {
+    font-family: "DoldskriftMicro";
+    src: url("./DoldskriftMicro-Regular.svg#DoldskriftMicro") format("svg");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+.doldskrift, .agent-text {
+    font-family: "DoldskriftText", "Doldskrift", monospace;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+}
+.doldskrift-mono { font-family: "DoldskriftMono", monospace; }
+.doldskrift-micro { font-family: "DoldskriftMicro", monospace; }

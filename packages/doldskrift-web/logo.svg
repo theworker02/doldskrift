@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Doldskrift project mark U+E1F0">
+  <rect width="128" height="128" rx="20" fill="#F7F4EF"/>
+  <g transform="translate(14,14) scale(0.1)" fill="none" stroke="#12161A" stroke-width="36" stroke-linecap="square" stroke-linejoin="miter">
+<line x1="280" y1="780" x2="280" y2="220"/>
+<path d="M 419.99999999999994 760 A 260 260 0 0 1 420.00000000000006 240"/>
+<path d="M 420 500 L 560 620 M 420 500 L 560 380"/>
+<circle cx="280" cy="780" r="12" fill="#1a1a1a" stroke="none"/>
+<circle cx="280" cy="220" r="12" fill="#1a1a1a" stroke="none"/>
+<line x1="660" y1="500" x2="700" y2="500" stroke-width="48"/>
+<circle cx="520" cy="500" r="18" fill="#1a1a1a" stroke="none"/>
+<circle cx="760" cy="760" r="12" fill="#1a1a1a" stroke="none"/>
+<circle cx="800" cy="760" r="12" fill="#1a1a1a" stroke="none"/>
+  </g>
+  <circle cx="104" cy="24" r="4" fill="#0F6B5C"/>
+</svg>

@@ -1,0 +1,24 @@
+name: Protocol change
+description: Propose a DSK framing / mapping / container change
+labels: ["protocol"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Protocol changes that affect interoperability should become a **DEP**.
+        See `deps/DEP-0001-process.md`.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+    validations:
+      required: true
+  - type: dropdown
+    id: compat
+    attributes:
+      label: Compatibility
+      options: [backward-compatible, needs DSK/2, experimental-only]
+  - type: textarea
+    id: dep_draft
+    attributes:
+      label: DEP draft link or outline

@@ -1,0 +1,48 @@
+[package]
+name = "doldskrift-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+doldskrift = { path = "../crates/doldskrift" }
+
+[[bin]]
+name = "decoder"
+path = "fuzz_targets/decoder.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "container"
+path = "fuzz_targets/container.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "manifest"
+path = "fuzz_targets/manifest.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "stream_decoder"
+path = "fuzz_targets/stream_decoder.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "mapping"
+path = "fuzz_targets/mapping.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "semantic"
+path = "fuzz_targets/semantic.rs"
+test = false
+doc = false

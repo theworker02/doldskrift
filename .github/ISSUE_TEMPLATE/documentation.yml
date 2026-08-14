@@ -1,0 +1,43 @@
+name: Documentation
+description: Report a docs gap, unclear page, or incorrect maturity/security wording
+labels: ["documentation"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Getting started / guides
+        - Protocol / spec
+        - Product / positioning
+        - Engineering (build/test)
+        - Site (Lens, Technology, Research)
+        - ADR / architecture
+        - Security / accessibility wording
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Path or URL
+      placeholder: "docs/product/positioning.md or site/technology.html"
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: What is wrong or missing?
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested fix (optional)
+  - type: checkboxes
+    id: claims
+    attributes:
+      label: Claims hygiene
+      options:
+        - label: This report is about avoiding fake metrics or overstated security language
+          required: false

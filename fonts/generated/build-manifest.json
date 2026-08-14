@@ -1,0 +1,13 @@
+{
+  "families": [
+    "DoldskriftText",
+    "DoldskriftMono",
+    "DoldskriftMicro"
+  ],
+  "font_version": 2,
+  "generator": "doldskrift-font-mge2",
+  "glyph_count": 352,
+  "glyph_engine": 2,
+  "project_mark": "U+E1F0",
+  "seed": 1
+}

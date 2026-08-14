@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 340" role="img" aria-label="Doldskrift visual, encoded, and session modes">
+  <rect width="960" height="340" fill="#F7F4EF"/>
+  <text x="48" y="40" font-family="IBM Plex Sans, Syne, sans-serif" font-size="20" font-weight="700" fill="#12161A">Modes at a glance</text>
+  <text x="48" y="64" font-family="IBM Plex Mono, monospace" font-size="12" fill="#0F6B5C">visual | encoded | session - same message, different contracts</text>
+  <text x="48" y="100" font-family="IBM Plex Sans, sans-serif" font-size="13" font-weight="700" fill="#12161A">visual</text>
+  <text x="120" y="100" font-family="IBM Plex Mono, monospace" font-size="11" fill="#5a636b">Unicode unchanged | font substitutes abstract glyphs</text>
+  <rect x="48" y="112" width="864" height="48" rx="6" fill="#fff" stroke="#12161A" stroke-width="1.25"/>
+  <text x="72" y="142" font-family="IBM Plex Mono, monospace" font-size="18" fill="#12161A">Deploy worker seven.</text>
+  <text x="880" y="142" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="10" fill="#0F6B5C">codepoints = Latin</text>
+  <text x="48" y="192" font-family="IBM Plex Sans, sans-serif" font-size="13" font-weight="700" fill="#12161A">encoded</text>
+  <text x="130" y="192" font-family="IBM Plex Mono, monospace" font-size="11" fill="#5a636b">byte to PUA mapping (static-v1) | reversible</text>
+  <rect x="48" y="204" width="864" height="48" rx="6" fill="#EEF1F4" stroke="#12161A" stroke-width="1.25"/>
+  <g fill="none" stroke="#12161A" stroke-width="2" stroke-linecap="square" transform="translate(0,-4)">
+    <g transform="translate(72,216)"><path d="M4 6 V30"/><path d="M4 6 C18 6 28 12 28 18 C28 24 18 30 4 30"/><circle cx="28" cy="18" r="2.5" fill="#0F6B5C" stroke="none"/></g>
+    <g transform="translate(120,216)"><path d="M4 18 H28"/><circle cx="16" cy="6" r="3" fill="#12161A" stroke="none"/></g>
+    <g transform="translate(168,216)"><path d="M6 6 L22 18 L6 30"/><circle cx="28" cy="18" r="4"/></g>
+    <g transform="translate(216,216)"><circle cx="16" cy="18" r="11"/><circle cx="16" cy="18" r="2.5" fill="#0F6B5C" stroke="none"/></g>
+    <g transform="translate(264,216)"><path d="M4 6 L28 30 M28 6 L4 30"/></g>
+    <g transform="translate(312,216)"><path d="M4 6 V30"/><path d="M12 18 H28"/></g>
+    <g transform="translate(360,216)"><path d="M4 18 H28"/><circle cx="16" cy="6" r="3" fill="#12161A" stroke="none"/><circle cx="36" cy="10" r="2" fill="#0F6B5C" stroke="none"/><circle cx="44" cy="10" r="2" fill="#12161A" stroke="none"/></g>
+    <g transform="translate(424,216)"><path d="M4 6 V30"/><path d="M4 6 C18 6 28 12 28 18 C28 24 18 30 4 30"/></g>
+    <g transform="translate(472,216)"><circle cx="16" cy="18" r="11"/><path d="M10 18 H22"/></g>
+    <g transform="translate(520,216)"><path d="M4 18 H28"/><circle cx="16" cy="30" r="3" fill="#12161A" stroke="none"/></g>
+    <g transform="translate(568,216)"><path d="M6 6 L22 18 L6 30"/></g>
+    <g transform="translate(616,216)"><path d="M4 6 L28 30 M28 6 L4 30"/><circle cx="36" cy="10" r="2" fill="#0F6B5C" stroke="none"/></g>
+    <g transform="translate(680,216)"><path d="M4 6 V30"/><path d="M12 18 H28"/></g>
+    <g transform="translate(728,216)"><circle cx="16" cy="18" r="11"/></g>
+    <g transform="translate(776,216)"><path d="M4 18 H28"/><circle cx="16" cy="6" r="3" fill="#12161A" stroke="none"/></g>
+    <g transform="translate(824,216)"><path d="M4 6 V30"/><path d="M4 6 C18 6 28 12 28 18 C28 24 18 30 4 30"/><circle cx="28" cy="18" r="2.5" fill="#0F6B5C" stroke="none"/></g>
+  </g>
+  <text x="48" y="284" font-family="IBM Plex Sans, sans-serif" font-size="13" font-weight="700" fill="#12161A">session</text>
+  <text x="124" y="284" font-family="IBM Plex Mono, monospace" font-size="11" fill="#5a636b">seeded dynamic mapping + manifest</text>
+  <rect x="48" y="296" width="864" height="28" rx="6" fill="#12161A"/>
+  <text x="72" y="315" font-family="IBM Plex Mono, monospace" font-size="12" fill="#7aa897">seed to permuted PUA map | wire carries glyphs + session_id | reversible with manifest</text>
+</svg>

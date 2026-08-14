@@ -1,0 +1,5 @@
+# name: neural-e0001-stub
+# status: placeholder — no training run yet
+grammar_epoch: LSG/1-E0001
+reader_family: deferred
+notes: Neural ≠ encryption

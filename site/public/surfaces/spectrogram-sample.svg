@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="88" height="160" viewBox="0 0 88 160" role="img" aria-label="Doldskrift spectrogram strip">
+  <desc id="dsk-carrier">{&quot;kind&quot;:&quot;spectrogram-strip&quot;,&quot;encoded&quot;:&quot;&quot;,&quot;sha256&quot;:null,&quot;epoch&quot;:1,&quot;note&quot;:&quot;Spectrogram-style Open strip — bar height from symbol id. Decode via carrier. Not audio / not encryption.&quot;}</desc>
+  <defs><radialGradient id="spec-aurora" cx="46%" cy="35%" r="78%">
+      <stop offset="0%" stop-color="hsl(170,48%,22%)"/>
+      <stop offset="55%" stop-color="hsl(186,28%,14%)"/>
+      <stop offset="100%" stop-color="hsl(193,36%,10%)"/>
+    </radialGradient>
+    <linearGradient id="spec-aurora-band" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="hsl(170,48%,22%)" stop-opacity="0.35"/>
+      <stop offset="50%" stop-color="hsl(186,28%,14%)" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="hsl(193,36%,10%)" stop-opacity="0.4"/>
+    </linearGradient></defs>
+  <rect width="100%" height="100%" fill="url(#spec-aurora)"/>
+  <text x="16" y="18" fill="#7aa897" font-family="IBM Plex Mono, monospace" font-size="10">spectrogram strip · symbol-id → bar height · Open carrier</text>
+  <rect x="24" y="66" width="7" height="66" fill="hsl(181,45%,55%)" opacity="0.9" data-dsk-cp="U+E073" data-sid="115"/><rect x="34" y="68" width="7" height="64" fill="hsl(161,45%,55%)" opacity="0.9" data-dsk-cp="U+E070" data-sid="112"/><rect x="44" y="73" width="7" height="59" fill="hsl(187,45%,55%)" opacity="0.9" data-dsk-cp="U+E065" data-sid="101"/><rect x="54" y="74" width="7" height="58" fill="hsl(187,45%,55%)" opacity="0.9" data-dsk-cp="U+E063" data-sid="99"/>
+</svg>

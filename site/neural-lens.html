@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Neural Lens — experimental Mock/Deterministic framing only." />
+    <title>Neural Lens (experimental) — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero" style="padding-bottom: 1rem">
+        <p class="hero-brand" style="font-size: clamp(2rem, 4vw, 2.8rem)">Neural Lens</p>
+        <p class="lead">
+          Experimental scaffold. Uses Mock/Deterministic framing language only — no trained Gemma
+          inference in the browser. Neural ≠ encryption.
+        </p>
+        <div class="meta-bar">
+          <span class="pill">experimental</span>
+          <span class="pill">DeterministicBaseline messaging</span>
+          <span class="pill">not encryption</span>
+        </div>
+      </header>
+
+      <section class="section" style="margin-top: 0">
+        <h2>Deterministic reconstruct (browser echo)</h2>
+        <p class="sub">
+          Type a short string. This page shows a stand-in latent summary and a
+          <strong>deterministic reconstruct</strong> echo — the same honesty model as Rust’s
+          <code>DeterministicBaseline</code> / <code>MockReader</code>. Exact SHA-256 goldens live
+          in <code>cargo test</code>, not here.
+        </p>
+        <textarea id="nl-input" rows="3">hello neural</textarea>
+        <div class="controls" style="margin-top: 0.75rem">
+          <button type="button" class="btn primary" id="nl-run">Reconstruct (deterministic echo)</button>
+          <button type="button" class="btn" id="nl-fail">Simulate UnknownGrammar</button>
+        </div>
+        <pre id="nl-out" style="margin-top: 1rem" aria-live="polite"></pre>
+        <p class="note" style="margin-top: 1rem">
+          Pipeline: semantic → SemanticComposer → LatentGraph → (browser echo) →
+          ObservationGraph messaging → status. Fail-closed statuses:
+          <a href="./unknown-page.html">Unknown Page</a>.
+        </p>
+      </section>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      mountShell({ active: "neural-lens" });
+      const input = document.getElementById("nl-input");
+      const out = document.getElementById("nl-out");
+
+      function showReconstructed() {
+        const text = input.value;
+        const bytes = new TextEncoder().encode(text).length;
+        out.textContent = JSON.stringify(
+          {
+            status: "Reconstructed",
+            reader: "deterministic-baseline/1 (browser echo)",
+            epoch: "LSG/1-E0001",
+            path: "compose_deterministic → from_latent_carrier → reconstruct (echo)",
+            value: text,
+            latentSummary: {
+              nodeCount: 1,
+              kind: "string",
+              byteHint: bytes,
+            },
+            notes:
+              "Browser echo only — not Gemma. Run Rust DeterministicBaseline for exact SHA-256 tests. Neural ≠ encryption.",
+          },
+          null,
+          2
+        );
+      }
+
+      function showFailClosed() {
+        out.textContent = JSON.stringify(
+          {
+            status: "UnknownGrammar",
+            reader: "deterministic-baseline/1",
+            epoch: null,
+            value: null,
+            path: "fail closed — never fabricate plaintext",
+            notes:
+              "STRUCTURAL SCAN (Open/DVE) may still see glyphs; Neural reconstruct refused. See Unknown Page.",
+          },
+          null,
+          2
+        );
+      }
+
+      document.getElementById("nl-run").addEventListener("click", showReconstructed);
+      document.getElementById("nl-fail").addEventListener("click", showFailClosed);
+      showReconstructed();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+{
+  "latent": {
+    "edges": [
+      {
+        "from": "n0",
+        "rel": "child",
+        "to": "n1"
+      }
+    ],
+    "meta": {
+      "composer": "deterministic-composer/1",
+      "content_id": "dsk-sha256:e95e36d6b97c21fab7ac84f9613ab2750b69b8e0a978bae87be38f3372e6a894",
+      "epoch": {
+        "number": 1
+      }
+    },
+    "nodes": [
+      {
+        "id": "n0",
+        "kind": "root"
+      },
+      {
+        "id": "n1",
+        "kind": "atom",
+        "value": "hello-neural:1"
+      }
+    ]
+  },
+  "message": "hello-neural",
+  "mge5_plan": {
+    "compounds": [
+      {
+        "id": "cg-0",
+        "members": [
+          "n1"
+        ],
+        "seed": 1
+      }
+    ],
+    "engine": "MGE/5",
+    "forge3": {
+      "epoch_retention": null,
+      "latin_familiarity": null,
+      "machine_separability": null,
+      "repetition_exposure": null
+    },
+    "profile": "MGE5-NEURAL",
+    "todos": [
+      "Expand path geometry beyond deterministic SVG carrier marks",
+      "Minimize Latin/digit/punctuation/word-spacing resemblance under MGE5-NEURAL",
+      "Wire repetition suppression with measured Forge 3 scores"
+    ],
+    "variants": []
+  },
+  "notes": "Synthetic fixture — not a trained dataset; Neural ≠ encryption",
+  "observation": {
+    "edges": [],
+    "epoch": {
+      "number": 1
+    },
+    "is_doldskrift": true,
+    "latent_carrier": {
+      "edges": [
+        {
+          "from": "n0",
+          "rel": "child",
+          "to": "n1"
+        }
+      ],
+      "meta": {
+        "composer": "deterministic-composer/1",
+        "content_id": "dsk-sha256:e95e36d6b97c21fab7ac84f9613ab2750b69b8e0a978bae87be38f3372e6a894",
+        "epoch": {
+          "number": 1
+        }
+      },
+      "nodes": [
+        {
+          "id": "n0",
+          "kind": "root"
+        },
+        {
+          "id": "n1",
+          "kind": "atom",
+          "value": "hello-neural:1"
+        }
+      ]
+    },
+    "nodes": [
+      {
+        "bbox": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "fingerprint": "DSK-NEURAL-CARRIER",
+        "id": "obs0",
+        "kind": "group"
+      }
+    ],
+    "notes": "Synthetic carrier observation — not a camera reconstruction"
+  },
+  "profile": {
+    "grammar_epoch": "LSG/1-E0001",
+    "kind": "neural",
+    "notes": "Neural representation — not encryption",
+    "reader_family": "deterministic-baseline"
+  },
+  "seed": 1
+}

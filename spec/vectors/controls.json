@@ -1,0 +1,7 @@
+{
+  "checksum": "602b225f",
+  "encoded": "",
+  "input": "line1\nline2\ttab",
+  "mode": "encoded",
+  "version": 1
+}

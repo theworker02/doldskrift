@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Playground 2.0 — Doldskrift</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <nav class="nav">
+        <a class="brand" href="./index.html">Doldskrift</a>
+        <div class="nav-links">
+          <a class="active" href="./playground.html">playground</a>
+          <a href="./machine-reader.html">machine reader</a>
+          <a href="./glyphs.html">glyphs</a>
+          <a href="./protocol.html">protocol</a>
+        </div>
+      </nav>
+      <header class="page-title">
+        <h1>Playground 2.0</h1>
+        <p>Inspect every stage from input to decode. Educational tooling — not a security bypass.</p>
+        <label style="max-width:20rem;margin-top:1rem">Search docs
+          <input id="q" placeholder="checksum, fingerprint, session…" />
+        </label>
+        <div id="hits" class="mono" style="font-size:0.8rem;margin-top:0.4rem"></div>
+      </header>
+      <section class="section" style="border-top:none;padding-top:0">
+        <label>INPUT<textarea id="input">Hello machine.</textarea></label>
+        <div class="pipeline" id="pipe" style="margin-top:1rem"></div>
+        <div id="glyphs" class="glyph-stage" style="margin-top:1rem;font-size:40px"></div>
+        <div class="panel" style="margin-top:1rem">
+          <h3>Selected symbol structure</h3>
+          <pre id="struct" class="mono" style="margin:0">Click a glyph.</pre>
+        </div>
+      </section>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      import { encode, decode, renderGlyphRun, PUA_BASE } from "/src/doldskrift.js";
+      import { fingerprint, fingerprintLegend } from "/src/mge2.js";
+      import { searchDocs } from "/src/search.js";
+
+      mountShell({ active: "play" });
+
+      const input = document.getElementById("input");
+      const pipe = document.getElementById("pipe");
+      const glyphs = document.getElementById("glyphs");
+      const struct = document.getElementById("struct");
+      document.getElementById("q").addEventListener("input", (e) => {
+        const hits = searchDocs(e.target.value);
+        document.getElementById("hits").innerHTML = hits
+          .map((h) => `<div><a href="${h.href}">${h.title}</a> — ${h.blurb}</div>`)
+          .join("");
+      });
+
+      function paint() {
+        const text = input.value;
+        const bytes = [...new TextEncoder().encode(text)];
+        const opaque = encode(text);
+        const ids = [...opaque].map((c) => c.codePointAt(0));
+        const stages = [
+          ["INPUT", JSON.stringify(text)],
+          ["ENCODING (UTF-8)", bytes.map((b) => b.toString(16).padStart(2, "0")).join(" ")],
+          ["SYMBOLS", ids.map((id) => id - PUA_BASE).join(" ")],
+          ["GLYPHS", "MGE/2 zone forms below"],
+          ["STRUCTURE", ids.slice(0, 4).map((id) => fingerprint(id - PUA_BASE)).join(" · ") + (ids.length > 4 ? " …" : "")],
+          ["DECODE", decode(opaque)],
+        ];
+        pipe.innerHTML = stages
+          .map((s, i) => `<div class="pipe-step"><strong>${s[0]}</strong><div>${s[1]}</div></div>${i < stages.length - 1 ? '<div class="pipe-arrow">↓</div>' : ""}`)
+          .join("");
+        glyphs.className = "glyph-runway";
+        glyphs.innerHTML = renderGlyphRun(text, "encoded", 1, { animate: true });
+        glyphs.querySelectorAll(".g").forEach((el, i) => {
+          el.style.cursor = "pointer";
+          el.onclick = () => {
+            const id = ids[i];
+            const b = id - PUA_BASE;
+            const fp = fingerprint(b);
+            const legend = fingerprintLegend(fp);
+            struct.textContent = [
+              `index: ${i}`,
+              `symbol byte: 0x${b.toString(16)}`,
+              `codepoint: U+${id.toString(16).toUpperCase()}`,
+              `fingerprint: ${fp}`,
+              `zones: ${Object.entries(legend.zones).map(([k, v]) => k + "=" + v).join(" ")}`,
+              `redundancy: GRE/1 level ${legend.redundancy}`,
+              `orientation: ${legend.orientation * 45}°`,
+            ].join("\n");
+          };
+        });
+      }
+      input.addEventListener("input", paint);
+      paint();
+    </script>
+  </body>
+</html>

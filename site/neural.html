@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Doldskrift Neural — research into learned machine grammar (LSG). Not encryption."
+    />
+    <title>Neural — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero" style="padding-bottom: 1rem">
+        <p class="hero-brand" style="font-size: clamp(2.2rem, 5vw, 3.2rem)">Neural</p>
+        <p class="lead">
+          Neural profile: a Latent Structure Grammar and compatible readers — representation,
+          not encryption. The Swedish name (<em>dold</em> + <em>skrift</em>) means concealed script;
+          Neural remains in that honesty model. Trained inference is not shipping yet.
+        </p>
+        <div class="meta-bar">
+          <span class="pill">DSK/3 Neural</span>
+          <span class="pill">LSG/1-E0001</span>
+          <span class="pill">not encryption</span>
+          <span class="pill live"><span class="dot"></span> foundation</span>
+        </div>
+      </header>
+
+      <section class="section" style="margin-top: 0">
+        <h2>Research question</h2>
+        <p class="sub">
+          Can Doldskrift move from a fixed symbol alphabet to machine-optimized latent visuals
+          reconstructed by a matching reader — without pretending that difficulty equals secrecy?
+        </p>
+        <pre style="margin-top: 1rem">semantic → LSG → MGE/5 → visual → DVE/2 → reader → status</pre>
+      </section>
+
+      <section class="section">
+        <h2>Profiles</h2>
+        <div class="feature-strip">
+          <article>
+            <h3>Open</h3>
+            <p>DSK/1–2 shipping codec. Not encryption.</p>
+          </article>
+          <article>
+            <h3>Neural</h3>
+            <p>Learned grammar + compatible reader. Not encryption.</p>
+          </article>
+          <article>
+            <h3>Protected</h3>
+            <p>AEAD + Gate (sibling track). Encryption when it ships.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>What works locally</h2>
+        <p class="sub">
+          DeterministicBaseline / MockReader exact round-trips in Rust tests. Site demos below use
+          the same honest stub framing — no Gemma weights in the browser.
+        </p>
+        <div class="cta" style="margin-top: 1rem">
+          <a class="btn primary" href="./neural-lens.html">Neural Lens (experimental)</a>
+          <a class="btn" href="./unknown-page.html">Unknown Page</a>
+          <a class="btn" href="./compatibility.html">Compatibility matrix</a>
+          <a class="btn warm" href="../docs/neural/overview.md">Docs</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Deferred</h2>
+        <p class="sub">
+          Real adapter training, full MGE/5 geometry, camera DVE/2, checkpoint packaging, and
+          published adversarial OCR numbers. See the roadmap.
+        </p>
+      </section>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      mountShell({ active: "neural" });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Install Doldskrift — CLI, fonts, WASM, SDK, experimental Reader. Open / Neural / Protected honesty."
+    />
+    <title>Install — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="page-title">
+        <p class="hero-brand" style="font-size: clamp(2.2rem, 5vw, 3.2rem)">
+          Install <span aria-label="Sweden">🇸🇪</span>
+        </p>
+        <p class="lead">
+          Local toolchain first. Nothing here is published to crates.io / npm yet — clone the repo
+          and build. After install, run <code>dold doctor</code>.
+        </p>
+      </header>
+
+      <section class="section">
+        <h2>Open · Neural · Protected</h2>
+        <p class="sub">One mental model for everything you download.</p>
+        <div class="feature-strip">
+          <article>
+            <h3>Open</h3>
+            <p>Shipping codec, fonts, demos. Visual concealment ≠ encryption.</p>
+          </article>
+          <article>
+            <h3>Neural</h3>
+            <p>Foundation stubs + DeterministicBaseline. Not encryption. No Gemma weights in-repo.</p>
+          </article>
+          <article>
+            <h3>Protected</h3>
+            <p>Refuse stubs only. Real AEAD + Gate not shipping — do not treat as crypto.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Components</h2>
+        <div class="grid-2">
+          <article class="panel">
+            <h3>CLI (<code>dold</code>)</h3>
+            <p><code>cargo install --path crates/doldskrift-cli</code> — then <code>dold doctor</code>. Beta primary entrypoint.</p>
+          </article>
+          <article class="panel">
+            <h3>Rust library</h3>
+            <p>Path dep on <code>crates/doldskrift</code>. DSK/1 stable prototype; not on crates.io yet.</p>
+          </article>
+          <article class="panel">
+            <h3>Fonts (MGE)</h3>
+            <p><code>dold font build --out fonts/generated</code> — candidate / evolving grammar.</p>
+          </article>
+          <article class="panel">
+            <h3>WASM</h3>
+            <p>Bindings → <code>site/public/wasm/</code>. Beta; Lens falls back to JS if missing.</p>
+          </article>
+          <article class="panel">
+            <h3>JS / React SDK</h3>
+            <p><code>packages/doldskrift-js</code> + <code>doldskrift-react</code>. Vectors must match Rust.</p>
+          </article>
+          <article class="panel">
+            <h3>Reader (DSK-R)</h3>
+            <p><code>dold reader *</code> — <strong>experimental / mock</strong>. No multi-GB weight auto-download.</p>
+          </article>
+          <article class="panel">
+            <h3>Site (Pages)</h3>
+            <p><code>npm run site:build</code> → <code>site/dist</code>. Static demos only.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Quick start</h2>
+        <pre>cargo install --path crates/doldskrift-cli
+dold doctor
+dold version --verbose
+
+echo "Hello from Doldskrift" | dold encode > message.dsk
+dold validate message.dsk
+dold inspect --json message.dsk
+dold decode message.dsk
+
+dold completion powershell   # or bash / zsh / fish</pre>
+        <div class="cta">
+          <a class="btn primary" href="./docs.html">Docs</a>
+          <a class="btn" href="./lens.html">Lens demo</a>
+          <a class="btn" href="./surfaces.html">Surfaces</a>
+          <a class="btn" href="https://github.com/doldskrift/doldskrift">GitHub</a>
+        </div>
+      </section>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      mountShell({ active: "install" });
+    </script>
+  </body>
+</html>

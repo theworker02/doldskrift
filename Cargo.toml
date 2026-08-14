@@ -1,0 +1,53 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/doldskrift",
+    "crates/doldskrift-cli",
+    "crates/doldskrift-vision",
+    "crates/doldskrift-font",
+    "crates/doldskrift-bindings",
+]
+default-members = [
+    "crates/doldskrift",
+    "crates/doldskrift-cli",
+]
+
+[workspace.package]
+version = "0.4.0"
+edition = "2021"
+license = "Apache-2.0 OR MIT"
+repository = "https://github.com/doldskrift/doldskrift"
+homepage = "https://doldskrift.github.io/doldskrift"
+authors = ["Doldskrift Contributors"]
+rust-version = "1.75"
+keywords = ["typography", "encoding", "agents", "font", "protocol"]
+categories = ["encoding", "text-processing", "command-line-utilities"]
+
+[workspace.dependencies]
+doldskrift = { path = "crates/doldskrift", version = "0.4.0" }
+doldskrift-font = { path = "crates/doldskrift-font", version = "0.4.0" }
+doldskrift-vision = { path = "crates/doldskrift-vision", version = "0.4.0" }
+doldskrift-bindings = { path = "crates/doldskrift-bindings", version = "0.4.0" }
+
+image = { version = "0.25", default-features = false, features = ["png", "jpeg"] }
+
+crc32c = "0.6"
+thiserror = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+clap = { version = "4", features = ["derive"] }
+clap_complete = "4"
+proptest = "1"
+criterion = { version = "0.5", features = ["html_reports"] }
+hex = "0.4"
+base64 = "0.22"
+sha2 = "0.10"
+wasm-bindgen = "0.2"
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true
+
+[profile.bench]
+lto = true

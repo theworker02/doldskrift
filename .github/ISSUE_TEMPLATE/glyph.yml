@@ -1,0 +1,20 @@
+name: Glyph / MGE issue
+description: Fingerprint collision, recognition miss, or generator bug
+labels: ["glyph-engine", "font"]
+body:
+  - type: input
+    id: codepoint
+    attributes:
+      label: Codepoint / symbol id
+      placeholder: "U+E02A or byte 0x2A"
+  - type: input
+    id: fingerprint
+    attributes:
+      label: Fingerprint (if known)
+      placeholder: "DSKG-1:N2-E0-S1-W3-C4-R2-I9-O3"
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+    validations:
+      required: true

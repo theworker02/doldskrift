@@ -1,0 +1,24 @@
+{
+  "$comment": "Single checked-in source for cross-language protocol constants. Keep packages/*/types and Rust errors/version.rs in sync when editing.",
+  "protocolName": "doldskrift",
+  "protocolVersion": 1,
+  "protocolVersionProtected": 3,
+  "fontVersion": 2,
+  "glyphEngineVersion": 2,
+  "puaBase": 57344,
+  "puaBaseHex": "0xE000",
+  "alphabetSize": 256,
+  "projectMark": 57840,
+  "projectMarkHex": "0xE1F0",
+  "projectMarkName": "DSK_PROJECT_MARK",
+  "handshakeQuery": "DSK?",
+  "handshakeReply": "DSK!",
+  "magic": "DSK1",
+  "profiles": ["open", "neural", "protected"],
+  "honesty": {
+    "openIsNotEncryption": true,
+    "neuralIsNotEncryption": true,
+    "hashesAreNotSignatures": true,
+    "protectedAeadShipping": false
+  }
+}

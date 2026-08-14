@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Unknown Page — fail-closed Neural reader statuses (experimental scaffold)."
+    />
+    <title>Unknown Page — Doldskrift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero" style="padding-bottom: 1rem">
+        <p class="hero-brand" style="font-size: clamp(2rem, 4vw, 2.8rem)">Unknown Page</p>
+        <p class="lead">
+          When a reader cannot reconstruct, it must fail closed — never invent plausible plaintext.
+        </p>
+        <div class="meta-bar">
+          <span class="pill">Incompatible</span>
+          <span class="pill">UnknownGrammar</span>
+          <span class="pill">NotDoldskrift</span>
+        </div>
+      </header>
+
+      <section class="section" style="margin-top: 0">
+        <h2>Two honest paths</h2>
+        <p class="sub">
+          <strong>STRUCTURAL SCAN</strong> (Open / DVE) recovers symbol structure when the visual is
+          DSK-shaped. <strong>Neural reader required</strong> when the carrier is LSG/Mock-only —
+          without a matching DeterministicBaseline or MockReader, status is fail-closed.
+        </p>
+        <div class="feature-strip" style="margin-top: 1rem">
+          <article>
+            <h3>Incompatible</h3>
+            <p>Epoch or reader family mismatch. Value: none. (Mock / Deterministic messaging)</p>
+          </article>
+          <article>
+            <h3>UnknownGrammar</h3>
+            <p>Epoch not recognized. Value: none. Never fabricate.</p>
+          </article>
+          <article>
+            <h3>NotDoldskrift</h3>
+            <p>No structure detected. Value: none. Structural scan ≠ Neural reconstruct.</p>
+          </article>
+        </div>
+
+        <h2 style="margin-top: 1.5rem">Demo (browser echo)</h2>
+        <p class="sub">
+          Illustrative only — not Gemma. Mirrors Rust <code>ReaderStatus</code> labels for
+          DeterministicBaseline. Compatible reconstruct messaging lives on
+          <a href="./neural-lens.html">Neural Lens</a>.
+        </p>
+        <div class="controls" style="margin-top: 0.75rem">
+          <button type="button" class="btn" data-status="Incompatible">Incompatible</button>
+          <button type="button" class="btn" data-status="UnknownGrammar">UnknownGrammar</button>
+          <button type="button" class="btn" data-status="NotDoldskrift">NotDoldskrift</button>
+          <button type="button" class="btn primary" data-status="Reconstructed">
+            Deterministic reconstruct
+          </button>
+        </div>
+        <pre id="up-out" style="margin-top: 1rem" aria-live="polite"></pre>
+        <p class="note">
+          Honesty: fail closed means <code>value: null</code>. Open pixel Lens is a different path
+          (<a href="./lens.html">Lens</a>).
+        </p>
+
+        <div class="cta" style="margin-top: 1.25rem">
+          <a class="btn" href="./neural.html">Neural overview</a>
+          <a class="btn" href="./neural-lens.html">Neural Lens</a>
+        </div>
+      </section>
+    </div>
+    <script type="module">
+      import { mountShell } from "/src/shell.js";
+      mountShell({ active: "neural" });
+      const out = document.getElementById("up-out");
+      document.querySelectorAll("button[data-status]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const status = btn.dataset.status;
+          const ok = status === "Reconstructed";
+          out.textContent = JSON.stringify(
+            {
+              status,
+              reader: "deterministic-baseline/1 (browser echo)",
+              epoch: ok ? "LSG/1-E0001" : null,
+              value: ok ? "hello (echo only)" : null,
+              path: ok
+                ? "compose_deterministic → reconstruct echo — exact goldens in Rust CI"
+                : "STRUCTURAL SCAN may still see glyphs; Neural reconstruct refused",
+              notes:
+                "Fail closed. Neural ≠ encryption. No trained weights in browser.",
+            },
+            null,
+            2
+          );
+        });
+      });
+    </script>
+  </body>
+</html>
