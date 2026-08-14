@@ -2,5 +2,3 @@
 # thanks.dev path must match the maintainer GitHub login used at setup.
 github: [theworker02]
 thanks_dev: u/gh/theworker02
-custom:
-  - "https://thanks.dev/u/gh/theworker02"

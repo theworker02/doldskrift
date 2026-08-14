@@ -332,9 +332,8 @@ Issues and pull requests are welcome for protocol clarity, Lab DX, documentation
 
 ## License
 
-Licensed under either of:
+Dual licensed under both:
 
-- MIT license ([`LICENSE-MIT`](LICENSE-MIT) or http://opensource.org/licenses/MIT)
 - Apache License, Version 2.0 ([`LICENSE-APACHE`](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
-
-at your option. See [`LICENSE`](LICENSE).
+  AND
+- MIT license ([`LICENSE-MIT`](LICENSE-MIT) or http://opensource.org/licenses/MIT)
