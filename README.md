@@ -5,26 +5,24 @@
 <h1 align="center">Doldskrift <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1f8-1f1ea.svg" alt="Sweden" width="28" height="28" /></h1>
 
 <p align="center">
-  <a href="https://github.com/doldskrift/doldskrift/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/doldskrift/doldskrift/ci.yml?branch=main&label=CI" alt="CI" /></a>
+  <a href="https://github.com/theworker02/doldskrift/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/theworker02/doldskrift/ci.yml?branch=main&label=CI" alt="CI" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0%20%7C%20MIT-blue" alt="License" /></a>
   <img src="https://img.shields.io/badge/MSRV-1.75-orange" alt="MSRV" />
-  <img src="https://img.shields.io/badge/rustc-stable-orange" alt="rustc" />
-  <a href="https://doldskrift.github.io/doldskrift/"><img src="https://img.shields.io/badge/site-GitHub%20Pages-0F6B5C" alt="GitHub Pages site" /></a>
+  <a href="https://crates.io/crates/doldskrift"><img src="https://img.shields.io/crates/v/doldskrift?label=crates.io" alt="crates.io" /></a>
+  <a href="https://docs.rs/doldskrift"><img src="https://img.shields.io/docsrs/doldskrift?label=docs.rs" alt="docs.rs" /></a>
+  <a href="https://theworker02.github.io/doldskrift/"><img src="https://img.shields.io/badge/site-GitHub%20Pages-0F6B5C" alt="GitHub Pages site" /></a>
   <a href="https://thanks.dev/u/gh/theworker02"><img src="https://img.shields.io/badge/thanks.dev-theworker02-0F6B5C" alt="thanks.dev" /></a>
   <img src="https://img.shields.io/badge/protocol-DSK%2F1%20%7C%20DSK%2F2%20%7C%20DSK%2F3-0F6B5C" alt="Protocol" />
-  <img src="https://img.shields.io/badge/crates.io-not%20published-lightgrey" alt="crates.io (not published)" />
 </p>
 
 <p align="center"><strong>Machine-native visual information.</strong><br/>
-Encode structured information into a visual writing system designed for deterministic machine reconstruction.</p>
+A platform for encoding structured data into a visual writing system built for deterministic machine reconstruction.</p>
 
 <p align="center">
-  <strong>Name (Swedish):</strong> <em>dold</em> (hidden / concealed) + <em>skrift</em> (writing / script)<br/>
+  <strong>Swedish etymology:</strong> <em>dold</em> (hidden / concealed) + <em>skrift</em> (writing / script)<br/>
   → “hidden writing” / “concealed script” · <em>Maskinskriven betydelse — inte hemlighet.</em><br/>
   <sub>Machine-written meaning — not secrecy. Hidden ≠ encrypted.</sub>
 </p>
-
-> Badge / Pages URLs target the public GitHub org/repo `doldskrift/doldskrift`. This working tree may not have a git remote yet.
 
 > **Open** and **Neural** are **not encryption**. Visual illegibility and learned grammars are not confidentiality.
 > **Protected** *is* AEAD + Gate authorization when it ships — glyphs encode ciphertext. Today: refuse stubs only.
@@ -32,15 +30,27 @@ Encode structured information into a visual writing system designed for determin
 
 ---
 
-## What is Doldskrift?
+## Product
 
-An independent open-source **platform** for machine-native visual information: protocol, glyphs, recognition, Lab CLI, and demos — one architecture with three profiles.
+Doldskrift is an independent open-source **platform** for machine-native visual information: protocol, glyphs, recognition, Lab CLI, demos, and documentation — one architecture with three profiles.
+
+It is designed for agents, tooling, and research workflows that need a stable visual carrier: encode structured information, render it as machine glyphs, transmit or display the artifact, then reconstruct the original bytes with deterministic fidelity (Open) or a declared reader path (Neural).
 
 ```bash
 dold guide           # in-CLI onboarding
 dold about           # etymology + profiles
 dold museum          # protocol archaeology
 ```
+
+### Why it exists
+
+Humans and machines do not share the same reading stack. Doldskrift treats the visual plane as a first-class information channel for machines: geometry, protocol framing, and reconstruction — not Latin text decoration, and not a substitute for cryptography.
+
+The official logo **is** glyph `DSK_PROJECT_MARK` (`U+E1F0`) — a real machine glyph, not ornament.
+
+---
+
+## Architecture: Open · Neural · Protected
 
 ```text
 DOLDSKRIFT
@@ -67,14 +77,10 @@ DOLDSKRIFT
 | **Lens** | Flagship visual demonstration |
 | **Lab** | Developer tooling (`dold`) |
 
-The official logo **is** glyph `DSK_PROJECT_MARK` (`U+E1F0`) — a real machine glyph, not decoration.
+### Profiles
 
----
-
-## Profiles: Open · Neural · Protected
-
-| Profile | What it is | Shipping? |
-|---------|------------|-----------|
+| Profile | What it is | Shipping status |
+|---------|------------|-----------------|
 | **Open** | Deterministic codec + glyphs (DSK/1–2). Visual concealment, not secrecy. | Yes (prototype) |
 | **Neural** | Learned LSG + compatible reader (DSK/3). Fail closed on unknown grammar. **Not encryption.** | Foundation stubs + DeterministicBaseline |
 | **Protected** | AEAD ciphertext + Gate authorization. Glyphs encode ciphertext. | Refuse stubs only — **no AEAD yet** |
@@ -96,7 +102,7 @@ DATA → DSK → MGE → VISUAL MEDIUM → DVE → DSK → DATA
 
 ![Encode pipeline](assets/brand/encode-decode-pipeline.svg)
 
-### Real specimen
+### Specimen
 
 Input:
 
@@ -114,18 +120,42 @@ Modes:
 
 ---
 
-## Install · Try · Docs
+## Install
 
-| | |
-|--|--|
-| **Install** | `cargo install --path crates/doldskrift-cli` then **`dold doctor`** |
-| **Onboard** | `dold guide` · `dold demo -o ./dold-demo` |
-| **Try (Open)** | encode → validate → inspect → decode · `dold convert` · [Lens](https://doldskrift.github.io/doldskrift/lens.html) / [Surfaces](https://doldskrift.github.io/doldskrift/surfaces.html) |
-| **Neural** | `dold neural encode/render/reconstruct` · [Neural](https://doldskrift.github.io/doldskrift/neural.html) |
-| **Docs** | [`docs/`](docs/) · [CLI](docs/reference/cli.md) · [Pages](https://doldskrift.github.io/doldskrift/) |
+### From crates.io (recommended)
 
 ```bash
+cargo install doldskrift-cli
+dold doctor
+```
+
+Library (Cargo.toml):
+
+```toml
+[dependencies]
+doldskrift = "0.5"
+```
+
+Related crates: [`doldskrift`](https://crates.io/crates/doldskrift), [`doldskrift-font`](https://crates.io/crates/doldskrift-font), [`doldskrift-vision`](https://crates.io/crates/doldskrift-vision), [`doldskrift-cli`](https://crates.io/crates/doldskrift-cli), [`doldskrift-bindings`](https://crates.io/crates/doldskrift-bindings).
+
+API docs: [docs.rs/doldskrift](https://docs.rs/doldskrift).
+
+### From source
+
+```bash
+git clone https://github.com/theworker02/doldskrift.git
+cd doldskrift
 cargo install --path crates/doldskrift-cli
+dold doctor
+```
+
+MSRV: **Rust 1.75+**.
+
+---
+
+## Quick start
+
+```bash
 dold guide                  # product orientation
 dold doctor                 # install health + constants sync
 dold self-test              # encode/decode/validate + protected refuse
@@ -160,7 +190,7 @@ $env:DOLD_JSON_ERRORS = "1"   # PowerShell → stderr doldskrift.error/1
 
 Interactive demos — **static GitHub Pages** (no separate hosted web app):
 
-Live: [https://doldskrift.github.io/doldskrift/](https://doldskrift.github.io/doldskrift/)
+**Live site:** [https://theworker02.github.io/doldskrift/](https://theworker02.github.io/doldskrift/)
 
 ```bash
 npm install
@@ -169,9 +199,20 @@ npm run site:preview   # build site/dist + local static preview
 
 ---
 
-## Unexpected surfaces
+## Lab CLI highlights
 
-Open demos that still obey the honesty model (Open ≠ encryption; hashes ≠ signatures):
+The `dold` binary is the Lab surface for developers and agents.
+
+| Area | Commands |
+|------|----------|
+| **Onboarding** | `guide`, `about`, `museum`, `demo`, `commands` / `topics` |
+| **Codec** | `encode` / `e`, `decode` / `d`, `pipeline`, `validate`, `fmt`, `inspect`, `convert` |
+| **Health** | `doctor`, `self-test`, `version --verbose`, `schema`, `completion` |
+| **Surfaces** | `postcard`, `ambient`, `seal`, `radio`, `mesh`, `kaleidoscope`, `timeline`, … |
+| **Neural** | `neural`, `dataset`, `reader`, `evaluate` |
+| **Brand / funding** | `logo`, `brand`, `funding` |
+
+Unexpected Open surfaces still obey the honesty model (Open ≠ encryption; hashes ≠ signatures). Gallery: [Surfaces](https://theworker02.github.io/doldskrift/surfaces.html). Full list: `dold surfaces list` / `dold guide surfaces`.
 
 | Command | What it does |
 |---------|----------------|
@@ -181,20 +222,17 @@ Open demos that still obey the honesty model (Open ≠ encryption; hashes ≠ si
 | `dold ambient` / `--decode` | Constellation SVG Open channel |
 | `dold postcard` / `--read` | Machine postcard |
 | `dold convert` | Bridge text/dsk ↔ postcard/ambient/seal |
-| `dold museum` / `dold about` | Archaeology + Swedish etymology |
 | `dold render --tty` | Braille / block art without a browser |
-
-Site gallery: [Surfaces](https://doldskrift.github.io/doldskrift/surfaces.html). Full list: `dold surfaces list` / `dold guide surfaces`.
 
 ---
 
 ## Libraries
 
-**Rust** (path dependency until crates.io; workspace `0.4.0` / Unreleased 0.5.0 work):
+**Rust** (published on crates.io as **0.5.0**):
 
 ```toml
 [dependencies]
-doldskrift = { path = "crates/doldskrift" }
+doldskrift = "0.5"
 ```
 
 ```rust
@@ -205,34 +243,42 @@ assert_eq!(decode(&opaque).unwrap(), "Hello, agent!");
 let _ = Mode::Encoded;
 ```
 
-**JavaScript** — primary SDK `@doldskrift/core`; thin `@doldskrift/web` / `@doldskrift/react` adapters; generated WASM (`doldskrift-bindings`). Rust owns the protocol truth.
+**JavaScript** — primary SDK `@doldskrift/core`; thin `@doldskrift/web` / `@doldskrift/react` adapters; generated WASM (`doldskrift-bindings`). Rust owns the protocol truth. npm packages are versioned in-repo and are **not** the crates.io release channel.
 
 ---
 
-## Repository layout
+## Documentation & links
 
-```text
-crates/          # ≤5 Rust crates (core, cli, vision, font, bindings)
-packages/        # @doldskrift/core (+ thin web/react) · WASM bindings
-site/            # GitHub Pages demos
-docs/            # Product + protocol + neural docs map
-spec/            # Normative DSK/1 + protocol-constants.json
-training/        # Python experiments only (not a second protocol)
-```
-
----
-
-## Documentation
-
-| Resource | Path |
+| Resource | Link |
 |----------|------|
+| GitHub repository | [theworker02/doldskrift](https://github.com/theworker02/doldskrift) |
+| GitHub Releases | [Releases](https://github.com/theworker02/doldskrift/releases) |
+| GitHub Pages | [theworker02.github.io/doldskrift](https://theworker02.github.io/doldskrift/) |
 | Docs portal | [`docs/`](docs/) |
 | CLI reference | [`docs/reference/cli.md`](docs/reference/cli.md) |
 | Architecture | [`ARCHITECTURE.md`](ARCHITECTURE.md) |
 | Roadmap | [`ROADMAP.md`](ROADMAP.md) |
 | Security | [`SECURITY.md`](SECURITY.md) |
 | Brand kit | [`docs/brand.md`](docs/brand.md) |
-| Static site | [`site/`](site/) · [live](https://doldskrift.github.io/doldskrift/) |
+| Changelog | [`CHANGELOG.md`](CHANGELOG.md) |
+| crates.io | [doldskrift](https://crates.io/crates/doldskrift) |
+| docs.rs | [doldskrift](https://docs.rs/doldskrift) |
+| Funding | [thanks.dev/u/gh/theworker02](https://thanks.dev/u/gh/theworker02) |
+
+Lens / Surfaces / Neural demos: [Lens](https://theworker02.github.io/doldskrift/lens.html) · [Surfaces](https://theworker02.github.io/doldskrift/surfaces.html) · [Neural](https://theworker02.github.io/doldskrift/neural.html)
+
+---
+
+## Repository layout
+
+```text
+crates/          # Rust workspace (core, cli, vision, font, bindings)
+packages/        # @doldskrift/core (+ thin web/react) · WASM bindings
+site/            # GitHub Pages demos
+docs/            # Product + protocol + neural docs map
+spec/            # Normative DSK/1 + protocol-constants.json
+training/        # Python experiments only (not a second protocol)
+```
 
 ---
 
@@ -256,17 +302,26 @@ Open-mode visual illegibility is not a security boundary. See [`SECURITY.md`](SE
 
 - **thanks.dev:** [https://thanks.dev/u/gh/theworker02](https://thanks.dev/u/gh/theworker02)
 - **GitHub funding file:** [`.github/FUNDING.yml`](.github/FUNDING.yml)
-- **Site:** [Funding page](https://doldskrift.github.io/doldskrift/funding.html)
+- **Site:** [Funding page](https://theworker02.github.io/doldskrift/funding.html)
 - **CLI:** `dold funding` · `dold funding --json`
 
-Bugs and docs: [`SUPPORT.md`](SUPPORT.md). Commercial collaboration: [Partners](https://doldskrift.github.io/doldskrift/partners.html).
+Bugs and documentation issues: [`SUPPORT.md`](SUPPORT.md). Commercial collaboration: [Partners](https://theworker02.github.io/doldskrift/partners.html).
+
+---
+
+## Contributing
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md).
+
+Issues and pull requests are welcome for protocol clarity, Lab DX, documentation honesty, and Open-mode reliability. Please keep Neural and Protected claims aligned with what actually ships.
 
 ---
 
 ## License
 
-Apache-2.0 OR MIT — see [`LICENSE`](LICENSE).
+Licensed under either of:
 
-## Contributing
+- Apache License, Version 2.0 ([`LICENSE-APACHE`](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
+- MIT license ([`LICENSE-MIT`](LICENSE-MIT) or http://opensource.org/licenses/MIT)
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md).
+at your option. See [`LICENSE`](LICENSE).

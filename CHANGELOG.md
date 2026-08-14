@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.5.0] — Unreleased (unified platform polish)
+## [0.5.0] - 2026-08-14
 
 Company-grade product polish: one present-tense platform architecture (Open · Neural · Protected), consolidated JS packages, Lab DX commands, brand/funding consistency. Neural remains **foundation** (no trained Gemma); Protected remains **refuse stubs** (no AEAD).
 
@@ -93,7 +93,7 @@ Company-grade product polish: one present-tense platform architecture (Open · N
 
 - Trained Gemma/LoRA inference, full MGE/5 geometry, camera DVE/2, multi-GB checkpoints, published OCR bake-off numbers
 - Real AEAD/Gate crypto (`protected-crypto` feature not started)
-- Public GitHub / crates.io / npm publish (prep only)
+- npm publish (Rust crates on crates.io as of 0.5.0; JS packages remain unpublished)
 - Enforcing cargo-deny as a hard CI gate (currently advisory)
 - Replacing `site/src/doldskrift.js` with WASM / `@doldskrift/core` only
 

@@ -5,7 +5,7 @@
 # `doldskrift-cli`
 
 <p align="center">
-  <a href="https://github.com/doldskrift/doldskrift/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/doldskrift/doldskrift/ci.yml?branch=main&label=CI" alt="CI" /></a>
+  <a href="https://github.com/theworker02/doldskrift/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/doldskrift/doldskrift/ci.yml?branch=main&label=CI" alt="CI" /></a>
   <img src="https://img.shields.io/badge/MSRV-1.75-orange" alt="MSRV" />
 </p>
 

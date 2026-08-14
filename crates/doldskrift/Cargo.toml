@@ -5,6 +5,7 @@ edition.workspace = true
 license.workspace = true
 repository.workspace = true
 homepage.workspace = true
+documentation = "https://docs.rs/doldskrift"
 authors.workspace = true
 rust-version.workspace = true
 description = "Machine-native typography, encoding, and agent communication (DOLDSKRIFT/1)"

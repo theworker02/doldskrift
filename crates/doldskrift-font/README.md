@@ -5,7 +5,7 @@
 # `doldskrift-font`
 
 <p align="center">
-  <a href="https://github.com/doldskrift/doldskrift/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/doldskrift/doldskrift/ci.yml?branch=main&label=CI" alt="CI" /></a>
+  <a href="https://github.com/theworker02/doldskrift/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/doldskrift/doldskrift/ci.yml?branch=main&label=CI" alt="CI" /></a>
 </p>
 
 MGE/2 glyph engine, fingerprints, font/specimen generation, TTY braille fallback, and unexpected visual surfaces (ambient / flicker / living / mesh).

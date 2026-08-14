@@ -5,6 +5,7 @@ edition.workspace = true
 license.workspace = true
 repository.workspace = true
 homepage.workspace = true
+documentation = "https://docs.rs/doldskrift-font"
 authors.workspace = true
 rust-version.workspace = true
 description = "Procedural glyph grammar and font generation for Doldskrift"

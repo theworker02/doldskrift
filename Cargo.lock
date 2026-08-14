@@ -367,7 +367,7 @@ dependencies = [
 
 [[package]]
 name = "doldskrift"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "base64",
  "crc32c",
@@ -382,7 +382,7 @@ dependencies = [
 
 [[package]]
 name = "doldskrift-bindings"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "doldskrift",
  "serde_json",
@@ -391,7 +391,7 @@ dependencies = [
 
 [[package]]
 name = "doldskrift-cli"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "clap",
  "clap_complete",
@@ -405,7 +405,7 @@ dependencies = [
 
 [[package]]
 name = "doldskrift-font"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "doldskrift",
  "hex",
@@ -416,7 +416,7 @@ dependencies = [
 
 [[package]]
 name = "doldskrift-vision"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "doldskrift",
  "doldskrift-font",

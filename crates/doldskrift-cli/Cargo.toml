@@ -5,6 +5,7 @@ edition.workspace = true
 license.workspace = true
 repository.workspace = true
 homepage.workspace = true
+documentation = "https://docs.rs/doldskrift-cli"
 authors.workspace = true
 rust-version.workspace = true
 description = "Command-line interface for Doldskrift (`dold`)"
