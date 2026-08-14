@@ -2,7 +2,9 @@
 //!
 //! Glyph generation lives in `doldskrift-font` — bench that crate separately if needed.
 
-use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
+use std::hint::black_box;
+
+use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
 use doldskrift::{decode, encode, DskDocument, Mapping, Mode, StreamingDecoder, StreamingEncoder};
 
 fn payload(size: usize) -> String {
