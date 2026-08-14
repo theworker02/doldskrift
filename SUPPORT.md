@@ -2,7 +2,7 @@
 
 | Need | Where |
 |------|--------|
-| Bugs | [GitHub Issues](https://github.com/doldskrift/doldskrift/issues) |
+| Bugs | [GitHub Issues](https://github.com/theworker02/doldskrift/issues) |
 | Ideas / research | GitHub Discussions (when enabled) |
 | Security | See [`SECURITY.md`](SECURITY.md) — private reporting channel |
 | Docs gaps | Documentation issue form |

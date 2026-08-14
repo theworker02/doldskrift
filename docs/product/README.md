@@ -41,7 +41,7 @@ semantic → LSG → MGE/5 → visual → DVE → DSK-R
 DATA → AEAD → DSK/3 → MGE → VISUAL → DVE → ciphertext → Gate(K) → DATA
 ```
 
-Site surfaces (static GitHub Pages): [`site/`](../../site/) · live [https://doldskrift.github.io/doldskrift/](https://doldskrift.github.io/doldskrift/).
+Site surfaces (static GitHub Pages): [`site/`](../../site/) · live [https://theworker02.github.io/doldskrift/](https://theworker02.github.io/doldskrift/).
 
 ## Maturity
 

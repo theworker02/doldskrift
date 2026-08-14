@@ -12,7 +12,7 @@ Brand marks in `public/` (`logo-mark.svg`, `favicon.svg`, …) mirror `assets/br
 
 After Pages is enabled on the repo:
 
-`https://doldskrift.github.io/doldskrift/`
+`https://theworker02.github.io/doldskrift/`
 
 Build uses `base: "./"` so asset URLs stay relative under that project path.
 
@@ -23,7 +23,7 @@ Build uses `base: "./"` so asset URLs stay relative under that project path.
 **Enable once** in the GitHub repo: **Settings → Pages → Source: GitHub Actions**  
 (Do not use “Deploy from a branch” for this workflow.)
 
-After the first successful Actions run, the site is at `https://doldskrift.github.io/doldskrift/`.
+After the first successful Actions run, the site is at `https://theworker02.github.io/doldskrift/`.
 
 Sponsor / thanks.dev: [`funding.html`](./funding.html) · footer CTA · [`.github/FUNDING.yml`](../.github/FUNDING.yml).
 

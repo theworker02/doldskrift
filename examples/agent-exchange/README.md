@@ -25,4 +25,4 @@ cargo run -q -p doldskrift-cli -- echo --verify examples/agent-exchange/echo.svg
 cargo run -q -p doldskrift-cli -- handshake visual -o examples/agent-exchange/handshake.svg
 ```
 
-Site companion: [Agent Radio](https://doldskrift.github.io/doldskrift/radio.html) (static simulation).
+Site companion: [Agent Radio](https://theworker02.github.io/doldskrift/radio.html) (static simulation).

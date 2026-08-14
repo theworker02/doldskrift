@@ -5,9 +5,9 @@
 # `@doldskrift/core`
 
 <p align="center">
-  <a href="https://github.com/doldskrift/doldskrift/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/doldskrift/doldskrift/ci.yml?branch=main&label=CI" alt="CI" /></a>
+  <a href="https://github.com/theworker02/doldskrift/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/doldskrift/doldskrift/ci.yml?branch=main&label=CI" alt="CI" /></a>
   <img src="https://img.shields.io/badge/license-Apache--2.0%20%7C%20MIT-blue" alt="License" />
-  <a href="https://doldskrift.github.io/doldskrift/"><img src="https://img.shields.io/badge/site-GitHub%20Pages-0F6B5C" alt="GitHub Pages" /></a>
+  <a href="https://theworker02.github.io/doldskrift/"><img src="https://img.shields.io/badge/site-GitHub%20Pages-0F6B5C" alt="GitHub Pages" /></a>
 </p>
 
 **Primary JavaScript SDK** for Doldskrift Open mode: encode/decode, session mappings, `.dsk` containers, discovery helpers, and browser DOM helpers.
@@ -34,4 +34,4 @@ Rust remains the protocol source of truth. Constants sync with [`spec/protocol-c
 
 Logo: same mark as [`assets/brand/logo-mark.svg`](../../assets/brand/logo-mark.svg). Funding: [thanks.dev/u/gh/theworker02](https://thanks.dev/u/gh/theworker02).
 
-[Root README](../../README.md) · [Docs](../../docs/guides/javascript.md) · [Site](https://doldskrift.github.io/doldskrift/)
+[Root README](../../README.md) · [Docs](../../docs/guides/javascript.md) · [Site](https://theworker02.github.io/doldskrift/)

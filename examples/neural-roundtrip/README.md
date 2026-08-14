@@ -18,7 +18,7 @@ Expected honesty:
 - Fail closed on unknown grammar (see Unknown Page on the site)
 - `dold doctor` reports `neural: ready (deterministic-baseline/1, no trained weights)`
 
-Site: [Neural](https://doldskrift.github.io/doldskrift/neural.html) · [Neural Lens](https://doldskrift.github.io/doldskrift/neural-lens.html)
+Site: [Neural](https://theworker02.github.io/doldskrift/neural.html) · [Neural Lens](https://theworker02.github.io/doldskrift/neural-lens.html)
 
 Protected contrast (refuse path):
 

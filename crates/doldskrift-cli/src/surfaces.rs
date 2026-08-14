@@ -424,9 +424,9 @@ pub const THANKS_DEV_URL: &str = "https://thanks.dev/u/gh/theworker02";
 /// Repository funding file (GitHub Sponsors UI).
 pub const FUNDING_YML_PATH: &str = ".github/FUNDING.yml";
 /// Project GitHub Pages site.
-pub const SITE_URL: &str = "https://doldskrift.github.io/doldskrift/";
+pub const SITE_URL: &str = "https://theworker02.github.io/doldskrift/";
 /// Funding page on GitHub Pages.
-pub const SITE_FUNDING_URL: &str = "https://doldskrift.github.io/doldskrift/funding.html";
+pub const SITE_FUNDING_URL: &str = "https://theworker02.github.io/doldskrift/funding.html";
 
 /// Print sponsor / thanks.dev URLs (`dold funding`).
 pub fn cmd_funding(json: bool) -> Result<(), Box<dyn std::error::Error>> {
@@ -437,7 +437,7 @@ pub fn cmd_funding(json: bool) -> Result<(), Box<dyn std::error::Error>> {
         "github_login": "theworker02",
         "funding_yml": FUNDING_YML_PATH,
         "site_funding": SITE_FUNDING_URL,
-        "repository": "https://github.com/doldskrift/doldskrift",
+        "repository": "https://github.com/theworker02/doldskrift",
         "site": SITE_URL,
         "note": "Open-source sustainability — not a crypto product. Open/Neural ≠ encryption.",
         "cli": "dold funding [--json]"
@@ -449,7 +449,7 @@ pub fn cmd_funding(json: bool) -> Result<(), Box<dyn std::error::Error>> {
         println!("  thanks.dev:   {THANKS_DEV_URL}");
         println!("  GitHub file:  {FUNDING_YML_PATH}");
         println!("  Site page:    {SITE_FUNDING_URL}");
-        println!("  Repository:   https://github.com/doldskrift/doldskrift");
+        println!("  Repository:   https://github.com/theworker02/doldskrift");
         println!();
         println!("Support sustains the open core. This is not encryption sponsorship.");
         println!("Tip: dold funding --json · see SUPPORT.md · site /funding.html");

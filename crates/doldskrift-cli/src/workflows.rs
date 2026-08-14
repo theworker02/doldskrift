@@ -741,7 +741,7 @@ Local Doldskrift project scaffold.\n\n\
 - Open encode/decode is **not encryption**.\n\
 - Protected containers are refuse stubs until AEAD ships.\n\
 - Defaults: `config.json` (`dold config show`).\n\
-- See https://github.com/doldskrift/doldskrift and SECURITY.md.\n\n\
+- See https://github.com/theworker02/doldskrift and SECURITY.md.\n\n\
 Quick start:\n\n\
 ```bash\ndold guide\ndold demo -o ./out\ndold pipeline --text \"hello agent\" -o message.dsk\ndold validate message.dsk\ndold decode message.dsk\n```\n",
         )?;

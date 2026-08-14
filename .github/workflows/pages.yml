@@ -2,7 +2,7 @@ name: GitHub Pages
 
 # Static site only — builds site/ → site/dist and deploys via Actions.
 # Enable: repo Settings → Pages → Source: GitHub Actions
-# URL: https://doldskrift.github.io/doldskrift/
+# URL: https://theworker02.github.io/doldskrift/
 
 on:
   push:

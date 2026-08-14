@@ -34,10 +34,10 @@
     "type": "thanks.dev",
     "url": "https://thanks.dev/u/gh/theworker02"
   },
-  "homepage": "https://doldskrift.github.io/doldskrift/",
+  "homepage": "https://theworker02.github.io/doldskrift/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/doldskrift/doldskrift",
+    "url": "https://github.com/theworker02/doldskrift",
     "directory": "packages/doldskrift-react"
   },
   "license": "MIT"
