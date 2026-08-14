@@ -13,21 +13,22 @@ default-members = [
 ]
 
 [workspace.package]
-version = "0.4.0"
+version = "0.5.0"
 edition = "2021"
 license = "Apache-2.0 OR MIT"
-repository = "https://github.com/doldskrift/doldskrift"
-homepage = "https://doldskrift.github.io/doldskrift"
+repository = "https://github.com/theworker02/doldskrift"
+homepage = "https://theworker02.github.io/doldskrift/"
+documentation = "https://docs.rs/doldskrift"
 authors = ["Doldskrift Contributors"]
 rust-version = "1.75"
 keywords = ["typography", "encoding", "agents", "font", "protocol"]
 categories = ["encoding", "text-processing", "command-line-utilities"]
 
 [workspace.dependencies]
-doldskrift = { path = "crates/doldskrift", version = "0.4.0" }
-doldskrift-font = { path = "crates/doldskrift-font", version = "0.4.0" }
-doldskrift-vision = { path = "crates/doldskrift-vision", version = "0.4.0" }
-doldskrift-bindings = { path = "crates/doldskrift-bindings", version = "0.4.0" }
+doldskrift = { path = "crates/doldskrift", version = "0.5.0" }
+doldskrift-font = { path = "crates/doldskrift-font", version = "0.5.0" }
+doldskrift-vision = { path = "crates/doldskrift-vision", version = "0.5.0" }
+doldskrift-bindings = { path = "crates/doldskrift-bindings", version = "0.5.0" }
 
 image = { version = "0.25", default-features = false, features = ["png", "jpeg"] }
 
@@ -40,8 +41,7 @@ clap_complete = "4"
 proptest = "1"
 criterion = { version = "0.8", features = ["html_reports"] }
 hex = "0.4"
-base64 = "0.23"
-sha2 = "0.10"
+base64 = "0.23"`nsha2 = "0.11"
 wasm-bindgen = "0.2"
 
 [profile.release]
