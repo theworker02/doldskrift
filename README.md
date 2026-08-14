@@ -318,7 +318,7 @@ Curated project contributors (not GitHub's automatic commit graph):
 |------|------|
 | [**theworker02**](https://github.com/theworker02) | Creator and maintainer |
 
-Bots such as Dependabot are not listed as project contributors. Full note: [CONTRIBUTORS.md](CONTRIBUTORS.md).
+Bots such as Dependabot are not listed as project contributors. Full note: [`CONTRIBUTORS.md`](CONTRIBUTORS.md).
 
 ---
 
