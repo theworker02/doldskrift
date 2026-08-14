@@ -39,7 +39,7 @@ jobs:
           test -d site/dist/wasm
           test -f site/dist/.nojekyll
           test -f site/dist/logo-mark.svg
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site/dist
 
