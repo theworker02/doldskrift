@@ -1,8 +1,6 @@
 //! Runtime feature detection and build metadata.
 
-use crate::{
-    FONT_VERSION, GLYPH_ENGINE_VERSION, PROTOCOL_VERSION, PROTOCOL_VERSION_PROTECTED,
-};
+use crate::{FONT_VERSION, GLYPH_ENGINE_VERSION, PROTOCOL_VERSION, PROTOCOL_VERSION_PROTECTED};
 
 /// Structured crate / protocol metadata (shared by CLI, WASM, agents).
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

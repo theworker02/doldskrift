@@ -458,7 +458,11 @@ pub fn cmd_funding(json: bool) -> Result<(), Box<dyn std::error::Error>> {
 }
 
 /// Export brand kit: mark SVG, tokens JSON, sync checklist (`dold brand`).
-pub fn cmd_brand(out: PathBuf, seed: u64, json_only: bool) -> Result<(), Box<dyn std::error::Error>> {
+pub fn cmd_brand(
+    out: PathBuf,
+    seed: u64,
+    json_only: bool,
+) -> Result<(), Box<dyn std::error::Error>> {
     let manifest = brand_kit_manifest_json(seed)?;
     if json_only {
         print!("{manifest}");
@@ -476,7 +480,9 @@ pub fn cmd_brand(out: PathBuf, seed: u64, json_only: bool) -> Result<(), Box<dyn
     fs::write(out.join("tokens.json"), tokens)?;
     fs::write(out.join("brand-manifest.json"), &manifest)?;
     let mut checklist = String::from("# Doldskrift brand kit\n\n");
-    checklist.push_str("Regenerated with `dold brand`. Canonical mark = `DSK_PROJECT_MARK` (U+E1F0).\n\n");
+    checklist.push_str(
+        "Regenerated with `dold brand`. Canonical mark = `DSK_PROJECT_MARK` (U+E1F0).\n\n",
+    );
     checklist.push_str("## Sync checklist\n\n");
     for p in BRAND_MARK_SYNC_PATHS {
         checklist.push_str(&format!("- [ ] `{p}`\n"));

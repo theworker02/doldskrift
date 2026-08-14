@@ -845,10 +845,7 @@ fn cmd_doctor() -> Result<(), Box<dyn std::error::Error>> {
     println!("  protocol:         DSK/1 · DSK/2 experimental · DSK/3 Neural+Protected stubs");
     println!("  glyph engine:     MGE/2 + MGE/4 research + MGE/5 SVG carrier");
     println!("  vision:           DVE/1 structural + DVE/2 scaffolds + scan --diff");
-    println!(
-        "  constants sync:   {}",
-        doctor_constants_sync()
-    );
+    println!("  constants sync:   {}", doctor_constants_sync());
 
     // Neural readiness — DeterministicBaseline exact path
     let neural = (|| -> Result<String, Box<dyn std::error::Error>> {
@@ -977,8 +974,8 @@ fn cmd_doctor() -> Result<(), Box<dyn std::error::Error>> {
 /// Compare Rust constants against `spec/protocol-constants.json` when present.
 fn doctor_constants_sync() -> String {
     use doldskrift::{
-        ALPHABET_SIZE, DSK_PROJECT_MARK, FONT_VERSION, GLYPH_ENGINE_VERSION, PUA_BASE,
-        PROTOCOL_VERSION, PROTOCOL_VERSION_PROTECTED,
+        ALPHABET_SIZE, DSK_PROJECT_MARK, FONT_VERSION, GLYPH_ENGINE_VERSION, PROTOCOL_VERSION,
+        PROTOCOL_VERSION_PROTECTED, PUA_BASE,
     };
     let path = PathBuf::from("spec/protocol-constants.json");
     if !path.is_file() {
@@ -1001,7 +998,11 @@ fn doctor_constants_sync() -> String {
             v["protocolVersionProtected"].as_u64(),
             Some(PROTOCOL_VERSION_PROTECTED as u64),
         ),
-        ("fontVersion", v["fontVersion"].as_u64(), Some(FONT_VERSION as u64)),
+        (
+            "fontVersion",
+            v["fontVersion"].as_u64(),
+            Some(FONT_VERSION as u64),
+        ),
         (
             "glyphEngineVersion",
             v["glyphEngineVersion"].as_u64(),
@@ -1053,10 +1054,7 @@ fn doctor_constants_sync() -> String {
 
 fn query_json_path(value: &serde_json::Value, path: &str) -> serde_json::Value {
     let path = path.trim().trim_start_matches('$');
-    let parts: Vec<&str> = path
-        .split(['.', '/'])
-        .filter(|p| !p.is_empty())
-        .collect();
+    let parts: Vec<&str> = path.split(['.', '/']).filter(|p| !p.is_empty()).collect();
     let mut cur = value;
     for part in parts {
         let key = part.trim_start_matches('[').trim_end_matches(']');

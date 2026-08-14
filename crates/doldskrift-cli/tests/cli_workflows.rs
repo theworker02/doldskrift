@@ -103,7 +103,10 @@ fn completion_still_builds() {
 
 #[test]
 fn guide_quickstart() {
-    let out = dold().args(["guide", "quickstart"]).output().expect("guide");
+    let out = dold()
+        .args(["guide", "quickstart"])
+        .output()
+        .expect("guide");
     assert!(out.status.success());
     let s = String::from_utf8_lossy(&out.stdout);
     assert!(s.contains("doctor") || s.contains("concealed"));

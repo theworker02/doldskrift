@@ -4,8 +4,8 @@
 use clap::{Subcommand, ValueEnum};
 use doldskrift::{DskDocument, Mode};
 use doldskrift_font::{
-    extract_carrier_from_svg, generate_alphabet, generate_glyph, generate_project_mark, glyph_to_svg,
-    render_ambient_constellation, render_postcard_svg, render_seal_svg,
+    extract_carrier_from_svg, generate_alphabet, generate_glyph, generate_project_mark,
+    glyph_to_svg, render_ambient_constellation, render_postcard_svg, render_seal_svg,
 };
 use sha2::{Digest, Sha256};
 use std::fs;
@@ -220,7 +220,9 @@ pub fn run(cmd: WorkflowCommands) -> Result<(), Box<dyn std::error::Error>> {
 pub fn catalog_text() -> String {
     let mut out = String::new();
     out.push_str("dold — command catalog (curated)\n");
-    out.push_str("Open / Neural ≠ encryption. Protected = refuse stubs until AEAD. See SECURITY.md.\n\n");
+    out.push_str(
+        "Open / Neural ≠ encryption. Protected = refuse stubs until AEAD. See SECURITY.md.\n\n",
+    );
 
     section(
         &mut out,
@@ -243,12 +245,18 @@ pub fn catalog_text() -> String {
         "Workflows",
         &[
             ("guide", "in-CLI onboarding (honesty · swedish · …)"),
-            ("demo", "one-shot Open product pack (.dsk + postcard + mark)"),
+            (
+                "demo",
+                "one-shot Open product pack (.dsk + postcard + mark)",
+            ),
             ("convert", "bridge text/dsk ↔ postcard/ambient/seal"),
             ("config", "project defaults (.doldskrift/config.json)"),
             ("pipeline", "encode → validate → inspect [→ render]"),
             ("batch encode|validate", "directory of .txt / .dsk"),
-            ("self-test", "built-in encode/decode/validate + protected refuse"),
+            (
+                "self-test",
+                "built-in encode/decode/validate + protected refuse",
+            ),
             ("commands / topics", "this listing"),
             ("schema", "JSON envelope shapes for agents"),
             ("init", "scaffold .doldskrift/ (+ --sample)"),
@@ -294,7 +302,10 @@ pub fn catalog_text() -> String {
             ("radio / echo / ambient / flicker", "packets & carriers"),
             ("live / mesh / postcard / duet", "living + multi-channel"),
             ("spectrogram / notarize", "strips + digest marks"),
-            ("kaleidoscope / timeline / seal", "mandala / epochs / wax seal"),
+            (
+                "kaleidoscope / timeline / seal",
+                "mandala / epochs / wax seal",
+            ),
             ("compare", "Open payload equality across SVGs"),
         ],
     );
@@ -314,7 +325,10 @@ fn section(out: &mut String, title: &str, rows: &[(&str, &str)]) {
 
 pub fn surfaces_list_text() -> String {
     let rows = [
-        ("ambient", "constellation SVG Open channel (--decode; --animate)"),
+        (
+            "ambient",
+            "constellation SVG Open channel (--decode; --animate)",
+        ),
         ("flicker", "temporal animated SVG with embedded carrier"),
         ("live", "epoch-varying MGE/4 living document"),
         ("mesh", "Neural constellation map (--html)"),
@@ -326,7 +340,10 @@ pub fn surfaces_list_text() -> String {
         ("kaleidoscope", "six-fold Open mandala (--decode)"),
         ("timeline", "multi-epoch living strip (--epochs)"),
         ("seal", "wax-seal digest mark (--verify; ≠ signature)"),
-        ("radio", "agent visual packet directories (send|recv|exchange)"),
+        (
+            "radio",
+            "agent visual packet directories (send|recv|exchange)",
+        ),
         ("handshake visual", "Open capability negotiation strip"),
         ("compare", "Open payload equality for two surface SVGs"),
         ("render --tty", "braille/block terminal specimen"),
@@ -1037,8 +1054,7 @@ fn cmd_convert(
         ConvertFormat::Postcard | ConvertFormat::Ambient | ConvertFormat::Seal => {
             let path = input.ok_or("convert: surface --from requires -i <svg>")?;
             let svg = fs::read_to_string(path)?;
-            let carrier =
-                extract_carrier_from_svg(&svg).ok_or("convert: no dsk-carrier in SVG")?;
+            let carrier = extract_carrier_from_svg(&svg).ok_or("convert: no dsk-carrier in SVG")?;
             doldskrift::decode(&carrier.encoded)?
         }
     };
@@ -1181,7 +1197,10 @@ Plaintext used: `{plaintext}`\n"
     println!("  wrote:     {}", mark_path.display());
     println!("  validate:  OK");
     println!("  honesty:   Open ≠ encryption · Neural ≠ encryption · Protected = refuse stubs");
-    println!("  next:      dold postcard --read {}", postcard_path.display());
+    println!(
+        "  next:      dold postcard --read {}",
+        postcard_path.display()
+    );
     Ok(())
 }
 
