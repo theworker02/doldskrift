@@ -40,7 +40,7 @@ clap_complete = "4"
 proptest = "1"
 criterion = { version = "0.5", features = ["html_reports"] }
 hex = "0.4"
-base64 = "0.22"
+base64 = "0.23"
 sha2 = "0.10"
 wasm-bindgen = "0.2"
 
