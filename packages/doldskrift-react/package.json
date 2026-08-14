@@ -28,7 +28,7 @@
   "devDependencies": {
     "@types/react": "^19.2.18",
     "react": "^19.2.8",
-    "typescript": "^5.8.2"
+    "typescript": "^7.0.2"
   },
   "funding": {
     "type": "thanks.dev",
