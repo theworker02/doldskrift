@@ -84,7 +84,7 @@ jobs:
           cp -r fonts/generated dist/fonts
           cp -r spec dist/spec
           (cd dist && find . -type f -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         with:
           files: |
             dist/**
