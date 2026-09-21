@@ -1,43 +1,43 @@
-{
-  "name": "@doldskrift/core",
-  "version": "0.2.0",
-  "description": "Doldskrift Open codec for JavaScript/TypeScript — encode/decode, sessions, .dsk, browser helpers",
-  "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    },
-    "./doldskrift.css": "./doldskrift.css"
-  },
-  "files": [
-    "dist",
-    "doldskrift.css",
-    "logo.svg",
-    "README.md"
-  ],
-  "scripts": {
-    "build": "tsc",
-    "test": "tsc && tsc -p tsconfig.test.json && node --test dist-test/vectors.test.js"
-  },
-  "devDependencies": {
-    "@types/node": "^26.2.0",
-    "typescript": "^7.0.2"
-  },
-  "engines": {
-    "node": ">=18"
-  },
-  "funding": {
-    "type": "thanks.dev",
-    "url": "https://thanks.dev/u/gh/theworker02"
-  },
-  "homepage": "https://theworker02.github.io/doldskrift/",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/theworker02/doldskrift",
-    "directory": "packages/doldskrift-js"
-  },
-  "license": "MIT"
+﻿{
+    "name":  "@doldskrift/core",
+    "version":  "0.2.0",
+    "description":  "Doldskrift Open codec for JavaScript/TypeScript â€” encode/decode, sessions, .dsk, browser helpers",
+    "type":  "module",
+    "main":  "./dist/index.js",
+    "types":  "./dist/index.d.ts",
+    "exports":  {
+                    ".":  {
+                              "types":  "./dist/index.d.ts",
+                              "import":  "./dist/index.js"
+                          },
+                    "./doldskrift.css":  "./doldskrift.css"
+                },
+    "files":  [
+                  "dist",
+                  "doldskrift.css",
+                  "logo.svg",
+                  "README.md"
+              ],
+    "scripts":  {
+                    "build":  "tsc",
+                    "test":  "tsc \u0026\u0026 tsc -p tsconfig.test.json \u0026\u0026 node --test dist-test/vectors.test.js"
+                },
+    "devDependencies":  {
+                            "@types/node":  "^26.2.0",
+                            "typescript":  "^7.0.2"
+                        },
+    "engines":  {
+                    "node":  "\u003e=18"
+                },
+    "funding":  {
+                    "type":  "thanks.dev",
+                    "url":  "https://thanks.dev/u/gh/theworker02"
+                },
+    "homepage":  "https://theworker02.github.io/doldskrift/",
+    "repository":  {
+                       "type":  "git",
+                       "url":  "https://github.com/theworker02/doldskrift",
+                       "directory":  "packages/doldskrift-js"
+                   },
+    "license":  "SEE LICENSE IN LICENSE"
 }
