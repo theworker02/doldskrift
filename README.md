@@ -1,4 +1,4 @@
-﻿<p align="center">
+<p align="center">
   <img src="assets/brand/logo-horizontal.svg" alt="Doldskrift" width="420" />
 </p>
 
@@ -334,3 +334,9 @@ Issues and pull requests are welcome for protocol clarity, Lab DX, documentation
 
 **Source-available proprietary** — evaluation under [LICENSE](./LICENSE); commercial / production use via [COMMERCIAL.md](./COMMERCIAL.md). See [LICENSE_TRANSITION_NOTICE.md](./LICENSE_TRANSITION_NOTICE.md) and [NOTICE](./NOTICE).
 
+
+---
+
+## License & acquisition
+
+This project is **proprietary**. Production use, redistribution, and commercial deployment require a written commercial license or completed acquisition. See [LICENSE](./LICENSE) and [ACQUISITION.md](./ACQUISITION.md). Contact [@theworker02](https://github.com/theworker02).
