@@ -1,4 +1,4 @@
-﻿{
+{
     "name":  "@doldskrift/react",
     "version":  "0.2.0",
     "description":  "React bindings for DOLDSKRIFT/1",
@@ -26,8 +26,8 @@
                          "@doldskrift/core":  "*"
                      },
     "devDependencies":  {
-                            "@types/react":  "^19.2.18",
-                            "react":  "^19.2.8",
+                            "@types/react":  "^19.3.0",
+                            "react":  "^19.3.0",
                             "typescript":  "^7.0.2"
                         },
     "funding":  {
