@@ -20,19 +20,19 @@ A platform for encoding structured data into a visual writing system built for d
 
 <p align="center">
   <strong>Swedish etymology:</strong> <em>dold</em> (hidden / concealed) + <em>skrift</em> (writing / script)<br/>
-  â†’ â€œhidden writingâ€ / â€œconcealed scriptâ€ Â· <em>Maskinskriven betydelse â€” inte hemlighet.</em><br/>
-  <sub>Machine-written meaning â€” not secrecy. Hidden â‰  encrypted.</sub>
+  Ã¢â€ â€™ Ã¢â‚¬Å“hidden writingÃ¢â‚¬Â / Ã¢â‚¬Å“concealed scriptÃ¢â‚¬Â Ã‚Â· <em>Maskinskriven betydelse Ã¢â‚¬â€ inte hemlighet.</em><br/>
+  <sub>Machine-written meaning Ã¢â‚¬â€ not secrecy. Hidden Ã¢â€°Â  encrypted.</sub>
 </p>
 
 > **Open** and **Neural** are **not encryption**. Visual illegibility and learned grammars are not confidentiality.
-> **Protected** *is* AEAD + Gate authorization when it ships â€” glyphs encode ciphertext. Today: refuse stubs only.
+> **Protected** *is* AEAD + Gate authorization when it ships Ã¢â‚¬â€ glyphs encode ciphertext. Today: refuse stubs only.
 > Until then: encrypt with established cryptography first, then optionally represent the result with Open-mode Doldskrift.
 
 ---
 
 ## Product
 
-Doldskrift is an independent open-source **platform** for machine-native visual information: protocol, glyphs, recognition, Lab CLI, demos, and documentation â€” one architecture with three profiles.
+Doldskrift is an independent open-source **platform** for machine-native visual information: protocol, glyphs, recognition, Lab CLI, demos, and documentation Ã¢â‚¬â€ one architecture with three profiles.
 
 It is designed for agents, tooling, and research workflows that need a stable visual carrier: encode structured information, render it as machine glyphs, transmit or display the artifact, then reconstruct the original bytes with deterministic fidelity (Open) or a declared reader path (Neural).
 
@@ -44,25 +44,25 @@ dold museum          # protocol archaeology
 
 ### Why it exists
 
-Humans and machines do not share the same reading stack. Doldskrift treats the visual plane as a first-class information channel for machines: geometry, protocol framing, and reconstruction â€” not Latin text decoration, and not a substitute for cryptography.
+Humans and machines do not share the same reading stack. Doldskrift treats the visual plane as a first-class information channel for machines: geometry, protocol framing, and reconstruction Ã¢â‚¬â€ not Latin text decoration, and not a substitute for cryptography.
 
-The official logo **is** glyph `DSK_PROJECT_MARK` (`U+E1F0`) â€” a real machine glyph, not ornament.
+The official logo **is** glyph `DSK_PROJECT_MARK` (`U+E1F0`) Ã¢â‚¬â€ a real machine glyph, not ornament.
 
 ---
 
-## Architecture: Open Â· Neural Â· Protected
+## Architecture: Open Ã‚Â· Neural Ã‚Â· Protected
 
 ```text
 DOLDSKRIFT
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚ Semantic Layer                       â”‚  structured machine information
-â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-â”‚ Protocol Layer                       â”‚  frames, streams, schemas, sessions
-â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-â”‚ Visual Layer                         â”‚  glyphs, alphabets, rendering
-â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-â”‚ Recognition Layer                    â”‚  detection, vision, reconstruction
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â
+Ã¢â€â€š Semantic Layer                       Ã¢â€â€š  structured machine information
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â¤
+Ã¢â€â€š Protocol Layer                       Ã¢â€â€š  frames, streams, schemas, sessions
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â¤
+Ã¢â€â€š Visual Layer                         Ã¢â€â€š  glyphs, alphabets, rendering
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â¤
+Ã¢â€â€š Recognition Layer                    Ã¢â€â€š  detection, vision, reconstruction
+Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ
 ```
 
 | Name | Role |
@@ -81,12 +81,12 @@ DOLDSKRIFT
 
 | Profile | What it is | Shipping status |
 |---------|------------|-----------------|
-| **Open** | Deterministic codec + glyphs (DSK/1â€“2). Visual concealment, not secrecy. | Yes (prototype) |
+| **Open** | Deterministic codec + glyphs (DSK/1Ã¢â‚¬â€œ2). Visual concealment, not secrecy. | Yes (prototype) |
 | **Neural** | Learned LSG + compatible reader (DSK/3). Fail closed on unknown grammar. **Not encryption.** | Foundation stubs + DeterministicBaseline |
-| **Protected** | AEAD ciphertext + Gate authorization. Glyphs encode ciphertext. | Refuse stubs only â€” **no AEAD yet** |
+| **Protected** | AEAD ciphertext + Gate authorization. Glyphs encode ciphertext. | Refuse stubs only Ã¢â‚¬â€ **no AEAD yet** |
 
 ```text
-DATA â†’ DSK â†’ MGE â†’ VISUAL MEDIUM â†’ DVE â†’ DSK â†’ DATA
+DATA Ã¢â€ â€™ DSK Ã¢â€ â€™ MGE Ã¢â€ â€™ VISUAL MEDIUM Ã¢â€ â€™ DVE Ã¢â€ â€™ DSK Ã¢â€ â€™ DATA
 ```
 
 ---
@@ -97,8 +97,8 @@ DATA â†’ DSK â†’ MGE â†’ VISUAL MEDIUM â†’ DVE â†’ DSK 
 
 | Reader | Experience |
 |--------|------------|
-| **Humans** | Structured abstract marks â€” geometry, not Latin |
-| **Agents** | Deterministic decode: symbols â†’ bytes â†’ original data |
+| **Humans** | Structured abstract marks Ã¢â‚¬â€ geometry, not Latin |
+| **Agents** | Deterministic decode: symbols Ã¢â€ â€™ bytes Ã¢â€ â€™ original data |
 
 ![Encode pipeline](assets/brand/encode-decode-pipeline.svg)
 
@@ -110,7 +110,7 @@ Input:
 Deploy worker seven.
 ```
 
-![Doldskrift rendering of â€œDeploy worker seven.â€](assets/brand/readme-demo.svg)
+![Doldskrift rendering of Ã¢â‚¬Å“Deploy worker seven.Ã¢â‚¬Â](assets/brand/readme-demo.svg)
 
 Decode recovers the exact original string.
 
@@ -179,16 +179,16 @@ dold config init
 dold completion powershell > _dold.ps1
 
 # Agent-friendly errors
-$env:DOLD_JSON_ERRORS = "1"   # PowerShell â†’ stderr doldskrift.error/1
+$env:DOLD_JSON_ERRORS = "1"   # PowerShell Ã¢â€ â€™ stderr doldskrift.error/1
 ```
 
 ### End-to-end paths
 
-1. **Open:** `encode` â†’ `validate` â†’ `.dsk` / MGE specimen â†’ Lens or Surfaces â†’ `decode`
-2. **Neural:** `dold neural encode` â†’ `render` (SVG carrier) â†’ `reconstruct` (DeterministicBaseline)
-3. **Protected:** `encode --mode protected` â†’ `inspect` shows Readable: No â†’ `decode` / `open` refuse (AEAD not shipping)
+1. **Open:** `encode` Ã¢â€ â€™ `validate` Ã¢â€ â€™ `.dsk` / MGE specimen Ã¢â€ â€™ Lens or Surfaces Ã¢â€ â€™ `decode`
+2. **Neural:** `dold neural encode` Ã¢â€ â€™ `render` (SVG carrier) Ã¢â€ â€™ `reconstruct` (DeterministicBaseline)
+3. **Protected:** `encode --mode protected` Ã¢â€ â€™ `inspect` shows Readable: No Ã¢â€ â€™ `decode` / `open` refuse (AEAD not shipping)
 
-Interactive demos â€” **static GitHub Pages** (no separate hosted web app):
+Interactive demos Ã¢â‚¬â€ **static GitHub Pages** (no separate hosted web app):
 
 **Live site:** [https://theworker02.github.io/doldskrift/](https://theworker02.github.io/doldskrift/)
 
@@ -208,11 +208,11 @@ The `dold` binary is the Lab surface for developers and agents.
 | **Onboarding** | `guide`, `about`, `museum`, `demo`, `commands` / `topics` |
 | **Codec** | `encode` / `e`, `decode` / `d`, `pipeline`, `validate`, `fmt`, `inspect`, `convert` |
 | **Health** | `doctor`, `self-test`, `version --verbose`, `schema`, `completion` |
-| **Surfaces** | `postcard`, `ambient`, `seal`, `radio`, `mesh`, `kaleidoscope`, `timeline`, â€¦ |
+| **Surfaces** | `postcard`, `ambient`, `seal`, `radio`, `mesh`, `kaleidoscope`, `timeline`, Ã¢â‚¬Â¦ |
 | **Neural** | `neural`, `dataset`, `reader`, `evaluate` |
 | **Brand / funding** | `logo`, `brand`, `funding` |
 
-Unexpected Open surfaces still obey the honesty model (Open â‰  encryption; hashes â‰  signatures). Gallery: [Surfaces](https://theworker02.github.io/doldskrift/surfaces.html). Full list: `dold surfaces list` / `dold guide surfaces`.
+Unexpected Open surfaces still obey the honesty model (Open Ã¢â€°Â  encryption; hashes Ã¢â€°Â  signatures). Gallery: [Surfaces](https://theworker02.github.io/doldskrift/surfaces.html). Full list: `dold surfaces list` / `dold guide surfaces`.
 
 | Command | What it does |
 |---------|----------------|
@@ -221,7 +221,7 @@ Unexpected Open surfaces still obey the honesty model (Open â‰  encryption; 
 | `dold echo` / `--verify` | Self-describing document + SHA-256 glyph strip |
 | `dold ambient` / `--decode` | Constellation SVG Open channel |
 | `dold postcard` / `--read` | Machine postcard |
-| `dold convert` | Bridge text/dsk â†” postcard/ambient/seal |
+| `dold convert` | Bridge text/dsk Ã¢â€ â€ postcard/ambient/seal |
 | `dold render --tty` | Braille / block art without a browser |
 
 ---
@@ -243,7 +243,7 @@ assert_eq!(decode(&opaque).unwrap(), "Hello, agent!");
 let _ = Mode::Encoded;
 ```
 
-**JavaScript** â€” primary SDK `@doldskrift/core`; thin `@doldskrift/web` / `@doldskrift/react` adapters; generated WASM (`doldskrift-bindings`). Rust owns the protocol truth. npm packages are versioned in-repo and are **not** the crates.io release channel.
+**JavaScript** Ã¢â‚¬â€ primary SDK `@doldskrift/core`; thin `@doldskrift/web` / `@doldskrift/react` adapters; generated WASM (`doldskrift-bindings`). Rust owns the protocol truth. npm packages are versioned in-repo and are **not** the crates.io release channel.
 
 ---
 
@@ -265,7 +265,7 @@ let _ = Mode::Encoded;
 | docs.rs | [doldskrift](https://docs.rs/doldskrift) |
 | Funding | [thanks.dev/u/gh/theworker02](https://thanks.dev/u/gh/theworker02) |
 
-Lens / Surfaces / Neural demos: [Lens](https://theworker02.github.io/doldskrift/lens.html) Â· [Surfaces](https://theworker02.github.io/doldskrift/surfaces.html) Â· [Neural](https://theworker02.github.io/doldskrift/neural.html)
+Lens / Surfaces / Neural demos: [Lens](https://theworker02.github.io/doldskrift/lens.html) Ã‚Â· [Surfaces](https://theworker02.github.io/doldskrift/surfaces.html) Ã‚Â· [Neural](https://theworker02.github.io/doldskrift/neural.html)
 
 ---
 
@@ -273,7 +273,7 @@ Lens / Surfaces / Neural demos: [Lens](https://theworker02.github.io/doldskrift/
 
 ```text
 crates/          # Rust workspace (core, cli, vision, font, bindings)
-packages/        # @doldskrift/core (+ thin web/react) Â· WASM bindings
+packages/        # @doldskrift/core (+ thin web/react) Ã‚Â· WASM bindings
 site/            # GitHub Pages demos
 docs/            # Product + protocol + neural docs map
 spec/            # Normative DSK/1 + protocol-constants.json
@@ -303,7 +303,7 @@ Open-mode visual illegibility is not a security boundary. See [`SECURITY.md`](SE
 - **thanks.dev:** [https://thanks.dev/u/gh/theworker02](https://thanks.dev/u/gh/theworker02)
 - **GitHub funding file:** [`.github/FUNDING.yml`](.github/FUNDING.yml)
 - **Site:** [Funding page](https://theworker02.github.io/doldskrift/funding.html)
-- **CLI:** `dold funding` Â· `dold funding --json`
+- **CLI:** `dold funding` Ã‚Â· `dold funding --json`
 
 Bugs and documentation issues: [`SUPPORT.md`](SUPPORT.md). Commercial collaboration: [Partners](https://theworker02.github.io/doldskrift/partners.html).
 
@@ -332,7 +332,7 @@ Issues and pull requests are welcome for protocol clarity, Lab DX, documentation
 
 ## License
 
-**Source-available proprietary** — evaluation under [LICENSE](./LICENSE); commercial / production use via [COMMERCIAL.md](./COMMERCIAL.md). See [LICENSE_TRANSITION_NOTICE.md](./LICENSE_TRANSITION_NOTICE.md) and [NOTICE](./NOTICE).
+**Source-available proprietary** â€” evaluation under [LICENSE](./LICENSE); commercial / production use via [COMMERCIAL.md](./COMMERCIAL.md). See [LICENSE_TRANSITION_NOTICE.md](./LICENSE_TRANSITION_NOTICE.md) and [NOTICE](./NOTICE).
 
 
 ---
@@ -340,3 +340,7 @@ Issues and pull requests are welcome for protocol clarity, Lab DX, documentation
 ## License & acquisition
 
 This project is **proprietary**. Production use, redistribution, and commercial deployment require a written commercial license or completed acquisition. See [LICENSE](./LICENSE) and [ACQUISITION.md](./ACQUISITION.md). Contact [@theworker02](https://github.com/theworker02).
+
+## Acquisition diligence
+
+Buyer-facing diligence materials live in [docs/acquisition/](./docs/acquisition/). Commercial licensing contact path: [COMMERCIAL.md](./COMMERCIAL.md).
