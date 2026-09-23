@@ -16,7 +16,7 @@
 ## Capability highlights
 
 - **thanks.dev:** [https://thanks.dev/u/gh/theworker02](https://thanks.dev/u/gh/theworker02)
-- **GitHub funding file:** [`.github/FUNDING.yml`](.github/FUNDING.yml)
+- **GitHub funding file:** [`.github/FUNDING.yml`](../../.github/FUNDING.yml)
 - **Site:** [Funding page](https://theworker02.github.io/doldskrift/funding.html)
 - **CLI:** `dold funding` Ã‚Â· `dold funding --json`
 
