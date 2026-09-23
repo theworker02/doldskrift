@@ -1,4 +1,4 @@
-﻿{
+{
     "name":  "@doldskrift/core",
     "version":  "0.2.0",
     "description":  "Doldskrift Open codec for JavaScript/TypeScript â€” encode/decode, sessions, .dsk, browser helpers",
