@@ -1,4 +1,4 @@
-﻿{
+{
     "name":  "@doldskrift/web",
     "version":  "0.2.0",
     "description":  "Thin browser adapter for Doldskrift (re-exports @doldskrift/core)",

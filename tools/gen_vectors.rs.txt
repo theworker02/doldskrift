@@ -1,4 +1,4 @@
-﻿fn main() {
+fn main() {
   let cases = [
     (\"hello-world\", \"Hello world\"),
     (\"hello-doldskrift\", \"Hello from Doldskrift\"),
